@@ -1,0 +1,50 @@
+[
+  {
+    "site_id": "sample_moon_a",
+    "name": "SAMPLE Site A (fake, for UI testing only)",
+    "coordinates": [10.0, 20.0],
+    "target_body": "moon",
+    "dimension_scores": {"terrain": 0.8, "thermal": 0.4, "geology": 0.7, "subsurface": 0.6},
+    "confidence": "medium",
+    "strengths": ["PLACEHOLDER strength one", "PLACEHOLDER strength two"],
+    "breakdowns": ["PLACEHOLDER breakdown one"],
+    "exploration_uses": ["PLACEHOLDER use: test rover mobility"],
+    "data_sources": ["PLACEHOLDER dataset"]
+  },
+  {
+    "site_id": "sample_moon_b",
+    "name": "SAMPLE Site B (fake, for UI testing only)",
+    "coordinates": [-45.5, 30.2],
+    "target_body": "moon",
+    "dimension_scores": {"terrain": 0.5, "thermal": 0.9, "geology": 0.3, "subsurface": 0.2},
+    "confidence": "low",
+    "strengths": ["PLACEHOLDER strength"],
+    "breakdowns": ["PLACEHOLDER breakdown one", "PLACEHOLDER breakdown two"],
+    "exploration_uses": ["PLACEHOLDER use"],
+    "data_sources": ["PLACEHOLDER dataset"]
+  },
+  {
+    "site_id": "sample_mars_a",
+    "name": "SAMPLE Site C (fake, for UI testing only)",
+    "coordinates": [55.0, 24.0],
+    "target_body": "mars",
+    "dimension_scores": {"terrain": 0.6, "thermal": 0.7, "geology": 0.9, "subsurface": 0.5, "dust_wind": 0.8},
+    "confidence": "high",
+    "strengths": ["PLACEHOLDER strength one", "PLACEHOLDER strength two", "PLACEHOLDER strength three"],
+    "breakdowns": ["PLACEHOLDER breakdown"],
+    "exploration_uses": ["PLACEHOLDER use one", "PLACEHOLDER use two"],
+    "data_sources": ["PLACEHOLDER dataset one", "PLACEHOLDER dataset two"]
+  },
+  {
+    "site_id": "sample_mars_b",
+    "name": "SAMPLE Site D (fake, for UI testing only)",
+    "coordinates": [-110.0, -25.0],
+    "target_body": "mars",
+    "dimension_scores": {"terrain": 0.3, "thermal": 0.2, "geology": 0.5, "subsurface": 0.9},
+    "confidence": "medium",
+    "strengths": ["PLACEHOLDER strength"],
+    "breakdowns": ["PLACEHOLDER breakdown one", "PLACEHOLDER breakdown two"],
+    "exploration_uses": ["PLACEHOLDER use"],
+    "data_sources": ["PLACEHOLDER dataset"]
+  }
+]

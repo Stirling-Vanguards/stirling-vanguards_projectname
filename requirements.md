@@ -1,1 +1,8 @@
+# Python 3.11+
+pandas
+numpy
+pyyaml
+jsonschema
+pytest
 
+# Joash: add ingestion dependencies below
