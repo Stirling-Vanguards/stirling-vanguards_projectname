@@ -10,12 +10,12 @@ venv/
 node_modules/
 dist/
 
-# Data (only small processed files are committed)
-data/raw/
-data/interim/
+# Data: ignore contents, keep the folders tracked via .gitkeep
+data/raw/*
+data/interim/*
+!data/raw/.gitkeep
+!data/interim/.gitkeep
 
 # Secrets / OS
 .env
 .DS_Store
-!data/raw/.gitkeep
-!data/interim/.gitkeep
