@@ -1,0 +1,61 @@
+# Target site profiles. Footprint + features to compute, NOT hand-typed measurements.
+# Anything with verified: false must not appear in the report as fact.
+
+schema_version: 1
+
+targets:
+  - site_id: moon_target_a
+    name: "Lunar south polar site (PLACEHOLDER, Rex to confirm)"
+    target_body: moon
+    coordinates: null          # [lon, lat] from a verified source
+    footprint_radius_km: null  # area the stats are computed over
+    dimensions:
+      terrain:
+        features: [slope_median, slope_p90, roughness, crater_density]
+        data_sources: ["LOLA (verify access)"]
+        computed: true         # pipeline fills data/interim/targets/<site_id>.json
+      thermal:
+        features: [temp_min, temp_max, diurnal_swing, seasonal_variation]
+        data_sources: ["Diviner (verify access)"]
+        computed: true
+      geology:
+        target_classes: []     # from papers, e.g. lithology/mineral list
+        data_sources: ["Kaguya multiband or Chandrayaan-1 M3 (verify access)"]
+        source_citation: null
+        verified: false
+      subsurface:
+        target_features: []    # e.g. pit / lava tube types and scales
+        data_sources: ["pit catalog (verify openly available)"]
+        source_citation: null
+        verified: false
+    breakdowns:                # shown on site cards
+      - "Permanently shadowed regions and cold traps have no real Earth equivalent"
+      - "Vacuum, low gravity and radiation cannot be replicated on Earth"
+
+  - site_id: mars_target_a
+    name: "Jezero Crater (PLACEHOLDER, Rex to confirm)"
+    target_body: mars
+    coordinates: null
+    footprint_radius_km: null
+    dimensions:
+      terrain:
+        features: [slope_median, slope_p90, roughness, crater_density]
+        data_sources: ["MOLA", "HiRISE/CTX (verify access)"]
+        computed: true
+      thermal:
+        features: [temp_min, temp_max, diurnal_swing, seasonal_variation]
+        data_sources: ["THEMIS (verify access)"]
+        computed: true
+      geology:
+        target_classes: []     # e.g. clays, carbonates, olivine per Venice's criteria; cite papers
+        data_sources: ["CRISM (verify access)"]
+        source_citation: null
+        verified: false
+      subsurface:
+        target_features: []
+        data_sources: ["pit/cave catalog (verify)"]
+        source_citation: null
+        verified: false
+    breakdowns:
+      - "Mars atmosphere is much thinner than Earth's, so wind and dust behave differently"
+      - "Gravity and radiation environment cannot be replicated on Earth"
