@@ -1,0 +1,74 @@
+/* Uses tokens only; no hard-coded colors here. */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+:where(button, select, a):focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
+
+/* ---------- Badges (card header + confidence) ---------- */
+.badge {
+  display: inline-block; padding: 0.15rem 0.6rem; border-radius: 999px;
+  font-size: 0.8rem; border: 1px solid currentColor; font-weight: 600;
+}
+.badge-moon { color: var(--color-moon); }
+.badge-mars { color: var(--color-mars); }
+.badge.conf-high,   td.conf-high   { color: var(--color-conf-high); }
+.badge.conf-medium, td.conf-medium { color: var(--color-conf-medium); }
+.badge.conf-low,    td.conf-low    { color: var(--color-conf-low); }
+td[class^="conf-"] { font-weight: 600; text-transform: capitalize; }
+
+/* ---------- Site card ---------- */
+.site-card {
+  font-family: var(--font-body); color: var(--color-text);
+  background: var(--color-bg); border: 1px solid var(--color-border);
+  border-radius: var(--radius); padding: var(--space-3);
+  max-width: 34rem;
+}
+.card-head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+.card-head h2 { flex: 1 1 100%; margin: 0; font-size: 1.3rem; }
+.site-card .note { color: var(--color-muted); font-size: 0.85rem; margin: var(--space-2) 0 var(--space-3); }
+.card-section { margin-top: var(--space-3); }
+.card-section h3 { margin: 0 0 var(--space-1); font-size: 1rem; }
+.card-section ul { margin: 0; padding-left: 1.2rem; }
+.card-section li { margin-bottom: var(--space-1); }
+
+/* ---------- Radar ---------- */
+.radar { display: block; width: 100%; max-width: 22rem; height: auto; margin: var(--space-3) auto 0; overflow: visible; }
+.radar-ring  { fill: none; stroke: var(--color-border); stroke-width: 1; }
+.radar-axis  { stroke: var(--color-border); stroke-width: 1; }
+.radar-label { fill: var(--color-text); font-size: 11px; font-family: var(--font-body); }
+.radar-shape { fill: var(--color-accent-soft); stroke: var(--color-accent); stroke-width: 2; stroke-linejoin: round; }
+.radar-error { color: var(--color-conf-low); font-weight: 600; }
+
+/* ---------- Ranked table + filters ---------- */
+.ranked { font-family: var(--font-body); color: var(--color-text); }
+.ranked-controls { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: flex-end; margin-bottom: var(--space-2); }
+.filter { display: flex; flex-direction: column; gap: var(--space-1); font-size: 0.85rem; color: var(--color-muted); }
+.filter select, .dir-toggle, .actions button {
+  font: inherit; color: var(--color-text); background: var(--color-bg);
+  border: 1px solid var(--color-border); border-radius: var(--radius);
+  padding: 0.4rem 0.7rem; cursor: pointer; min-height: 2.25rem;
+}
+.dir-toggle:hover, .actions button:hover { background: var(--color-surface); }
+.ranked-status { color: var(--color-muted); font-size: 0.85rem; margin: var(--space-2) 0; }
+.ranked-empty { padding: var(--space-4); text-align: center; background: var(--color-surface); border-radius: var(--radius); }
+
+.ranked-table-wrap { overflow-x: auto; border: 1px solid var(--color-border); border-radius: var(--radius); }
+.ranked-table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+.ranked-table th, .ranked-table td { padding: 0.55rem 0.75rem; text-align: left; border-bottom: 1px solid var(--color-border); white-space: nowrap; }
+.ranked-table thead th { background: var(--color-surface); font-weight: 600; }
+.ranked-table tbody tr:last-child > * { border-bottom: 0; }
+.ranked-table tbody tr:hover { background: var(--color-surface); }
+.ranked-table .rank { color: var(--color-muted); width: 2rem; }
+.ranked-table .site-name { font-weight: 600; }
+.ranked-table .score { font-variant-numeric: tabular-nums; }
+.ranked-table .is-ranked { background: var(--color-accent-soft); }
+.ranked-table .not-scored { color: var(--color-muted); font-style: italic; }
+.ranked-table .actions { display: flex; gap: var(--space-2); }
+.ranked-table .actions button { padding: 0.25rem 0.6rem; font-size: 0.8rem; }
+
+@media (max-width: 40rem) {
+  .ranked-controls { gap: var(--space-2); }
+  .site-card { padding: var(--space-2); }
+}
