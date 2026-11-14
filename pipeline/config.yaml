@@ -1,0 +1,39 @@
+# pipeline/config.yaml
+# Pipeline-wide settings. Change values here instead of editing code.
+
+# Dimensions (names must match docs/data_contract.md)
+dimensions: [terrain, thermal, geology, subsurface]   # core, always scored
+stretch_dimensions: []                                # add water_ice, dust_wind only if time allows
+
+# Equal weights by default. Weights are only used for ranking/sorting in the UI.
+# Per-dimension scores are never blended into one number in the output.
+weights:
+  terrain: 1.0
+  thermal: 1.0
+  geology: 1.0
+  subsurface: 1.0
+
+# Comparison scale (OPEN: Venice, Joash and Rex still need to decide this)
+common_scale_km: null      # shared resolution all datasets get resampled to
+grid_cell_km: null         # size of the Earth grid cells
+drilldown_sites: 4         # number of deep-dive site cards (3 to 4)
+
+# Confidence rule (from Venice's criteria, v1 draft)
+confidence_rules:
+  high: "both sides direct measurements at comparable resolution"
+  medium: "one side modelled or resampled by a large factor"
+  low: "catalog-only, sparse, or proxy data"
+
+# Paths (relative to repo root)
+paths:
+  raw: data/raw
+  interim: data/interim
+  processed: data/processed
+  targets: pipeline/targets/targets.yaml
+  schema: docs/data_contract.schema.json
+  app_data: app/public/data
+
+# Output
+output:
+  target_bodies: [moon, mars]
+  score_range: [0.0, 1.0]
