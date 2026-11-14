@@ -5,8 +5,6 @@ Standard limits of Earth as an analog for the Moon and Mars. Every site card pic
 **Owner:** Venice, with Ely (displays it on the site card).
 **Status:** Final text. Body constants below are verified against NASA's Planetary Fact Sheets (NSSDCA, Mars and Moon fact sheets). Radiation has no numbers on purpose.
 
-> **Data status:** the contract has no field for this content. Suggested field: `earth_limits[]`. Until Rex confirms it, this is card text and the app renders it from curated static content. *(Rex)*
-
 ---
 
 ## Why this file exists
