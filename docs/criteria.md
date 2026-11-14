@@ -4,7 +4,7 @@
 **Project name:** Vanguard Atlas *(Rex confirms)*
 **Challenge:** Identify Earth Locations that Analog the Permanent Moon Base Locations and Mars
 **Owner:** Venice (Science Lead). Methodology review: Rex.
-**Status:** Final text. Becomes frozen when Venice and Rex tick the sign-off box in section 8. Items marked *(Rex)* are the defaults used until he says otherwise.
+**Status:** Final draft, pending Rex. Becomes frozen when Venice and Rex tick the sign-off box in section 9. Items marked *(Rex)* are the defaults used until he says otherwise.
 **Last updated:** November 14, 2026
 
 ---
@@ -90,14 +90,14 @@ Every site card draws on `docs/site_cards/earth_limits.md` (gravity, atmosphere/
 | --- | --- |
 | Instrument measurements | Instrument team papers, PDS documentation |
 | Why a criterion matters | Peer-reviewed analog reviews; agency landing-site/exploration-zone workshop reports |
-| Body constants | NASA Planetary Fact Sheets (NSSDCA); verified, see `earth_limits.md` |
+| Body constants | NASA Planetary Fact Sheets (NSSDCA); see `earth_limits.md` for which values are still to be re-checked |
 | Lava tubes and pits | Peer-reviewed detection papers |
 
 No specific paper citations are attached. Confirm each exists before it enters the report.
 
 ## 7. Site card standard
 
-Each deep-dive site gets one card at `docs/site_cards/<site_id>.md`, written from pipeline output and verified sources only. Sections, in order:
+Each deep-dive site gets one card at `docs/site_cards/<site_id>.md`, copied from `docs/site_cards/_template.md` (this section and the template must stay in sync). Cards are written from pipeline output and verified sources only. Sections, in order:
 
 1. **Basics:** `site_id`, `name`, `[lon, lat]`, `target_body`, region/country, compared target, `confidence`, best-matching cell used, author, last updated.
 2. **Summary:** one or two sentences on why the site is a meaningful analog, beyond looks.
@@ -123,8 +123,11 @@ Each deep-dive site gets one card at `docs/site_cards/<site_id>.md`, written fro
 - [ ] Rex confirms criteria and freezes this file
 - [ ] Rex confirms contract v1.1 (nullable optional dimensions, `earth_limits[]`, confidence handling)
 - [ ] Rex confirms cell-to-site roll-up and thermal reference range
-- [ ] Rex confirms `docs/criteria.md` as its location
+- [ ] Rex confirms `docs/criteria.md` and `docs/site_cards/_template.md` as locations
 - [ ] Rex decides target sites and common comparison scale
 - [ ] Joash tests dataset access and logs each in `data/DATA_SOURCES.md`
+- [ ] Re-check the body constants in `earth_limits.md` against the NASA fact sheets
 - [ ] Replace each "Evidence" line with a confirmed reference before the report
 - [ ] AI-assisted drafting logged in `docs/ai_usage_log.md`
+
+- [ ] 
