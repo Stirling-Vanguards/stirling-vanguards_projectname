@@ -76,6 +76,12 @@ export function renderRankedTable(initialSites, {
   const tableWrap = el('div', 'ranked-table-wrap');
   root.append(controls, status, tableWrap);
 
+      if (!sites.length) {
+      status.textContent = '';
+      tableWrap.replaceChildren(el('p', 'ranked-empty', 'No site data loaded yet.'));
+      return;
+    }
+
   const bodyCtl = makeSelect('Target', (v) => {
     state.body = v; drawTable();
     onFilterChange?.({ body: state.body, confidence: state.confidence });
