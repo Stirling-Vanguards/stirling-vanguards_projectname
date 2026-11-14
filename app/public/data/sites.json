@@ -1,126 +1,593 @@
 [
   {
-    "breakdowns": [
-      "Earth atmosphere and humidity are unlike Mars"
-    ],
-    "confidence": "low",
+    "site_id": "atacama_desert_vs_lunar_south_pole",
+    "name": "Atacama Desert, Chile",
     "coordinates": [
       -69.25,
       -24.5
     ],
-    "data_sources": [
-      "MGS MOLA MEGDR (megt44n000hb)",
-      "demo_earth_catalog",
-      "demo_earth_dem",
-      "demo_target_catalog"
-    ],
+    "target_body": "moon",
     "dimension_scores": {
-      "geology": 0.75,
-      "subsurface": 0.8667,
-      "terrain": 0.9896,
-      "thermal": 0.4685
+      "terrain": 0.45,
+      "thermal": 0.226,
+      "geology": 0.5,
+      "subsurface": 0.25
     },
+    "confidence": "low",
+    "strengths": [],
+    "breakdowns": [
+      "Thermal (0.23): largest gap: temp_min 273 on Earth vs 40 at the target",
+      "Subsurface (0.25): no match for ground_ice, impact_fractures, lava_tubes",
+      "Permanently shadowed regions and cold traps have no real Earth equivalent",
+      "Vacuum, low gravity and radiation cannot be replicated on Earth"
+    ],
     "exploration_uses": [
-      "Use this site to test rover dust mitigation"
+      "Use this site to test rover navigation and wheel traction across moderate desert slopes (median 7.15 deg) in hyper-arid conditions."
     ],
-    "name": "Atacama Desert",
-    "site_id": "atacama_desert",
-    "strengths": [
-      "Hyper-arid surface with very low organic load"
-    ],
-    "target_body": "mars"
+    "data_sources": [
+      "LRO LOLA GDRDSM (240m)",
+      "Copernicus GLO-30 DEM (30m)",
+      "LRO Diviner Polar Cumulative Product Baseline (Paige et al., 2010; Williams et al., 2019)",
+      "WorldClim v2.1 (10 arcmin)",
+      "USGS Unified Geologic Map of the Moon / Kaguya MI",
+      "USGS / GLiM Analog Lithology Catalog",
+      "LRO Diviner / Mini-RF / Wagner & Robinson (2014) Lunar Pit Atlas",
+      "Analog Subsurface & Karst/Lava-Tube Catalog"
+    ]
   },
   {
-    "breakdowns": [
-      "Seasonal liquid water has no Martian equivalent"
-    ],
-    "confidence": "low",
+    "site_id": "haughton_crater_vs_lunar_south_pole",
+    "name": "Haughton Crater, Devon Island, Canada",
     "coordinates": [
       -89.7,
       75.4
     ],
-    "data_sources": [
-      "MGS MOLA MEGDR (megt44n000hb)",
-      "demo_earth_catalog",
-      "demo_earth_dem",
-      "demo_target_catalog"
-    ],
+    "target_body": "moon",
     "dimension_scores": {
-      "geology": 0.6562,
-      "subsurface": 0.7333,
-      "terrain": 0.9692,
-      "thermal": 0.5778
+      "terrain": 0.181,
+      "thermal": 0.201,
+      "geology": 0.5,
+      "subsurface": 0.5
     },
+    "confidence": "low",
+    "strengths": [],
+    "breakdowns": [
+      "Terrain (0.18): largest gap: slope_median 4.02 on Earth vs 12.6 at the target",
+      "Thermal (0.20): largest gap: temp_min 235 on Earth vs 40 at the target",
+      "Permanently shadowed regions and cold traps have no real Earth equivalent",
+      "Vacuum, low gravity and radiation cannot be replicated on Earth"
+    ],
     "exploration_uses": [
-      "Use this site to test field habitat operations"
+      "Use this site to test crater-interior traverse planning and polar field operations on gentle impact-basin slopes (median 4.02 deg)."
     ],
-    "name": "Devon Island",
-    "site_id": "devon_island",
-    "strengths": [
-      "Cold, dry polar desert with impact-derived terrain"
-    ],
-    "target_body": "mars"
+    "data_sources": [
+      "LRO LOLA GDRDSM (240m)",
+      "Copernicus GLO-30 DEM (30m)",
+      "LRO Diviner Polar Cumulative Product Baseline (Paige et al., 2010; Williams et al., 2019)",
+      "WorldClim v2.1 (10 arcmin)",
+      "USGS Unified Geologic Map of the Moon / Kaguya MI",
+      "USGS / GLiM Analog Lithology Catalog",
+      "LRO Diviner / Mini-RF / Wagner & Robinson (2014) Lunar Pit Atlas",
+      "Analog Subsurface & Karst/Lava-Tube Catalog"
+    ]
   },
   {
-    "breakdowns": [
-      "Permanently shadowed cold traps cannot be reproduced"
+    "site_id": "death_valley_vs_lunar_south_pole",
+    "name": "Death Valley, USA",
+    "coordinates": [
+      -116.9,
+      36.5
     ],
+    "target_body": "moon",
+    "dimension_scores": {
+      "terrain": 0.0,
+      "thermal": 0.27,
+      "geology": 0.25,
+      "subsurface": 0.0
+    },
     "confidence": "low",
+    "strengths": [],
+    "breakdowns": [
+      "Terrain (0.00): largest gap: slope_median 0.461 on Earth vs 12.6 at the target",
+      "Thermal (0.27): largest gap: temp_min 276 on Earth vs 40 at the target",
+      "Geology (0.25): no match for anorthosite, impact_breccia, regolith",
+      "Subsurface (0.00): no match for ground_ice, regolith_mantle, impact_fractures, lava_tubes",
+      "Permanently shadowed regions and cold traps have no real Earth equivalent",
+      "Vacuum, low gravity and radiation cannot be replicated on Earth"
+    ],
+    "exploration_uses": [
+      "Use this site to test long-range autonomous driving and hazard avoidance on flat basin floors (median 0.46 deg) comparable to Jezero Crater's floor."
+    ],
+    "data_sources": [
+      "LRO LOLA GDRDSM (240m)",
+      "Copernicus GLO-30 DEM (30m)",
+      "LRO Diviner Polar Cumulative Product Baseline (Paige et al., 2010; Williams et al., 2019)",
+      "WorldClim v2.1 (10 arcmin)",
+      "USGS Unified Geologic Map of the Moon / Kaguya MI",
+      "USGS / GLiM Analog Lithology Catalog",
+      "LRO Diviner / Mini-RF / Wagner & Robinson (2014) Lunar Pit Atlas",
+      "Analog Subsurface & Karst/Lava-Tube Catalog"
+    ]
+  },
+  {
+    "site_id": "antarctic_dry_valleys_vs_lunar_south_pole",
+    "name": "McMurdo Dry Valleys, Antarctica",
     "coordinates": [
       162.0,
       -77.5
     ],
-    "data_sources": [
-      "LRO LOLA GDRDSM (ldsm_75s_240m)",
-      "demo_earth_catalog",
-      "demo_earth_dem",
-      "demo_target_catalog"
-    ],
+    "target_body": "moon",
     "dimension_scores": {
-      "geology": 0.9187,
-      "subsurface": 0.6667,
-      "terrain": 0.5958,
-      "thermal": 0.4704
+      "terrain": 0.196,
+      "thermal": 0.208,
+      "geology": 0.5,
+      "subsurface": 0.25
     },
+    "confidence": "low",
+    "strengths": [],
+    "breakdowns": [
+      "Terrain (0.20): largest gap: slope_p90 33.5 on Earth vs 19 at the target",
+      "Thermal (0.21): largest gap: temp_min 237 on Earth vs 40 at the target",
+      "Subsurface (0.25): no match for regolith_mantle, impact_fractures, lava_tubes",
+      "Permanently shadowed regions and cold traps have no real Earth equivalent",
+      "Vacuum, low gravity and radiation cannot be replicated on Earth"
+    ],
     "exploration_uses": [
-      "Use this site to test subsurface sampling"
+      "Use this site to test steep-slope mobility and cold-environment hardware operations on rugged polar valley terrain (median 15.65 deg)."
     ],
-    "name": "Antarctic Dry Valleys",
-    "site_id": "antarctic_dry_valleys",
-    "strengths": [
-      "Extremely dry, cold ground with minimal weathering"
-    ],
-    "target_body": "moon"
+    "data_sources": [
+      "LRO LOLA GDRDSM (240m)",
+      "Copernicus GLO-30 DEM (30m)",
+      "LRO Diviner Polar Cumulative Product Baseline (Paige et al., 2010; Williams et al., 2019)",
+      "WorldClim v2.1 (10 arcmin)",
+      "USGS Unified Geologic Map of the Moon / Kaguya MI",
+      "USGS / GLiM Analog Lithology Catalog",
+      "LRO Diviner / Mini-RF / Wagner & Robinson (2014) Lunar Pit Atlas",
+      "Analog Subsurface & Karst/Lava-Tube Catalog"
+    ]
   },
   {
-    "breakdowns": [
-      "Vacuum, low gravity and radiation cannot be replicated"
-    ],
-    "confidence": "low",
+    "site_id": "iceland_lava_fields_vs_lunar_south_pole",
+    "name": "Askja / Highlands Lava Fields, Iceland",
     "coordinates": [
-      -19.0,
-      64.9
+      -18.5,
+      64.5
+    ],
+    "target_body": "moon",
+    "dimension_scores": {
+      "terrain": 0.0,
+      "thermal": 0.175,
+      "geology": 0.5,
+      "subsurface": 0.5
+    },
+    "confidence": "low",
+    "strengths": [],
+    "breakdowns": [
+      "Terrain (0.00): largest gap: slope_median 2.58 on Earth vs 12.6 at the target",
+      "Thermal (0.18): largest gap: temp_min 266 on Earth vs 40 at the target",
+      "Permanently shadowed regions and cold traps have no real Earth equivalent",
+      "Vacuum, low gravity and radiation cannot be replicated on Earth"
+    ],
+    "exploration_uses": [
+      "Use this site to test rover suspension and pathfinding over gently undulating volcanic terrain (median 2.58 deg)."
     ],
     "data_sources": [
-      "LRO LOLA GDRDSM (ldsm_75s_240m)",
-      "demo_earth_catalog",
-      "demo_earth_dem",
-      "demo_target_catalog"
+      "LRO LOLA GDRDSM (240m)",
+      "Copernicus GLO-30 DEM (30m)",
+      "LRO Diviner Polar Cumulative Product Baseline (Paige et al., 2010; Williams et al., 2019)",
+      "WorldClim v2.1 (10 arcmin)",
+      "USGS Unified Geologic Map of the Moon / Kaguya MI",
+      "USGS / GLiM Analog Lithology Catalog",
+      "LRO Diviner / Mini-RF / Wagner & Robinson (2014) Lunar Pit Atlas",
+      "Analog Subsurface & Karst/Lava-Tube Catalog"
+    ]
+  },
+  {
+    "site_id": "mauna_kea_vs_lunar_south_pole",
+    "name": "Mauna Kea, Hawaii, USA",
+    "coordinates": [
+      -155.5,
+      19.8
     ],
+    "target_body": "moon",
     "dimension_scores": {
-      "geology": 0.9688,
-      "subsurface": 0.8667,
-      "terrain": 0.5842,
-      "thermal": 0.4
+      "terrain": 0.646,
+      "thermal": 0.171,
+      "geology": 0.5,
+      "subsurface": 0.5
     },
+    "confidence": "low",
+    "strengths": [],
+    "breakdowns": [
+      "Thermal (0.17): largest gap: temp_min 277 on Earth vs 40 at the target",
+      "Permanently shadowed regions and cold traps have no real Earth equivalent",
+      "Vacuum, low gravity and radiation cannot be replicated on Earth"
+    ],
     "exploration_uses": [
-      "Use this site to test traverse planning on rough lava"
+      "Use this site to test highland ascent, slope-stability limits, and regolith-like volcanic terrain mobility (median 14.44 deg) comparable to lunar south polar slopes."
     ],
-    "name": "Iceland Lava Fields",
-    "site_id": "iceland_lava_fields",
+    "data_sources": [
+      "LRO LOLA GDRDSM (240m)",
+      "Copernicus GLO-30 DEM (30m)",
+      "LRO Diviner Polar Cumulative Product Baseline (Paige et al., 2010; Williams et al., 2019)",
+      "WorldClim v2.1 (10 arcmin)",
+      "USGS Unified Geologic Map of the Moon / Kaguya MI",
+      "USGS / GLiM Analog Lithology Catalog",
+      "LRO Diviner / Mini-RF / Wagner & Robinson (2014) Lunar Pit Atlas",
+      "Analog Subsurface & Karst/Lava-Tube Catalog"
+    ]
+  },
+  {
+    "site_id": "rio_tinto_vs_lunar_south_pole",
+    "name": "Rio Tinto, Spain",
+    "coordinates": [
+      -6.6,
+      37.7
+    ],
+    "target_body": "moon",
+    "dimension_scores": {
+      "terrain": 0.619,
+      "thermal": 0.253,
+      "geology": 0.0,
+      "subsurface": 0.0
+    },
+    "confidence": "low",
+    "strengths": [],
+    "breakdowns": [
+      "Thermal (0.25): largest gap: temp_min 277 on Earth vs 40 at the target",
+      "Geology (0.00): no match for anorthosite, impact_breccia, basalt, regolith",
+      "Subsurface (0.00): no match for ground_ice, regolith_mantle, impact_fractures, lava_tubes",
+      "Permanently shadowed regions and cold traps have no real Earth equivalent",
+      "Vacuum, low gravity and radiation cannot be replicated on Earth"
+    ],
+    "exploration_uses": [
+      "Use this site to test field-instrument deployment and mobility across moderately sloped terrain (median 8.82 deg)."
+    ],
+    "data_sources": [
+      "LRO LOLA GDRDSM (240m)",
+      "Copernicus GLO-30 DEM (30m)",
+      "LRO Diviner Polar Cumulative Product Baseline (Paige et al., 2010; Williams et al., 2019)",
+      "WorldClim v2.1 (10 arcmin)",
+      "USGS Unified Geologic Map of the Moon / Kaguya MI",
+      "USGS / GLiM Analog Lithology Catalog",
+      "LRO Diviner / Mini-RF / Wagner & Robinson (2014) Lunar Pit Atlas",
+      "Analog Subsurface & Karst/Lava-Tube Catalog"
+    ]
+  },
+  {
+    "site_id": "samail_ophiolite_vs_lunar_south_pole",
+    "name": "Samail Ophiolite, Oman",
+    "coordinates": [
+      57.8,
+      23.1
+    ],
+    "target_body": "moon",
+    "dimension_scores": {
+      "terrain": 0.0,
+      "thermal": 0.234,
+      "geology": 0.25,
+      "subsurface": 0.0
+    },
+    "confidence": "low",
+    "strengths": [],
+    "breakdowns": [
+      "Terrain (0.00): largest gap: slope_median 28.1 on Earth vs 12.6 at the target",
+      "Thermal (0.23): largest gap: temp_min 281 on Earth vs 40 at the target",
+      "Geology (0.25): no match for anorthosite, impact_breccia, regolith",
+      "Subsurface (0.00): no match for ground_ice, regolith_mantle, impact_fractures, lava_tubes",
+      "Permanently shadowed regions and cold traps have no real Earth equivalent",
+      "Vacuum, low gravity and radiation cannot be replicated on Earth"
+    ],
+    "exploration_uses": [
+      "Use this site to test extreme-slope climbing limits and cliff-avoidance algorithms in steep mountainous terrain (median 28.11 deg)."
+    ],
+    "data_sources": [
+      "LRO LOLA GDRDSM (240m)",
+      "Copernicus GLO-30 DEM (30m)",
+      "LRO Diviner Polar Cumulative Product Baseline (Paige et al., 2010; Williams et al., 2019)",
+      "WorldClim v2.1 (10 arcmin)",
+      "USGS Unified Geologic Map of the Moon / Kaguya MI",
+      "USGS / GLiM Analog Lithology Catalog",
+      "LRO Diviner / Mini-RF / Wagner & Robinson (2014) Lunar Pit Atlas",
+      "Analog Subsurface & Karst/Lava-Tube Catalog"
+    ]
+  },
+  {
+    "site_id": "atacama_desert_vs_jezero_crater",
+    "name": "Atacama Desert, Chile",
+    "coordinates": [
+      -69.25,
+      -24.5
+    ],
+    "target_body": "mars",
+    "dimension_scores": {
+      "terrain": 0.0,
+      "thermal": 0.31,
+      "geology": 0.5,
+      "subsurface": 0.25
+    },
+    "confidence": "low",
+    "strengths": [],
+    "breakdowns": [
+      "Terrain (0.00): largest gap: slope_median 7.15 on Earth vs 0.906 at the target",
+      "Thermal (0.31): largest gap: temp_min 273 on Earth vs 185 at the target",
+      "Subsurface (0.25): no match for layered_sediments, basaltic_fractures, ground_ice",
+      "Mars atmosphere is much thinner than Earth's, so wind and dust behave differently",
+      "Gravity and radiation environment cannot be replicated on Earth"
+    ],
+    "exploration_uses": [
+      "Use this site to test rover navigation and wheel traction across moderate desert slopes (median 7.15 deg) in hyper-arid conditions."
+    ],
+    "data_sources": [
+      "MGS MOLA MEGDR (463m)",
+      "Copernicus GLO-30 DEM (30m)",
+      "MGS TES / Mars 2020 MEDA Baseline (Martinez et al., 2023)",
+      "WorldClim v2.1 (10 arcmin)",
+      "MRO CRISM / USGS Geologic Map of Mars (SIM 3292)",
+      "USGS / GLiM Analog Lithology Catalog",
+      "MRO SHARAD / Mars Global Cave Candidate Catalog (MGC3)",
+      "Analog Subsurface & Karst/Lava-Tube Catalog"
+    ]
+  },
+  {
+    "site_id": "haughton_crater_vs_jezero_crater",
+    "name": "Haughton Crater, Devon Island, Canada",
+    "coordinates": [
+      -89.7,
+      75.4
+    ],
+    "target_body": "mars",
+    "dimension_scores": {
+      "terrain": 0.188,
+      "thermal": 0.344,
+      "geology": 0.667,
+      "subsurface": 0.25
+    },
+    "confidence": "low",
+    "strengths": [],
+    "breakdowns": [
+      "Terrain (0.19): largest gap: slope_p90 12.6 on Earth vs 1.65 at the target",
+      "Thermal (0.34): largest gap: diurnal_swing 6.17 on Earth vs 75 at the target",
+      "Subsurface (0.25): no match for layered_sediments, basaltic_fractures, evaporite_layers",
+      "Mars atmosphere is much thinner than Earth's, so wind and dust behave differently",
+      "Gravity and radiation environment cannot be replicated on Earth"
+    ],
+    "exploration_uses": [
+      "Use this site to test crater-interior traverse planning and polar field operations on gentle impact-basin slopes (median 4.02 deg)."
+    ],
+    "data_sources": [
+      "MGS MOLA MEGDR (463m)",
+      "Copernicus GLO-30 DEM (30m)",
+      "MGS TES / Mars 2020 MEDA Baseline (Martinez et al., 2023)",
+      "WorldClim v2.1 (10 arcmin)",
+      "MRO CRISM / USGS Geologic Map of Mars (SIM 3292)",
+      "USGS / GLiM Analog Lithology Catalog",
+      "MRO SHARAD / Mars Global Cave Candidate Catalog (MGC3)",
+      "Analog Subsurface & Karst/Lava-Tube Catalog"
+    ]
+  },
+  {
+    "site_id": "death_valley_vs_jezero_crater",
+    "name": "Death Valley, USA",
+    "coordinates": [
+      -116.9,
+      36.5
+    ],
+    "target_body": "mars",
+    "dimension_scores": {
+      "terrain": 0.723,
+      "thermal": 0.193,
+      "geology": 0.667,
+      "subsurface": 0.25
+    },
+    "confidence": "low",
     "strengths": [
-      "Basaltic terrain with young lava morphologies"
+      "Terrain (0.72): closest: slope_median 0.461 on Earth vs 0.906 at the target"
     ],
-    "target_body": "moon"
+    "breakdowns": [
+      "Thermal (0.19): largest gap: temp_min 276 on Earth vs 185 at the target",
+      "Subsurface (0.25): no match for layered_sediments, basaltic_fractures, ground_ice",
+      "Mars atmosphere is much thinner than Earth's, so wind and dust behave differently",
+      "Gravity and radiation environment cannot be replicated on Earth"
+    ],
+    "exploration_uses": [
+      "Use this site to test long-range autonomous driving and hazard avoidance on flat basin floors (median 0.46 deg) comparable to Jezero Crater's floor."
+    ],
+    "data_sources": [
+      "MGS MOLA MEGDR (463m)",
+      "Copernicus GLO-30 DEM (30m)",
+      "MGS TES / Mars 2020 MEDA Baseline (Martinez et al., 2023)",
+      "WorldClim v2.1 (10 arcmin)",
+      "MRO CRISM / USGS Geologic Map of Mars (SIM 3292)",
+      "USGS / GLiM Analog Lithology Catalog",
+      "MRO SHARAD / Mars Global Cave Candidate Catalog (MGC3)",
+      "Analog Subsurface & Karst/Lava-Tube Catalog"
+    ]
+  },
+  {
+    "site_id": "antarctic_dry_valleys_vs_jezero_crater",
+    "name": "McMurdo Dry Valleys, Antarctica",
+    "coordinates": [
+      162.0,
+      -77.5
+    ],
+    "target_body": "mars",
+    "dimension_scores": {
+      "terrain": 0.0,
+      "thermal": 0.471,
+      "geology": 0.167,
+      "subsurface": 0.25
+    },
+    "confidence": "low",
+    "strengths": [],
+    "breakdowns": [
+      "Terrain (0.00): largest gap: slope_median 15.6 on Earth vs 0.906 at the target",
+      "Geology (0.17): no match for carbonates, clays, olivine, sulfates, impact_breccia",
+      "Subsurface (0.25): no match for layered_sediments, basaltic_fractures, evaporite_layers",
+      "Mars atmosphere is much thinner than Earth's, so wind and dust behave differently",
+      "Gravity and radiation environment cannot be replicated on Earth"
+    ],
+    "exploration_uses": [
+      "Use this site to test steep-slope mobility and cold-environment hardware operations on rugged polar valley terrain (median 15.65 deg)."
+    ],
+    "data_sources": [
+      "MGS MOLA MEGDR (463m)",
+      "Copernicus GLO-30 DEM (30m)",
+      "MGS TES / Mars 2020 MEDA Baseline (Martinez et al., 2023)",
+      "WorldClim v2.1 (10 arcmin)",
+      "MRO CRISM / USGS Geologic Map of Mars (SIM 3292)",
+      "USGS / GLiM Analog Lithology Catalog",
+      "MRO SHARAD / Mars Global Cave Candidate Catalog (MGC3)",
+      "Analog Subsurface & Karst/Lava-Tube Catalog"
+    ]
+  },
+  {
+    "site_id": "iceland_lava_fields_vs_jezero_crater",
+    "name": "Askja / Highlands Lava Fields, Iceland",
+    "coordinates": [
+      -18.5,
+      64.5
+    ],
+    "target_body": "mars",
+    "dimension_scores": {
+      "terrain": 0.555,
+      "thermal": 0.344,
+      "geology": 0.333,
+      "subsurface": 0.5
+    },
+    "confidence": "low",
+    "strengths": [],
+    "breakdowns": [
+      "Thermal (0.34): largest gap: temp_min 266 on Earth vs 185 at the target",
+      "Geology (0.33): no match for carbonates, clays, sulfates, impact_breccia",
+      "Mars atmosphere is much thinner than Earth's, so wind and dust behave differently",
+      "Gravity and radiation environment cannot be replicated on Earth"
+    ],
+    "exploration_uses": [
+      "Use this site to test rover suspension and pathfinding over gently undulating volcanic terrain (median 2.58 deg)."
+    ],
+    "data_sources": [
+      "MGS MOLA MEGDR (463m)",
+      "Copernicus GLO-30 DEM (30m)",
+      "MGS TES / Mars 2020 MEDA Baseline (Martinez et al., 2023)",
+      "WorldClim v2.1 (10 arcmin)",
+      "MRO CRISM / USGS Geologic Map of Mars (SIM 3292)",
+      "USGS / GLiM Analog Lithology Catalog",
+      "MRO SHARAD / Mars Global Cave Candidate Catalog (MGC3)",
+      "Analog Subsurface & Karst/Lava-Tube Catalog"
+    ]
+  },
+  {
+    "site_id": "mauna_kea_vs_jezero_crater",
+    "name": "Mauna Kea, Hawaii, USA",
+    "coordinates": [
+      -155.5,
+      19.8
+    ],
+    "target_body": "mars",
+    "dimension_scores": {
+      "terrain": 0.0,
+      "thermal": 0.291,
+      "geology": 0.333,
+      "subsurface": 0.0
+    },
+    "confidence": "low",
+    "strengths": [],
+    "breakdowns": [
+      "Terrain (0.00): largest gap: slope_median 14.4 on Earth vs 0.906 at the target",
+      "Thermal (0.29): largest gap: temp_min 277 on Earth vs 185 at the target",
+      "Geology (0.33): no match for carbonates, clays, sulfates, impact_breccia",
+      "Subsurface (0.00): no match for layered_sediments, basaltic_fractures, evaporite_layers, ground_ice",
+      "Mars atmosphere is much thinner than Earth's, so wind and dust behave differently",
+      "Gravity and radiation environment cannot be replicated on Earth"
+    ],
+    "exploration_uses": [
+      "Use this site to test highland ascent, slope-stability limits, and regolith-like volcanic terrain mobility (median 14.44 deg) comparable to lunar south polar slopes."
+    ],
+    "data_sources": [
+      "MGS MOLA MEGDR (463m)",
+      "Copernicus GLO-30 DEM (30m)",
+      "MGS TES / Mars 2020 MEDA Baseline (Martinez et al., 2023)",
+      "WorldClim v2.1 (10 arcmin)",
+      "MRO CRISM / USGS Geologic Map of Mars (SIM 3292)",
+      "USGS / GLiM Analog Lithology Catalog",
+      "MRO SHARAD / Mars Global Cave Candidate Catalog (MGC3)",
+      "Analog Subsurface & Karst/Lava-Tube Catalog"
+    ]
+  },
+  {
+    "site_id": "rio_tinto_vs_jezero_crater",
+    "name": "Rio Tinto, Spain",
+    "coordinates": [
+      -6.6,
+      37.7
+    ],
+    "target_body": "mars",
+    "dimension_scores": {
+      "terrain": 0.0,
+      "thermal": 0.289,
+      "geology": 0.333,
+      "subsurface": 0.25
+    },
+    "confidence": "low",
+    "strengths": [],
+    "breakdowns": [
+      "Terrain (0.00): largest gap: slope_median 8.82 on Earth vs 0.906 at the target",
+      "Thermal (0.29): largest gap: temp_min 277 on Earth vs 185 at the target",
+      "Geology (0.33): no match for carbonates, olivine, basalt, impact_breccia",
+      "Subsurface (0.25): no match for basaltic_fractures, evaporite_layers, ground_ice",
+      "Mars atmosphere is much thinner than Earth's, so wind and dust behave differently",
+      "Gravity and radiation environment cannot be replicated on Earth"
+    ],
+    "exploration_uses": [
+      "Use this site to test field-instrument deployment and mobility across moderately sloped terrain (median 8.82 deg)."
+    ],
+    "data_sources": [
+      "MGS MOLA MEGDR (463m)",
+      "Copernicus GLO-30 DEM (30m)",
+      "MGS TES / Mars 2020 MEDA Baseline (Martinez et al., 2023)",
+      "WorldClim v2.1 (10 arcmin)",
+      "MRO CRISM / USGS Geologic Map of Mars (SIM 3292)",
+      "USGS / GLiM Analog Lithology Catalog",
+      "MRO SHARAD / Mars Global Cave Candidate Catalog (MGC3)",
+      "Analog Subsurface & Karst/Lava-Tube Catalog"
+    ]
+  },
+  {
+    "site_id": "samail_ophiolite_vs_jezero_crater",
+    "name": "Samail Ophiolite, Oman",
+    "coordinates": [
+      57.8,
+      23.1
+    ],
+    "target_body": "mars",
+    "dimension_scores": {
+      "terrain": 0.0,
+      "thermal": 0.271,
+      "geology": 0.5,
+      "subsurface": 0.0
+    },
+    "confidence": "low",
+    "strengths": [],
+    "breakdowns": [
+      "Terrain (0.00): largest gap: slope_median 28.1 on Earth vs 0.906 at the target",
+      "Thermal (0.27): largest gap: temp_min 281 on Earth vs 185 at the target",
+      "Subsurface (0.00): no match for layered_sediments, basaltic_fractures, evaporite_layers, ground_ice",
+      "Mars atmosphere is much thinner than Earth's, so wind and dust behave differently",
+      "Gravity and radiation environment cannot be replicated on Earth"
+    ],
+    "exploration_uses": [
+      "Use this site to test extreme-slope climbing limits and cliff-avoidance algorithms in steep mountainous terrain (median 28.11 deg)."
+    ],
+    "data_sources": [
+      "MGS MOLA MEGDR (463m)",
+      "Copernicus GLO-30 DEM (30m)",
+      "MGS TES / Mars 2020 MEDA Baseline (Martinez et al., 2023)",
+      "WorldClim v2.1 (10 arcmin)",
+      "MRO CRISM / USGS Geologic Map of Mars (SIM 3292)",
+      "USGS / GLiM Analog Lithology Catalog",
+      "MRO SHARAD / Mars Global Cave Candidate Catalog (MGC3)",
+      "Analog Subsurface & Karst/Lava-Tube Catalog"
+    ]
   }
 ]

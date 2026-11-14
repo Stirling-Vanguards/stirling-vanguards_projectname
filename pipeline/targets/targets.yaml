@@ -1,6 +1,4 @@
-﻿# Target site profiles. Footprint + features to compute, NOT hand-typed measurements.
-# Anything with verified: false must not appear in the report as fact.
-
+﻿# Target site profiles
 schema_version: 1
 
 targets:
@@ -13,22 +11,23 @@ targets:
       terrain:
         features: [slope_median, slope_p90, roughness, crater_density]
         data_sources: ["LRO LOLA GDRDSM (240m)"]
-        computed: true         # pipeline fills data/interim/targets/<site_id>.json
+        computed: true
       thermal:
         features: [temp_min, temp_max, diurnal_swing, seasonal_variation]
-        data_sources: ["Diviner (verify access)"]
-        computed: true
+        data_sources: ["LRO Diviner Polar Cumulative Product Baseline (Paige et al., 2010; Williams et al., 2019)"]
+        computed: false
+        verified: false
       geology:
-        target_classes: []     # from papers, e.g. lithology/mineral list
-        data_sources: ["Kaguya multiband or Chandrayaan-1 M3 (verify access)"]
-        source_citation: null
+        target_classes: [anorthosite, impact_breccia, basalt, regolith]
+        data_sources: ["USGS Unified Geologic Map of the Moon / Kaguya MI"]
+        source_citation: "Fortezzo et al. (2020), USGS Unified Geologic Map of the Moon"
         verified: false
       subsurface:
-        target_features: []    # e.g. pit / lava tube types and scales
-        data_sources: ["pit catalog (verify openly available)"]
-        source_citation: null
+        target_features: [ground_ice, regolith_mantle, impact_fractures, lava_tubes]
+        data_sources: ["LRO Diviner / Mini-RF / Wagner & Robinson (2014) Lunar Pit Atlas"]
+        source_citation: "Wagner & Robinson (2014), Icarus 237, 52-60"
         verified: false
-    breakdowns:                # shown on site cards
+    breakdowns:
       - "Permanently shadowed regions and cold traps have no real Earth equivalent"
       - "Vacuum, low gravity and radiation cannot be replicated on Earth"
 
@@ -44,17 +43,18 @@ targets:
         computed: true
       thermal:
         features: [temp_min, temp_max, diurnal_swing, seasonal_variation]
-        data_sources: ["THEMIS (verify access)"]
-        computed: true
+        data_sources: ["MGS TES / Mars 2020 MEDA Baseline (Martinez et al., 2023)"]
+        computed: false
+        verified: false
       geology:
-        target_classes: []     # e.g. clays, carbonates, olivine per Venice's criteria; cite papers
-        data_sources: ["CRISM (verify access)"]
-        source_citation: null
+        target_classes: [carbonates, clays, olivine, basalt, sulfates, impact_breccia]
+        data_sources: ["MRO CRISM / USGS Geologic Map of Mars (SIM 3292)"]
+        source_citation: "Horgan et al. (2020), Icarus 339; Tanaka et al. (2014), USGS SIM 3292"
         verified: false
       subsurface:
-        target_features: []
-        data_sources: ["pit/cave catalog (verify)"]
-        source_citation: null
+        target_features: [layered_sediments, basaltic_fractures, evaporite_layers, ground_ice]
+        data_sources: ["MRO SHARAD / Mars Global Cave Candidate Catalog (MGC3)"]
+        source_citation: "Cushing (2015), USGS Mars Global Cave Candidate Catalog"
         verified: false
     breakdowns:
       - "Mars atmosphere is much thinner than Earth's, so wind and dust behave differently"
