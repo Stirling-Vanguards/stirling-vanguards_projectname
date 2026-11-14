@@ -1,0 +1,24 @@
+/* ============================================================================
+   VANGUARD ATLAS — ORBITAL DESIGN SYSTEM · single entry point
+   ----------------------------------------------------------------------------
+   Replace the four <link> tags in app/index.html with ONE:
+
+     <link rel="stylesheet" href="src/styles/index.css">
+
+   Load order is significant:
+     tokens → base → layout → components → viz → map
+   (map.css intentionally last so overlay positioning wins.)
+
+   No build step. No CDN. No font download required — the font stacks degrade
+   gracefully to system fonts when Poppins / IBM Plex Mono are not vendored.
+   To reach pixel parity with the mockup, vendor the two families into
+   public/fonts/ and add @font-face declarations (see DESIGN_SYSTEM.md §3.2).
+   ========================================================================== */
+
+@import "tokens.css";
+@import "base.css";
+@import "layout.css";
+@import "components.css";
+@import "viz.css";
+@import "pages.css";
+@import "map.css";

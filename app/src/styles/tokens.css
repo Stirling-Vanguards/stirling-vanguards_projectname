@@ -1,22 +1,376 @@
-/* Placeholder tokens. Swap values to match Venice's docs/design/ when ready. */
+/* ============================================================================
+   VANGUARD ATLAS — ORBITAL DESIGN SYSTEM
+   tokens.css · Layer 1 + 2: primitives and semantic aliases
+   ----------------------------------------------------------------------------
+   Source of truth (machine readable): ../design/tokens.json
+   This file is the runtime mirror. If you change a value, change BOTH.
+
+   Direction derived from the team's design mockup (_reference/design-mockup):
+   near-black space canvas, vivid blue CTA, heavy geometric display type,
+   luminous image tiles, instrument-grade dark data surfaces.
+
+   COMPONENT RULE: components.css / viz.css / layout.css / map.css may ONLY
+   reference semantic tokens (--bg-*, --fg-*, --border-*, --accent-*,
+   --dim-*, --signal-*, --body-*, --ramp-*) plus the scale tokens.
+   Never a raw hex value outside this file.
+   ========================================================================== */
+
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* ---- 1. PRIMITIVES · space / surfaces ---- */
+  --c-void: #000000;      /* footer / masks — brand-only */
+  --c-white: #ffffff;     /* glowing brand titles — brand-only */
+  --c-space-900: #03050b;
+  --c-space-850: #060a14;
+  --c-space-800: #0a1120;
+  --c-space-750: #101a2c;
+  --c-space-700: #16233a;
+  --c-space-650: #1e2e48;
+
+  --c-line-subtle: rgba(126, 166, 224, 0.10);
+  --c-line: rgba(126, 166, 224, 0.18);
+  --c-line-strong: rgba(126, 166, 224, 0.32);
+  --c-line-tile: rgba(96, 165, 255, 0.30);
+
+  /* ---- 1. PRIMITIVES · text ---- */
+  --c-text-100: #f5f8ff;
+  --c-text-200: #c6d4e8;
+  --c-text-300: #93a7c2;
+  --c-text-400: #6c809b;
+
+  /* ---- 1. PRIMITIVES · brand blue (sampled from the CTA gradient) ---- */
+  --c-blue-300: #7cc4ff;
+  --c-blue-400: #39b1ff;
+  --c-blue-500: #1672d8;   /* canonical brand blue */
+  --c-blue-600: #0a59ac;
+  --c-blue-700: #034a86;
+  --c-blue-ink: #ffffff;
+  --c-blue-soft: rgba(22, 114, 216, 0.14);
+  --c-blue-soft-2: rgba(57, 177, 255, 0.22);
+  --c-blue-line: rgba(57, 177, 255, 0.45);
+  --gradient-cta: linear-gradient(100deg, var(--c-blue-600) 0%, var(--c-blue-500) 48%, var(--c-blue-400) 100%);
+  /* Text-bearing variant: stops before the bright end so white label keeps
+     >= 4.5:1 contrast at every point. The brighter gradient above is reserved
+     for decorative rules, glows and non-text accents. */
+  --gradient-cta-solid: linear-gradient(100deg, var(--c-blue-700) 0%, var(--c-blue-600) 55%, var(--c-blue-500) 100%);
+  --gradient-hero: linear-gradient(90deg, rgba(3, 5, 11, 0.94) 0%, rgba(3, 5, 11, 0.72) 42%, rgba(3, 5, 11, 0.10) 100%);
+  --gradient-scrim: linear-gradient(180deg, rgba(2, 5, 12, 0) 35%, rgba(2, 5, 12, 0.72) 78%, rgba(2, 5, 12, 0.94) 100%);
+
+  /* ---- 1. PRIMITIVES · target bodies ---- */
+  --c-moon: #b9cfe8;
+  --c-mars: #e2824f;
+  --c-moon-soft: rgba(185, 207, 232, 0.12);
+  --c-mars-soft: rgba(226, 130, 79, 0.12);
+
+  /* ---- 1. PRIMITIVES · glow / glass ---- */
+  --c-glow-blue: rgba(35, 120, 220, 0.28);
+  --c-glow-warm: rgba(255, 205, 120, 0.30);
+  --c-scrim: rgba(2, 5, 12, 0.82);
+  --c-glass: rgba(9, 16, 30, 0.86);
+  --c-glass-solid: #0a1120;
+
+  /* ---- 1. PRIMITIVES · shared perceptual score ramp (viridis-derived) ----
+     ONE ramp for every dimension. Hue never encodes which dimension is active;
+     the segmented control and the legend title carry that. */
+  --c-ramp-0: #44307a;  /* 0.00 · far */
+  --c-ramp-1: #3b528b;
+  --c-ramp-2: #21918c;
+  --c-ramp-3: #5ec962;
+  --c-ramp-4: #fde725;  /* 1.00 · close */
+  --c-not-scored: #71849b;
+
+  /* ---- 1. PRIMITIVES · elevation ---- */
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.50);
+  --shadow-2: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-3: 0 18px 48px rgba(0, 0, 0, 0.55);
+  --shadow-4: 0 32px 80px rgba(0, 0, 0, 0.65);
+
+  /* ---- 1. PRIMITIVES · dimension identity (dark-optimised) ---- */
+  --dim-terrain: #efc75e;
+  --dim-terrain-soft: rgba(239, 199, 94, 0.14);
+  --dim-terrain-line: rgba(239, 199, 94, 0.42);
+  --dim-thermal: #ff7a66;
+  --dim-thermal-soft: rgba(255, 122, 102, 0.14);
+  --dim-thermal-line: rgba(255, 122, 102, 0.42);
+  --dim-geology: #a99bff;
+  --dim-geology-soft: rgba(169, 155, 255, 0.14);
+  --dim-geology-line: rgba(169, 155, 255, 0.42);
+  --dim-subsurface: #4fd1a5;
+  --dim-subsurface-soft: rgba(79, 209, 165, 0.14);
+  --dim-subsurface-line: rgba(79, 209, 165, 0.42);
+  --dim-water_ice: #6fd6e8;
+  --dim-water_ice-soft: rgba(111, 214, 232, 0.14);
+  --dim-water_ice-line: rgba(111, 214, 232, 0.42);
+  --dim-dust_wind: #e88bc4;
+  --dim-dust_wind-soft: rgba(232, 139, 196, 0.14);
+  --dim-dust_wind-line: rgba(232, 139, 196, 0.42);
+
+  /* ---- 1. PRIMITIVES · confidence + status ---- */
+  --signal-high: #5fd3a0;
+  --signal-medium: #efc75e;
+  --signal-low: #ee8a7e;
+  --signal-high-soft: rgba(95, 211, 160, 0.13);
+  --signal-medium-soft: rgba(239, 199, 94, 0.13);
+  --signal-low-soft: rgba(238, 138, 126, 0.13);
+  --status-info: #7cc4ff;
+  --status-success: #5fd3a0;
+  --status-warn: #efc75e;
+  --status-danger: #ff7a66;
+}
+
+/* ----------------------------------------------------------------------------
+   LIGHT THEME — accessibility / print variant only.
+   Brand surfaces (hero, starfield, image tiles) intentionally stay dark in both
+   themes: the photography is the brand. Only instrument surfaces invert.
+   -------------------------------------------------------------------------- */
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --c-space-900: #f2f6fc;
+  --c-space-850: #e9eff8;
+  --c-space-800: #ffffff;
+  --c-space-750: #f6f9fd;
+  --c-space-700: #eaf0f8;
+  --c-space-650: #dce6f2;
+
+  --c-line-subtle: rgba(20, 52, 96, 0.10);
+  --c-line: rgba(20, 52, 96, 0.18);
+  --c-line-strong: rgba(20, 52, 96, 0.32);
+  --c-line-tile: rgba(10, 89, 172, 0.30);
+
+  --c-text-100: #0a1a30;
+  --c-text-200: #2d4260;
+  --c-text-300: #536a88;
+  --c-text-400: #7a8da6;
+
+  --c-blue-300: #034a86;
+  --c-blue-400: #0a59ac;
+  --c-blue-500: #0a63be;
+  --c-blue-600: #084b93;
+  --c-blue-700: #063a73;
+  --c-blue-ink: #ffffff;
+  --c-blue-soft: rgba(10, 99, 190, 0.09);
+  --c-blue-soft-2: rgba(10, 99, 190, 0.16);
+  --c-blue-line: rgba(10, 99, 190, 0.42);
+
+  --c-moon: #45627f;
+  --c-mars: #a5471c;
+  --c-moon-soft: rgba(69, 98, 127, 0.10);
+  --c-mars-soft: rgba(165, 71, 28, 0.10);
+
+  --c-glow-blue: rgba(35, 120, 220, 0.12);
+  --c-glow-warm: rgba(255, 205, 120, 0.18);
+  --c-glass: rgba(255, 255, 255, 0.96);
+  --c-glass-solid: #ffffff;
+
+  --c-ramp-0: #440154;
+  --c-not-scored: #64748b;
+
+  --shadow-1: 0 1px 2px rgba(16, 40, 80, 0.10);
+  --shadow-2: 0 8px 24px rgba(16, 40, 80, 0.12);
+  --shadow-3: 0 18px 48px rgba(16, 40, 80, 0.16);
+  --shadow-4: 0 32px 80px rgba(16, 40, 80, 0.20);
+
+  /* Darker dimension variants keep >= 4.5:1 text contrast on white */
+  --dim-terrain: #8a6100;
+  --dim-thermal: #b33421;
+  --dim-geology: #5843b8;
+  --dim-subsurface: #0b7355;
+  --dim-water_ice: #0b6b80;
+  --dim-dust_wind: #9c2c72;
+  --dim-terrain-soft: rgba(138, 97, 0, 0.09);
+  --dim-thermal-soft: rgba(179, 52, 33, 0.09);
+  --dim-geology-soft: rgba(88, 67, 184, 0.09);
+  --dim-subsurface-soft: rgba(11, 115, 85, 0.09);
+  --dim-water_ice-soft: rgba(11, 107, 128, 0.09);
+  --dim-dust_wind-soft: rgba(156, 44, 114, 0.09);
+
+  --signal-high: #0b7355;
+  --signal-medium: #8a6100;
+  --signal-low: #a33427;
+  --status-info: #0a59ac;
+  --status-success: #0b7355;
+  --status-warn: #8a6100;
+  --status-danger: #b33421;
+}
+
+/* ----------------------------------------------------------------------------
+   LAYER 2 · SEMANTIC ALIASES — the only colour tokens components may use
+   -------------------------------------------------------------------------- */
 :root {
-  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --color-bg: #ffffff;
-  --color-surface: #f5f6f8;
-  --color-text: #1b1f24;
-  --color-muted: #566070;
-  --color-border: #d0d5dd;
-  --color-accent: #1d4ed8;
-  --color-accent-soft: rgba(29, 78, 216, 0.25);
-  --color-moon: #4b5563;
-  --color-mars: #b4492d;
-  --color-conf-high: #166534;
-  --color-conf-medium: #92400e;
-  --color-conf-low: #991b1b;
-  --radius: 8px;
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 1rem;
-  --space-4: 1.5rem;
-  --focus-ring: 3px solid var(--color-accent);
+  /* Brand-only constants: these NEVER invert. The starfield/photography is the
+     brand, so hero, section and tile surfaces stay dark in the light theme. */
+  --brand-canvas: #03050b;
+
+  --bg-app: var(--c-space-900);
+  --bg-sunken: var(--c-space-850);
+  --bg-panel: var(--c-space-800);
+  --bg-raised: var(--c-space-750);
+  --bg-hover: var(--c-space-700);
+  --bg-active: var(--c-space-650);
+  --bg-glass: var(--c-glass);
+  --bg-scrim: var(--c-scrim);
+
+  --fg-primary: var(--c-text-100);
+  --fg-secondary: var(--c-text-200);
+  --fg-muted: var(--c-text-300);
+  --fg-disabled: var(--c-text-400);
+  --fg-inverse: var(--c-space-900);
+
+  --border-subtle: var(--c-line-subtle);
+  --border-default: var(--c-line);
+  --border-strong: var(--c-line-strong);
+  --border-tile: var(--c-line-tile);
+
+  --accent: var(--c-blue-500);
+  --accent-hover: var(--c-blue-400);
+  --accent-press: var(--c-blue-600);
+  --accent-soft: var(--c-blue-soft);
+  --accent-soft-2: var(--c-blue-soft-2);
+  --accent-line: var(--c-blue-line);
+  --on-accent: var(--c-blue-ink);
+  --focus: var(--c-blue-400);
+
+  --body-moon: var(--c-moon);
+  --body-mars: var(--c-mars);
+  --body-moon-soft: var(--c-moon-soft);
+  --body-mars-soft: var(--c-mars-soft);
+
+  --ramp-0: var(--c-ramp-0);
+  --ramp-1: var(--c-ramp-1);
+  --ramp-2: var(--c-ramp-2);
+  --ramp-3: var(--c-ramp-3);
+  --ramp-4: var(--c-ramp-4);
+  --not-scored: var(--c-not-scored);
+
+  /* ---- Typography ---- */
+  --font-display: "Poppins", "Montserrat", "Century Gothic", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Poppins", "Montserrat", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  --font-ui: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "Space Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --text-2xs: 0.6875rem;   /* 11 */
+  --text-xs: 0.75rem;      /* 12 */
+  --text-sm: 0.8125rem;    /* 13 */
+  --text-md: 0.875rem;     /* 14 · UI default */
+  --text-base: 1rem;       /* 16 */
+  --text-lg: 1.125rem;     /* 18 */
+  --text-xl: 1.375rem;     /* 22 */
+  --text-2xl: 1.75rem;     /* 28 */
+  --text-3xl: 2.25rem;     /* 36 */
+  --text-4xl: 3rem;        /* 48 */
+  --text-5xl: 4.5rem;      /* 72 */
+
+  --lh-tight: 1.12;
+  --lh-snug: 1.30;
+  --lh-normal: 1.55;
+  --lh-relaxed: 1.75;
+
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-black: 800;
+
+  --tracking-brand: 0.10em;   /* hero paragraph, nav */
+  --tracking-caps: 0.14em;    /* eyebrows, labels */
+  --tracking-display: -0.02em;
+  --tracking-ui: 0;           /* data UI: never wide-tracked */
+  --tracking-mono: 0.02em;
+
+  /* ---- Space · 4px base grid ---- */
+  --space-0: 0;
+  --space-1: 0.125rem;  /*  2 */
+  --space-2: 0.25rem;   /*  4 */
+  --space-3: 0.5rem;    /*  8 */
+  --space-4: 0.75rem;   /* 12 */
+  --space-5: 1rem;      /* 16 */
+  --space-6: 1.25rem;   /* 20 */
+  --space-7: 1.5rem;    /* 24 */
+  --space-8: 2rem;      /* 32 */
+  --space-9: 2.5rem;    /* 40 */
+  --space-10: 3rem;     /* 48 */
+  --space-11: 4rem;     /* 64 */
+  --space-12: 6rem;     /* 96 */
+
+  /* ---- Radius ---- */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-2xl: 28px;
+  --radius-full: 999px;
+
+  /* ---- Motion ---- */
+  --dur-1: 90ms;
+  --dur-2: 160ms;
+  --dur-3: 280ms;
+  --dur-4: 480ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ---- Layout / sizing ---- */
+  --header-h: 64px;
+  --sidebar-w: 380px;
+  --bottom-h: min(40vh, 420px);
+  --content-max: 1440px;
+  --control-h: 40px;
+  --control-h-sm: 32px;
+  --touch-min: 44px;
+
+  --z-base: 0;
+  --z-map-overlay: 2;
+  --z-panel: 3;
+  --z-sticky: 10;
+  --z-dropdown: 20;
+  --z-toast: 40;
+  --z-modal: 60;
+
+  /* ---- Backwards-compatibility aliases ----
+     The audited app referenced these names. Keeping them means the team can
+     drop in styles/index.css without touching legacy JS-generated markup.
+     New code should use the semantic tokens above. */
+  --color-bg: var(--bg-app);
+  --color-surface: var(--bg-raised);
+  --color-text: var(--fg-primary);
+  --color-muted: var(--fg-muted);
+  --color-border: var(--border-default);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft-2);
+  --color-moon: var(--body-moon);
+  --color-mars: var(--body-mars);
+  --color-conf-high: var(--signal-high);
+  --color-conf-medium: var(--signal-medium);
+  --color-conf-low: var(--signal-low);
+  --radius: var(--radius-md);
+  --focus-ring: 2px solid var(--focus);
+}
+
+/* NOTE: the audited tokens.css used --space-1..4 = .25/.5/1/1.5rem (not a
+   consistent grid). They are re-based to the 4px scale above. Legacy class
+   names still resolve; only the rhythm changes, by design. */
+
+/* ---- High-contrast accessibility variant ---- */
+:root[data-contrast="high"] {
+  --c-line: rgba(160, 200, 255, 0.42);
+  --c-line-subtle: rgba(160, 200, 255, 0.28);
+  --c-line-strong: rgba(180, 215, 255, 0.65);
+  --c-text-200: #e4eeff;
+  --c-text-300: #c2d3ea;
+  --c-text-400: #a8bdd8;
+  --c-blue-400: #8fd0ff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-1: 0ms;
+    --dur-2: 0ms;
+    --dur-3: 0ms;
+    --dur-4: 0ms;
+  }
 }

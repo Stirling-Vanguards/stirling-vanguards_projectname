@@ -1,0 +1,12 @@
+# data-platform/.gitignore excludes app/public/data/* because the pipeline
+# generates those files. The published, quality-gated dataset is also a deploy
+# artifact for GitHub Pages: a plain `git clone` must produce a working site
+# without running the Python pipeline first. Re-include the small JSON files
+# here (a deeper .gitignore wins over the parent rule).
+!public/data/
+!public/data/*.json
+!public/data/*.geojson
+
+# Local-only validation artifacts
+_shots/
+_syntax/

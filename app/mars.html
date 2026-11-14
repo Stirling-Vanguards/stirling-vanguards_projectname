@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jezero Crater — Vanguard Atlas</title>
+<meta name="description" content="Target profile for Jezero Crater and the Earth analog sites compared against it, one dimension at a time.">
+<link rel="stylesheet" href="src/styles/index.css">
+</head>
+<body data-body="mars">
+<a class="va-skip" href="#main">Skip to content</a>
+
+<header class="va-masthead">
+  <a class="va-wordmark" href="index.html">Vanguard Atlas</a>
+  <nav class="va-nav" aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="explore.html">Atlas</a>
+    <a href="moon.html">Moon</a>
+    <a href="mars.html">Mars<span class="va-nav-dot" aria-hidden="true"></span></a>
+  </nav>
+  <div class="va-masthead__actions">
+    <button type="button" class="va-btn va-btn--sm va-btn--ghost" id="theme-toggle">Light mode</button>
+  </div>
+</header>
+
+<div class="va-global-status" data-global-status></div>
+
+<main id="main">
+  <section class="va-hero va-target-hero" aria-labelledby="target-title">
+    <img class="va-hero__art" src="public/assets/hero-mars.jpg" alt="" aria-hidden="true">
+    <div class="va-hero__inner">
+      <p class="va-eyebrow va-target-hero__kicker">Target · Mars</p>
+      <h1 class="va-display va-target-hero__title" id="target-title">Jezero Crater</h1>
+      <p class="va-brand-copy va-target-hero__copy">An ancient impact crater with a preserved river delta. We compare Earth analog sites against it one dimension at a time, using open NASA planetary data.</p>
+      <div class="va-target-hero__actions">
+        <a class="va-btn va-btn--primary" href="explore.html">Open the atlas</a>
+        <span class="va-badge va-badge--neutral">Target profile · unverified</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="va-target-body">
+    <div class="va-target-inner">
+      <div id="target-intro"></div>
+
+      <section class="va-target-block" aria-labelledby="map-title">
+        <div class="va-target-block__head">
+          <h2 id="map-title">Target map</h2>
+          <span>Interactive · drag to pan, scroll to zoom</span>
+        </div>
+        <div id="body-map"></div>
+      </section>
+
+      <section class="va-target-block" aria-labelledby="analogs-title">
+        <div class="va-target-block__head">
+          <h2 id="analogs-title">Earth analog sites</h2>
+          <span id="analog-count"></span>
+        </div>
+        <div class="va-target-grid" id="target-sites"></div>
+      </section>
+
+      <section class="va-target-block" aria-labelledby="breaks-title">
+        <div class="va-target-block__head">
+          <h2 id="breaks-title">Where the analogy breaks down</h2>
+          <span>Curated limits, not contract fields</span>
+        </div>
+        <div class="va-limits" id="target-breakdowns"></div>
+      </section>
+
+      <section class="va-target-block" aria-labelledby="planned-title">
+        <div class="va-target-block__head">
+          <h2 id="planned-title">Planned target measurements</h2>
+          <span>None published as fact yet</span>
+        </div>
+        <div class="va-planned" id="target-planned"></div>
+      </section>
+
+      <section class="va-target-block" aria-labelledby="provenance-title">
+        <div class="va-target-block__head"><h2 id="provenance-title">Dataset provenance</h2></div>
+        <div class="va-dataset-strip" id="target-strip" aria-label="Dataset provenance"></div>
+        <div style="margin-top:var(--space-5)">
+          <div class="va-rule-flag">Dimensions are compared one at a time. This product has no overall similarity score.</div>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer class="va-footer">
+  <div class="va-footer__brand">Vanguard Atlas<small>Stirling Vanguards</small></div>
+  <p class="va-footer__legal">© <span data-year>2026</span> Stirling Vanguards · NASA Space Apps Challenge 2026 entry.</p>
+  <div class="va-footer__credits">
+    Target profile: pipeline/targets/targets.yaml (verified: false)<br>
+    Planned science data: NASA MGS/MOLA via PDS Geosciences Node (target baselines unverified)
+  </div>
+</footer>
+
+<script type="module" src="src/pages/target.js"></script>
+</body>
+</html>

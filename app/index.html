@@ -1,44 +1,110 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Analog Finder (working title)</title>
-
-  <!-- MapLibre GL JS. Version is pinned; VERIFY it exists on unpkg before relying on it.
-       For the demo, vendor these two files into app/public/ so nothing depends on a CDN. -->
-  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-
-  <link rel="stylesheet" href="src/map/map.css">
-  <link rel="stylesheet" href="src/styles/tokens.css">
-  <link rel="stylesheet" href="src/styles/components.css">
-  <link rel="stylesheet" href="src/styles/layout.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vanguard Atlas — Where your future starts</title>
+<meta name="description" content="Discover terrestrial analog sites for permanent Moon and Mars bases, compared one dimension at a time using open NASA planetary data.">
+<link rel="stylesheet" href="src/styles/index.css">
 </head>
 <body>
-  <!-- Visually hidden page heading for screen readers (inline style so it works without a shared class). -->
-  <h1 style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Earth analog finder</h1>
+<a class="va-skip" href="#main">Skip to content</a>
 
-  <main id="app">
-    <!-- Kurt: map and dimension toggle -->
-    <section id="map-wrap" aria-label="Map of Earth analog sites">
-      <div id="dimension-toggle"></div>
-      <div id="map"></div>
-      <div id="map-legend"></div>
-      <div id="map-status" role="alert" hidden></div>
-    </section>
+<header class="va-masthead">
+  <a class="va-wordmark" href="index.html">Vanguard Atlas</a>
+  <nav class="va-nav" aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="explore.html">Atlas</a>
+    <a href="moon.html">Moon</a>
+    <a href="mars.html">Mars<span class="va-nav-dot" aria-hidden="true"></span></a>
+  </nav>
+  <div class="va-masthead__actions">
+    <button type="button" class="va-btn va-btn--sm va-btn--ghost" id="theme-toggle">Light mode</button>
+  </div>
+</header>
 
-    <aside id="side" aria-label="Selected site details">
-      <div id="site-card-slot" aria-live="polite"></div>   <!-- Ely: site analog card (mounted by src/main.js) -->
-      <div id="comparison-slot"></div>                      <!-- Vince: Earth-vs-target comparison -->
-    </aside>
-    <section id="bottom" aria-label="Ranked sites">
-      <div id="site-table-slot"></div>                      <!-- Ely: ranked table and filters (mounted by src/main.js) -->
-    </section>
-  </main>
+<div class="va-global-status" data-global-status></div>
 
-  <!-- ES modules need a local server. Separate modules so one failing import cannot break the other. -->
-  <script type="module" src="src/map/map.js"></script>
-  <script type="module" src="src/main.js"></script>
+<main id="main">
+  <section class="va-hero" aria-labelledby="hero-title">
+    <img class="va-hero__art" src="public/assets/earth-limb.jpg" alt="" aria-hidden="true">
+    <div class="va-hero__inner">
+      <p class="va-eyebrow">Stirling Vanguards · NASA Space Apps 2026</p>
+      <h1 class="va-hero__title" id="hero-title">
+        <span class="va-display-outline">Where your</span>
+        <span class="va-display">Future starts</span>
+      </h1>
+      <p class="va-brand-copy va-hero__copy">Before humanity builds permanent habitats on the Moon and Mars, we test here. Discover terrestrial analog sites using open NASA planetary data.</p>
+      <div class="va-hero__actions">
+        <a class="va-btn va-btn--primary" href="explore.html">Explore Sites</a>
+        <a class="va-btn" href="#how">How it works</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="va-section" aria-labelledby="explore-title">
+    <div class="va-section__head"><h2 class="va-section-title" id="explore-title">Explore sites</h2></div>
+    <div class="va-tile-grid va-tile-grid--home">
+      <a class="va-tile va-tile--banner" href="explore.html">
+        <img class="va-tile__img" src="public/assets/tile-earth.jpg" alt="Earth's limb from orbit">
+        <span class="va-tile__scrim"></span>
+        <span class="va-tile__label">Earth locations</span>
+      </a>
+      <a class="va-tile" href="moon.html">
+        <img class="va-tile__img" src="public/assets/tile-moon.jpg" alt="Lunar south pole terrain">
+        <span class="va-tile__scrim"></span>
+        <span class="va-tile__label">Lunar south-pole</span>
+      </a>
+      <a class="va-tile" href="mars.html">
+        <img class="va-tile__img" src="public/assets/tile-mars.jpg" alt="Jezero crater on Mars">
+        <span class="va-tile__scrim"></span>
+        <span class="va-tile__label">Jezero crater</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="va-section va-section--flat" id="how" aria-labelledby="how-title">
+    <div class="va-section__head"><h2 class="va-section-title" id="how-title">How the atlas works</h2></div>
+    <div class="va-feature-grid">
+      <article class="va-feature">
+        <span class="va-feature__num">01 / DIMENSIONS</span>
+        <h3>One dimension at a time</h3>
+        <p>Terrain, thermal, geology and subsurface are separate properties. Rank or map sites by a single dimension — features are never blended into one overall similarity score.</p>
+      </article>
+      <article class="va-feature">
+        <span class="va-feature__num">02 / SCORES</span>
+        <h3>A zero is not a gap</h3>
+        <p><code>0.00</code> means a measured "no match". An unmeasured optional dimension is <em>not scored</em> and is omitted from the record — it is never silently turned into zero.</p>
+      </article>
+      <article class="va-feature">
+        <span class="va-feature__num">03 / CONFIDENCE</span>
+        <h3>Weakest link, stated</h3>
+        <p>Confidence is derived from measurement inputs, source verification, spatial support and pixel validity. The lowest dimension sets the record's confidence; nothing is averaged.</p>
+      </article>
+      <article class="va-feature">
+        <span class="va-feature__num">04 / PROVENANCE</span>
+        <h3>Every number has a source</h3>
+        <p>Each run is published only after a quality gate. Run ID, generation time, dataset hashes, schema version and quality results ship as sidecars next to the site records.</p>
+      </article>
+    </div>
+
+    <dl class="va-home-stats" id="home-stats" aria-label="Published dataset summary"></dl>
+    <div class="va-dataset-strip" id="home-strip" aria-label="Dataset provenance"></div>
+    <div class="va-home-strip">
+      <div class="va-rule-flag">Dimensions are compared one at a time. This product has no overall similarity score.</div>
+    </div>
+  </section>
+</main>
+
+<footer class="va-footer">
+  <div class="va-footer__brand">Vanguard Atlas<small>Stirling Vanguards</small></div>
+  <p class="va-footer__legal">© <span data-year>2026</span> Stirling Vanguards · NASA Space Apps Challenge 2026 entry.</p>
+  <div class="va-footer__credits">
+    Planned science data: NASA LRO/LOLA &amp; MGS/MOLA via PDS Geosciences Node (see dataset strip for what this run used)<br>
+    <a href="design-system/index.html">Orbital design system</a>
+  </div>
+</footer>
+
+<script type="module" src="src/pages/home.js"></script>
 </body>
 </html>

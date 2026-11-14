@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Analog finder — Vanguard Atlas</title>
+<meta name="description" content="Interactive map simulator comparing Earth analog sites with Moon and Mars targets, one dimension at a time.">
+<link rel="stylesheet" href="public/vendor/maplibre-gl.css">
+<link rel="stylesheet" href="src/styles/index.css">
+</head>
+<body class="va-explore-page">
+<a class="va-skip" href="#main">Skip to content</a>
+
+<header class="va-masthead">
+  <a class="va-wordmark" href="index.html">Vanguard Atlas</a>
+  <nav class="va-nav" aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="explore.html">Atlas</a>
+    <a href="moon.html">Moon</a>
+    <a href="mars.html">Mars<span class="va-nav-dot" aria-hidden="true"></span></a>
+  </nav>
+  <div class="va-masthead__actions">
+    <button type="button" class="va-btn va-btn--sm va-btn--ghost" id="theme-toggle">Light mode</button>
+  </div>
+</header>
+
+<div class="va-global-status" data-global-status></div>
+
+<main id="main">
+  <div class="va-explore-topbar">
+    <div>
+      <h1>Interactive map simulator</h1>
+      <p>Earth sites vs Moon and Mars targets · dimension by dimension</p>
+    </div>
+    <div class="va-spacer"></div>
+    <button id="map-mode" class="va-btn va-btn--sm" type="button" aria-pressed="false">Interactive globe</button>
+    <div class="va-rule-flag" style="margin:0">No overall score · one dimension at a time</div>
+  </div>
+
+  <dl class="va-dataset-strip" id="dataset-strip" aria-label="Dataset provenance"></dl>
+
+  <div class="va-workspace">
+    <section class="va-workspace__map" id="map-wrap" aria-label="Map of Earth analog sites">
+      <div id="dimension-toggle"></div>
+      <div id="map"></div>
+      <div id="map-legend"></div>
+      <div id="map-status" role="alert" hidden></div>
+    </section>
+
+    <aside class="va-workspace__side" id="side" aria-label="Selected site details">
+      <div class="va-panel__head">
+        <h2>Selected site</h2>
+        <span class="va-kicker" id="selection-label">none</span>
+      </div>
+      <div id="site-card-slot" aria-live="polite"></div>
+      <div id="comparison-slot"></div>
+    </aside>
+
+    <section class="va-workspace__bottom" id="bottom" aria-label="Ranked sites">
+      <div id="site-table-slot"></div>
+    </section>
+  </div>
+</main>
+
+<footer class="va-footer">
+  <div class="va-footer__brand">Vanguard Atlas<small>Stirling Vanguards</small></div>
+  <p class="va-footer__legal">© <span data-year>2026</span> Stirling Vanguards · NASA Space Apps Challenge 2026 entry.</p>
+  <div class="va-footer__credits">
+    Basemap: Natural Earth (public domain) · MapLibre GL JS (BSD-3-Clause)<br>
+    Planned science data: NASA LRO/LOLA &amp; MGS/MOLA via PDS Geosciences Node (see dataset strip for what this run used)
+  </div>
+</footer>
+
+<script src="public/vendor/maplibre-gl.js"></script>
+<script type="module" src="src/pages/explore.js"></script>
+</body>
+</html>

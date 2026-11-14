@@ -1,0 +1,126 @@
+[
+  {
+    "breakdowns": [
+      "Earth atmosphere and humidity are unlike Mars"
+    ],
+    "confidence": "low",
+    "coordinates": [
+      -69.25,
+      -24.5
+    ],
+    "data_sources": [
+      "MGS MOLA MEGDR (megt44n000hb)",
+      "demo_earth_catalog",
+      "demo_earth_dem",
+      "demo_target_catalog"
+    ],
+    "dimension_scores": {
+      "geology": 0.75,
+      "subsurface": 0.8667,
+      "terrain": 0.9896,
+      "thermal": 0.4685
+    },
+    "exploration_uses": [
+      "Use this site to test rover dust mitigation"
+    ],
+    "name": "Atacama Desert",
+    "site_id": "atacama_desert",
+    "strengths": [
+      "Hyper-arid surface with very low organic load"
+    ],
+    "target_body": "mars"
+  },
+  {
+    "breakdowns": [
+      "Seasonal liquid water has no Martian equivalent"
+    ],
+    "confidence": "low",
+    "coordinates": [
+      -89.7,
+      75.4
+    ],
+    "data_sources": [
+      "MGS MOLA MEGDR (megt44n000hb)",
+      "demo_earth_catalog",
+      "demo_earth_dem",
+      "demo_target_catalog"
+    ],
+    "dimension_scores": {
+      "geology": 0.6562,
+      "subsurface": 0.7333,
+      "terrain": 0.9692,
+      "thermal": 0.5778
+    },
+    "exploration_uses": [
+      "Use this site to test field habitat operations"
+    ],
+    "name": "Devon Island",
+    "site_id": "devon_island",
+    "strengths": [
+      "Cold, dry polar desert with impact-derived terrain"
+    ],
+    "target_body": "mars"
+  },
+  {
+    "breakdowns": [
+      "Permanently shadowed cold traps cannot be reproduced"
+    ],
+    "confidence": "low",
+    "coordinates": [
+      162.0,
+      -77.5
+    ],
+    "data_sources": [
+      "LRO LOLA GDRDSM (ldsm_75s_240m)",
+      "demo_earth_catalog",
+      "demo_earth_dem",
+      "demo_target_catalog"
+    ],
+    "dimension_scores": {
+      "geology": 0.9187,
+      "subsurface": 0.6667,
+      "terrain": 0.5958,
+      "thermal": 0.4704
+    },
+    "exploration_uses": [
+      "Use this site to test subsurface sampling"
+    ],
+    "name": "Antarctic Dry Valleys",
+    "site_id": "antarctic_dry_valleys",
+    "strengths": [
+      "Extremely dry, cold ground with minimal weathering"
+    ],
+    "target_body": "moon"
+  },
+  {
+    "breakdowns": [
+      "Vacuum, low gravity and radiation cannot be replicated"
+    ],
+    "confidence": "low",
+    "coordinates": [
+      -19.0,
+      64.9
+    ],
+    "data_sources": [
+      "LRO LOLA GDRDSM (ldsm_75s_240m)",
+      "demo_earth_catalog",
+      "demo_earth_dem",
+      "demo_target_catalog"
+    ],
+    "dimension_scores": {
+      "geology": 0.9688,
+      "subsurface": 0.8667,
+      "terrain": 0.5842,
+      "thermal": 0.4
+    },
+    "exploration_uses": [
+      "Use this site to test traverse planning on rough lava"
+    ],
+    "name": "Iceland Lava Fields",
+    "site_id": "iceland_lava_fields",
+    "strengths": [
+      "Basaltic terrain with young lava morphologies"
+    ],
+    "target_body": "moon"
+  }
+]

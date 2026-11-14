@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vanguard Atlas — Orbital Design System</title>
+<meta name="description" content="The complete design system for Vanguard Atlas: foundations, brand components, instrument components, data-visualisation semantics and accessibility rules.">
+
+<!-- Optional webfonts. Production CSS degrades to system fonts when offline. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<!-- THE production system, unmodified -->
+<link rel="stylesheet" href="../src/styles/index.css">
+<!-- Gallery chrome only -->
+<link rel="stylesheet" href="gallery.css">
+</head>
+<body class="ds">
+
+<!-- ---------------------------------------------------------------- icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></symbol>
+  <symbol id="i-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18a9 9 0 0 0 0-18z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></symbol>
+</svg>
+
+<!-- ---------------------------------------------------------------- top bar -->
+<header class="ds-topbar">
+  <span class="va-wordmark">Vanguard Atlas</span>
+  <span class="ds-topbar__version">Orbital DS · v1.0</span>
+  <div class="ds-topbar__actions">
+    <button type="button" class="va-btn va-btn--sm va-btn--icon" id="theme-toggle" aria-label="Switch to light theme" title="Toggle theme">
+      <svg class="ds-icon" aria-hidden="true"><use href="#i-sun"/></svg>
+    </button>
+    <button type="button" class="va-btn va-btn--sm va-btn--icon" id="contrast-toggle" aria-pressed="false" aria-label="Toggle high contrast" title="High contrast">
+      <svg class="ds-icon" aria-hidden="true"><use href="#i-contrast"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="ds-body">
+  <!-- ------------------------------------------------------------ side nav -->
+  <nav class="ds-sidenav" aria-label="Design system sections">
+    <div class="ds-sidenav__group">
+      <p class="ds-sidenav__title">Foundations</p>
+      <a href="#overview" class="is-active">00 · Overview</a>
+      <a href="#principles">01 · Principles</a>
+      <a href="#color">02 · Colour</a>
+      <a href="#type">03 · Typography</a>
+      <a href="#space">04 · Space &amp; form</a>
+    </div>
+    <div class="ds-sidenav__group">
+      <p class="ds-sidenav__title">Brand surface</p>
+      <a href="#brand">05 · Brand components</a>
+      <a href="#buttons">06 · Buttons &amp; controls</a>
+    </div>
+    <div class="ds-sidenav__group">
+      <p class="ds-sidenav__title">Instrument surface</p>
+      <a href="#dimensions">07 · Dimension identity</a>
+      <a href="#data">08 · Data readouts</a>
+      <a href="#card">09 · Site card &amp; radar</a>
+      <a href="#table">10 · Ranked table</a>
+      <a href="#feedback">11 · Feedback states</a>
+    </div>
+    <div class="ds-sidenav__group">
+      <p class="ds-sidenav__title">Application</p>
+      <a href="#product">12 · Product in context</a>
+      <a href="#a11y">13 · Accessibility &amp; voice</a>
+      <a href="#adopt">14 · Adoption</a>
+    </div>
+  </nav>
+
+  <main class="ds-main">
+
+  <!-- ========================================================= 00 overview -->
+  <section class="ds-section" id="overview">
+    <div class="ds-demo ds-demo__body--flush">
+      <div class="va-hero" style="min-height:340px">
+        <img class="va-hero__art" src="../public/assets/earth-limb.jpg" alt="" aria-hidden="true">
+        <div class="va-hero__inner">
+          <p class="va-eyebrow">Stirling Vanguards · NASA Space Apps 2026</p>
+          <h1 class="va-hero__title">
+            <span class="va-display-outline">One brand.</span>
+            <span class="va-display">Two surfaces.</span>
+          </h1>
+          <p class="va-brand-copy va-hero__copy">
+            A cinematic space shell for the story, and an instrument-grade dark
+            surface for the science. Built from the team's design mockup, extended
+            to cover every state of the analog finder.
+          </p>
+          <div class="va-hero__actions">
+            <a class="va-btn va-btn--primary" href="#product">See it with real data</a>
+            <a class="va-btn" href="#adopt">Adoption guide</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-grid">
+      <div class="ds-card"><h4>Dark is the brand</h4><p>The near-black space canvas and planetary photography are the identity. A light variant exists only for accessibility and print — brand surfaces stay dark in both.</p></div>
+      <div class="ds-card"><h4>Token-driven, zero build</h4><p>CSS custom properties in <code>src/styles/tokens.css</code>, mirrored in <code>src/design/tokens.json</code>. MapLibre reads resolved values through <code>src/design/tokens.js</code>.</p></div>
+      <div class="ds-card"><h4>Drop-in compatible</h4><p>Styles the existing DOM class names from <code>siteCard.js</code>, <code>rankedTable.js</code> and <code>map.js</code>. Adoption is one <code>&lt;link&gt;</code> swap, no JS changes.</p></div>
+      <div class="ds-card"><h4>Science-safe by construction</h4><p>There is no component for an overall score, no average, no hero number. Dimensions are separate properties, always.</p></div>
+    </div>
+  </section>
+
+  <!-- ======================================================= 01 principles -->
+  <section class="ds-section" id="principles">
+    <div class="ds-section__head">
+      <p class="ds-section__num">01 / PRINCIPLES</p>
+      <h2>Four rules the system cannot break</h2>
+      <p class="ds-section__lead">These are not stylistic preferences. They encode the project's data contract and its "no blended score" scientific rule. A component that violates one of these is a bug, not a variation.</p>
+    </div>
+    <div class="ds-grid">
+      <div class="ds-card"><h4>① Never blend dimensions</h4><p>Features may only be aggregated <em>within</em> one dimension. The system ships no "overall similarity" component, no average, no composite hero number, no star rating.</p></div>
+      <div class="ds-card"><h4>② 0.00 ≠ not scored</h4><p><code>0.00</code> is a valid, measured "no match" and must be drawn. A missing optional dimension is omitted and shown as <em>not scored</em> with a dashed/italic treatment — never as zero.</p></div>
+      <div class="ds-card"><h4>③ Colour is never alone</h4><p>Dimensions carry a hue + 2-letter code + swatch + label. Bodies carry a hue + solid/dashed ring + monogram. Confidence carries a hue + 3-bar meter + text label.</p></div>
+      <div class="ds-card"><h4>④ Brand glows, instruments don't</h4><p>Glow, starfields and outline type belong to the cinematic shell. Data surfaces use flat backgrounds and hairline borders so numbers stay readable against a live basemap.</p></div>
+    </div>
+    <div class="ds-demo">
+      <div class="ds-demo__label"><span>Live rule flag</span><span>component</span></div>
+      <div class="ds-demo__body">
+        <div class="va-rule-flag">Dimensions are compared one at a time. This product has no overall similarity score.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================== 02 colour -->
+  <section class="ds-section" id="color">
+    <div class="ds-section__head">
+      <p class="ds-section__num">02 / COLOUR</p>
+      <h2>Colour</h2>
+      <p class="ds-section__lead">Sampled from the supplied mockup. Every swatch below reads the live computed token, so switching theme updates the values. Click a swatch to copy its token name.</p>
+    </div>
+
+    <h3 class="ds-h3">Brand blue · the CTA gradient, sampled from the mockup</h3>
+    <div class="ds-swatches" id="sw-brand"></div>
+
+    <h3 class="ds-h3">Space surfaces &amp; text</h3>
+    <div class="ds-swatches" id="sw-surface"></div>
+
+    <h3 class="ds-h3">Dimension identity · six distinct hues, each with a code</h3>
+    <div class="ds-swatches" id="sw-dim"></div>
+
+    <h3 class="ds-h3">Target bodies, confidence signals &amp; status</h3>
+    <div class="ds-swatches" id="sw-signal"></div>
+
+    <h3 class="ds-h3">Shared perceptual score ramp · one ramp for every dimension</h3>
+    <div class="ds-demo">
+      <div class="ds-demo__label"><span>--ramp-0 … --ramp-4</span><span>map markers only</span></div>
+      <div class="ds-demo__body">
+        <div class="va-ramp" aria-hidden="true"></div>
+        <div class="va-ramp__scale"><span>0.00 · far / no match</span><span>0.50</span><span>1.00 · close match</span></div>
+        <p class="va-note">Hue never identifies the active dimension. The segmented control and the legend title do. A point without a score uses <code>--not-scored</code> and a hollow ring.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= 03 typography -->
+  <section class="ds-section" id="type">
+    <div class="ds-section__head">
+      <p class="ds-section__num">03 / TYPOGRAPHY</p>
+      <h2>Typography</h2>
+      <p class="ds-section__lead">Two modes. Brand copy uses a heavy geometric display face with wide tracking; instrument UI uses compact system sans with zero tracking and tabular mono numerals. Wide tracking in a data table is a legibility defect.</p>
+    </div>
+
+    <div class="ds-demo">
+      <div class="ds-demo__label"><span>Brand · display</span><span>--font-display</span></div>
+      <div class="ds-demo__body ds-demo__body--space">
+        <p class="va-display-outline" style="font-size:clamp(2rem,5vw,4rem)">WHERE YOUR</p>
+        <p class="va-display" style="font-size:clamp(2rem,5vw,4rem)">FUTURE STARTS</p>
+        <p class="va-brand-copy" style="margin-top:var(--space-5);max-width:60ch">Before humanity builds permanent habitats on the Moon and Mars, we test here. Discover terrestrial analog sites using open NASA planetary data.</p>
+      </div>
+    </div>
+
+    <div class="ds-demo">
+      <div class="ds-demo__label"><span>Type scale</span><span>11 → 72 px</span></div>
+      <div class="ds-demo__body" id="type-scale"></div>
+    </div>
+
+    <div class="ds-demo">
+      <div class="ds-demo__label"><span>Instrument · numeric readouts</span><span>--font-mono + tabular-nums</span></div>
+      <div class="ds-demo__body ds-demo__row">
+        <span class="va-score">0.9896</span>
+        <span class="va-score va-score--zero">0.00</span>
+        <span class="va-score--missing">not scored</span>
+        <span class="va-mono va-muted">[-69.25, -24.50]</span>
+        <span class="va-mono va-muted">run 40f3f658fd7a</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================== 04 space & form -->
+  <section class="ds-section" id="space">
+    <div class="ds-section__head">
+      <p class="ds-section__num">04 / SPACE &amp; FORM</p>
+      <h2>Space, radius, elevation, motion</h2>
+      <p class="ds-section__lead">A 4px base grid. Radius increases with surface size: 6px controls, 10px panels, 14px cards, 20px image tiles, pill chips. Elevation is subtle on dark — borders do most of the separation.</p>
+    </div>
+    <div class="ds-demo">
+      <div class="ds-demo__label"><span>Spacing scale</span><span>2 → 96 px</span></div>
+      <div class="ds-demo__body" id="space-scale"></div>
+    </div>
+    <div class="ds-grid">
+      <div class="ds-card"><h4>Radius</h4><p><code>--radius-xs 4</code> · <code>sm 6</code> · <code>md 10</code> · <code>lg 14</code> · <code>xl 20</code> · <code>2xl 28</code> · <code>full 999</code></p></div>
+      <div class="ds-card"><h4>Elevation</h4><p><code>--shadow-1</code> panels → <code>--shadow-4</code> modals. On dark, pair every shadow with a 1px hairline border; a shadow alone disappears.</p></div>
+      <div class="ds-card"><h4>Motion</h4><p>Data interactions <code>--dur-2 160ms</code>; brand reveals <code>--dur-4 480ms</code>. Animate opacity and transform only. <code>prefers-reduced-motion</code> zeroes every duration.</p></div>
+    </div>
+    <div class="ds-demo">
+      <div class="ds-demo__label"><span>Radius specimens</span><span>live</span></div>
+      <div class="ds-demo__body ds-demo__row" id="radius-specimens"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ 05 brand -->
+  <section class="ds-section" id="brand">
+    <div class="ds-section__head">
+      <p class="ds-section__num">05 / BRAND COMPONENTS</p>
+      <h2>The cinematic shell</h2>
+      <p class="ds-section__lead">Reconstructed from the three supplied mockups: masthead, outlined hero, solid hero line, CTA, glowing image tiles, section title and footer. All imagery in this gallery is cropped from the supplied mockup and lives in <code>public/assets/</code>.</p>
+    </div>
+    <div class="ds-brand-preview">
+      <div class="va-masthead">
+        <span class="va-wordmark">Vanguard Atlas</span>
+        <nav class="va-nav" aria-label="Primary">
+          <a href="#brand" aria-current="page">Home</a>
+          <a href="#brand">Moon</a>
+          <a href="#brand">Mars<span class="va-nav-dot" aria-hidden="true"></span></a>
+        </nav>
+      </div>
+      <div class="va-hero">
+        <img class="va-hero__art" src="../public/assets/earth-limb.jpg" alt="" aria-hidden="true">
+        <div class="va-hero__inner">
+          <h2 class="va-hero__title">
+            <span class="va-display-outline">Where your</span>
+            <span class="va-display">Future starts</span>
+          </h2>
+          <p class="va-brand-copy va-hero__copy">Before humanity builds permanent habitats on the Moon and Mars, we test here. Discover terrestrial analog sites using open NASA planetary data.</p>
+          <div class="va-hero__actions"><button class="va-btn va-btn--primary" type="button">Explore Sites</button></div>
+        </div>
+      </div>
+      <div class="va-section">
+        <div class="va-section__head"><h2 class="va-section-title">Explore sites</h2></div>
+        <div class="va-tile-grid">
+          <a class="va-tile va-tile--banner" href="#brand">
+            <img class="va-tile__img" src="../public/assets/tile-earth.jpg" alt="Earth's limb from orbit">
+            <span class="va-tile__scrim"></span>
+            <span class="va-tile__label">Earth locations</span>
+          </a>
+          <a class="va-tile" href="#brand">
+            <img class="va-tile__img" src="../public/assets/tile-moon.jpg" alt="Lunar south pole terrain">
+            <span class="va-tile__scrim"></span>
+            <span class="va-tile__label">Lunar south-pole</span>
+          </a>
+          <a class="va-tile" href="#brand">
+            <img class="va-tile__img" src="../public/assets/tile-mars.jpg" alt="Jezero crater on Mars">
+            <span class="va-tile__scrim"></span>
+            <span class="va-tile__label">Jezero crater</span>
+          </a>
+        </div>
+      </div>
+      <footer class="va-footer">
+        <div class="va-footer__brand">Vanguard Atlas<small>Stirling Vanguards</small></div>
+        <p class="va-footer__legal">© 2026 Stirling Vanguards. All rights reserved.</p>
+        <span></span>
+      </footer>
+    </div>
+  </section>
+
+  <!-- ========================================================== 06 buttons -->
+  <section class="ds-section" id="buttons">
+    <div class="ds-section__head">
+      <p class="ds-section__num">06 / BUTTONS &amp; CONTROLS</p>
+      <h2>Actions and inputs</h2>
+      <p class="ds-section__lead">The mockup's bright CTA gradient fails contrast at its light end, so text-bearing buttons use a darker <code>--gradient-cta-solid</code> stop set (≥ 4.5:1 white-on-blue). The bright gradient is reserved for decorative accents.</p>
+    </div>
+    <div class="ds-demo">
+      <div class="ds-demo__label"><span>Variants</span><span>.va-btn</span></div>
+      <div class="ds-demo__body">
+        <div class="ds-demo__row"><span class="ds-demo__caption">Hierarchy</span>
+          <button class="va-btn va-btn--primary" type="button">Explore Sites</button>
+          <button class="va-btn va-btn--secondary" type="button">Secondary</button>
+          <button class="va-btn" type="button">Default</button>
+          <button class="va-btn va-btn--ghost" type="button">Ghost</button>
+          <button class="va-btn va-btn--danger" type="button">Danger</button>
+        </div>
+        <div class="ds-demo__row"><span class="ds-demo__caption">Sizes &amp; states</span>
+          <button class="va-btn va-btn--sm" type="button">Small</button>
+          <button class="va-btn" type="button">Medium</button>
+          <button class="va-btn va-btn--lg" type="button">Large</button>
+          <button class="va-btn" type="button" disabled>Disabled</button>
+          <button class="va-btn" type="button" aria-busy="true">Loading</button>
+          <button class="va-btn va-btn--icon" type="button" aria-label="Copy"><svg class="ds-icon" aria-hidden="true"><use href="#i-copy"/></svg></button>
+        </div>
+        <div class="ds-demo__row"><span class="ds-demo__caption">Legacy classes</span>
+          <button class="dir-toggle" type="button">Highest first</button>
+          <span class="actions va-row"><button type="button">Open card</button><button type="button">Locate on map</button></span>
+        </div>
+      </div>
+    </div>
+    <div class="ds-demo">
+      <div class="ds-demo__label"><span>Filter fields</span><span>.filter / .va-field</span></div>
+      <div class="ds-demo__body">
+        <div class="ranked-controls">
+          <label class="filter"><span>Target</span><select><option>All</option><option>Moon</option><option>Mars</option></select></label>
+          <label class="filter"><span>Confidence</span><select><option>All</option><option>High</option><option>Medium</option><option>Low</option></select></label>
+          <label class="va-field"><span class="va-field__label">Rank by</span><select class="va-select"><option>Terrain</option><option>Thermal</option></select><span class="va-field__hint">One dimension at a time</span></label>
+          <button class="va-btn" type="button" disabled aria-label="Sort direction placeholder">Direction</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================== 07 dimensions -->
+  <section class="ds-section" id="dimensions">
+    <div class="ds-section__head">
+      <p class="ds-section__num">07 / DIMENSION IDENTITY</p>
+      <h2>Dimensions, one at a time</h2>
+      <p class="ds-section__lead">Six dimensions from the frozen data contract. Four core, two optional. Labels and keys come from <code>meta.json</code> at runtime — never from hard-coded arrays. Each identity has four redundant channels: hue, 2-letter code, swatch and text label.</p>
+    </div>
+    <div class="ds-demo">
+      <div class="ds-demo__label"><span>Segmented control · active dimension</span><span>aria-pressed</span></div>
+      <div class="ds-demo__body">
+        <div class="va-segmented" role="group" aria-label="Dimension shown" id="dim-segments"></div>
+        <p class="va-note" style="margin-top:var(--space-4)">There is deliberately no "All" / "Overall" segment. Selecting a dimension changes which single property is shown on the map and which column is ranked.</p>
+      </div>
+    </div>
+    <div class="ds-demo">
+      <div class="ds-demo__label"><span>Dimension key</span><span>hue + code + label + core flag</span></div>
+      <div class="ds-demo__body"><div class="va-dim-key" id="dim-key"></div></div>
+    </div>
+    <div class="ds-demo">
+      <div class="ds-demo__label"><span>Chips</span><span>.va-chip[data-dim]</span></div>
+      <div class="ds-demo__body ds-demo__row" id="dim-chips"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ 08 data -->
+  <section class="ds-section" id="data">
+    <div class="ds-section__head">
+      <p class="ds-section__num">08 / DATA READOUTS</p>
+      <h2>Scores, confidence, provenance</h2>
+      <p class="ds-section__lead">The most important state distinction in the product: a measured zero versus an omitted optional dimension. Both are shown below, side by side, with different treatments.</p>
+    </div>
+
+    <div class="ds-demo">
+      <div class="ds-demo__label"><span>Score list · one bar per dimension</span><span>0.00 vs not scored</span></div>
+      <div class="ds-demo__body"><div class="va-score-list" id="score-list"></div>
+        <div class="va-score-scale"><span>0.00 · no match</span><span>1.00 · close match</span></div>
+      </div>
+    </div>
+
+    <div class="ds-grid" style="margin-bottom:var(--space-5)">
+      <div class="ds-demo" style="margin:0">
+        <div class="ds-demo__label"><span>Badges · bodies</span><span>solid / dashed ring</span></div>
+        <div class="ds-demo__body ds-demo__row">
+          <span class="badge badge-moon"><span class="va-badge__glyph">M</span> vs Moon</span>
+          <span class="badge badge-mars"><span class="va-badge__glyph">M</span> vs Mars</span>
+          <span class="va-badge va-badge--neutral">not scored</span>
+        </div>
+      </div>
+      <div class="ds-demo" style="margin:0">
+        <div class="ds-demo__label"><span>Badges · confidence</span><span>3-bar meter + text</span></div>
+        <div class="ds-demo__body ds-demo__row">
+          <span class="badge conf-high">Confidence: high</span>
+          <span class="badge conf-medium">Confidence: medium</span>
+          <span class="badge conf-low">Confidence: low</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-demo">
+      <div class="ds-demo__label"><span>Confidence meter</span><span>weakest-link, never averaged</span></div>
+      <div class="ds-demo__body ds-demo__row" id="meters"></div>
+    </div>
+
+    <div class="ds-demo">
+      <div class="ds-demo__label"><span>Map legend</span><span>legacy .legend-* markup</span></div>
+      <div class="ds-demo__body" style="max-width:260px">
+        <div class="va-legend">
+          <div class="legend-title" id="legend-title">Terrain match</div>
+          <div class="legend-ramp va-ramp" aria-hidden="true"></div>
+          <div class="legend-scale"><span>0 (far)</span><span>1 (close)</span></div>
+          <div class="legend-row"><span class="swatch va-ramp__swatch--not-scored"></span>Not scored</div>
+          <div class="legend-row"><span class="ring ring--moon"></span>Moon target</div>
+          <div class="legend-row"><span class="ring ring--mars"></span>Mars target</div>
+          <p class="legend-note">Each map view shows one dimension. There is no overall score.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-demo">
+      <div class="ds-demo__label"><span>Provenance strip</span><span>reads manifest.json / meta.json sidecars</span></div>
+      <div class="ds-demo__body"><dl class="va-meta-list" id="meta-strip"></dl></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ 09 card -->
+  <section class="ds-section" id="card">
+    <div class="ds-section__head">
+      <p class="ds-section__num">09 / SITE CARD &amp; RADAR</p>
+      <h2>Site card</h2>
+      <p class="ds-section__lead">The radar compares shapes across separate axes. Its polygon area is <em>not</em> an overall grade, so a disclaimer is always rendered next to it. Missing optional dimensions are never drawn as zero.</p>
+    </div>
+    <div class="ds-demo">
+      <div class="ds-demo__label"><span>Rendered from real published data</span><span>siteCard.js markup</span></div>
+      <div class="ds-demo__body"><div id="card-slot" style="max-width:420px"></div></div>
+    </div>
+  </section>
+
+  <!-- =========================================================== 10 table -->
+  <section class="ds-section" id="table">
+    <div class="ds-section__head">
+      <p class="ds-section__num">10 / RANKED TABLE</p>
+      <h2>Ranked table</h2>
+      <p class="ds-section__lead">Sorts by exactly one dimension. The ranked column is highlighted; <code>aria-sort</code> is set on its header; unscored cells are italic and dashed, never <code>0.00</code>.</p>
+    </div>
+    <div class="ds-demo ds-demo__body--flush">
+      <div class="ds-demo__label"><span>Live · sorted by selected dimension</span><span>rankedTable.js markup</span></div>
+      <div style="padding:var(--space-5)" id="table-slot"></div>
+    </div>
+  </section>
+
+  <!-- ======================================================= 11 feedback -->
+  <section class="ds-section" id="feedback">
+    <div class="ds-section__head">
+      <p class="ds-section__num">11 / FEEDBACK STATES</p>
+      <h2>Loading, empty, error, offline</h2>
+      <p class="ds-section__lead">The audited app had no designed failure states. A failed MapLibre CDN left the whole UI dead. These are the required states, including the message copy the team should use verbatim.</p>
+    </div>
+    <div class="ds-demo">
+      <div class="ds-demo__label"><span>Alerts</span><span>.va-alert</span></div>
+      <div class="ds-demo__body va-stack">
+        <div class="va-alert va-alert--info"><span class="va-alert__icon">i</span><span><strong>Dataset refreshed.</strong> Run <code>40f3f658fd7a</code> published 4 sites with 0 quality errors.</span></div>
+        <div class="va-alert va-alert--warn"><span class="va-alert__icon">!</span><span><strong>Unverified target facts.</strong> Confidence is capped at low until the target catalogue is verified.</span></div>
+        <div class="va-alert va-alert--danger"><span class="va-alert__icon">×</span><span><strong>Site data failed to load.</strong> The ranked table and site card are still available from cached data.</span></div>
+        <div class="va-alert va-alert--success"><span class="va-alert__icon">✓</span><span><strong>Quality gate passed.</strong> 0 errors, 0 warnings, 0 quarantined records.</span></div>
+      </div>
+    </div>
+    <div class="ds-grid">
+      <div class="ds-demo" style="margin:0">
+        <div class="ds-demo__label"><span>Empty state</span><span>.va-empty</span></div>
+        <div class="ds-demo__body"><div class="va-empty"><span class="va-empty__title">No site data loaded yet</span>Select a site on the map or in the table to see its card.</div></div>
+      </div>
+      <div class="ds-demo" style="margin:0">
+        <div class="ds-demo__label"><span>Skeleton</span><span>.va-skeleton</span></div>
+        <div class="ds-demo__body va-stack">
+          <div class="va-skeleton" style="height:14px;width:70%"></div>
+          <div class="va-skeleton" style="height:14px;width:100%"></div>
+          <div class="va-skeleton" style="height:14px;width:45%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-demo">
+      <div class="ds-demo__label"><span>Map status banner / offline fallback</span><span>#map-status</span></div>
+      <div class="ds-demo__body">
+        <div class="va-alert va-alert--danger" role="alert"><span class="va-alert__icon">×</span><span><strong>MapLibre failed to load.</strong> Check your connection or the script URL in index.html. The ranked table and site card remain available.</span></div>
+        <p class="va-note" style="margin-top:var(--space-4)">Data loading must never live inside the map module. <code>frontend/bootstrap.js</code> fetches data before anything else.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= 12 product -->
+  <section class="ds-section" id="product">
+    <div class="ds-section__head">
+      <p class="ds-section__num">12 / PRODUCT IN CONTEXT</p>
+      <h2>The actual application</h2>
+      <p class="ds-section__lead">A full workspace rendered with the production stylesheets and the real published dataset at <code>app/public/data/</code>. The dimension toggle, ranked table, site card and provenance strip are all interactive and share one selected dimension. <span id="data-status" class="va-kicker"></span></p>
+    </div>
+    <div class="ds-product-preview">
+      <div class="va-topbar">
+        <span class="va-wordmark">Vanguard Atlas</span>
+        <div><div class="va-topbar__title">Analog finder</div><div class="va-topbar__sub">Earth sites vs Moon and Mars targets · dimension by dimension</div></div>
+        <div class="va-spacer"></div>
+        <div class="va-segmented" role="group" aria-label="Body filter" id="body-toggle"></div>
+      </div>
+      <dl class="va-dataset-strip" id="dataset-strip"></dl>
+      <div class="va-workspace">
+        <div class="va-workspace__map" id="workspace-map">
+          <div class="va-map-fallback">
+            <p class="va-display">Interactive map simulator</p>
+            <p class="va-note">MapLibre markers use <code>mapPaint.scoreColor()</code> and <code>mapPaint.bodyColor()</code> from the token bridge. Overlays are shown below — the basemap is intentionally omitted in this static gallery.</p>
+          </div>
+          <div class="va-segmented" role="group" aria-label="Dimension shown on the map" id="workspace-dims" style="position:absolute;top:var(--space-4);left:var(--space-4);z-index:3"></div>
+          <div id="workspace-legend" style="position:absolute;left:var(--space-4);bottom:var(--space-8);z-index:3;width:210px;padding:var(--space-4);background:var(--bg-glass);border:1px solid var(--border-default);border-radius:var(--radius-md);box-shadow:var(--shadow-2);backdrop-filter:blur(14px)"></div>
+        </div>
+        <div class="va-workspace__side">
+          <div class="va-panel__head" style="margin:-24px -24px 16px"><h3>Selected site</h3><span class="va-kicker" id="selection-label">none</span></div>
+          <div id="workspace-card"></div>
+        </div>
+        <div class="va-workspace__bottom">
+          <div id="workspace-table"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================== 13 a11y -->
+  <section class="ds-section" id="a11y">
+    <div class="ds-section__head">
+      <p class="ds-section__num">13 / ACCESSIBILITY &amp; VOICE</p>
+      <h2>Accessibility and content rules</h2>
+      <p class="ds-section__lead">Try the theme and high-contrast switches in the top bar, and Tab through this page. Every interactive element has a visible 2px focus ring with 2px offset.</p>
+    </div>
+    <div class="ds-demo ds-demo__body--flush">
+      <table class="ds-table">
+        <thead><tr><th>Requirement</th><th>Implementation</th></tr></thead>
+        <tbody>
+          <tr><td>Contrast</td><td><code>--fg-primary</code> on <code>--bg-panel</code> ≈ 15:1; <code>--fg-muted</code> ≈ 6:1. Text-bearing CTA uses <code>--gradient-cta-solid</code> for ≥ 4.5:1 white text.</td></tr>
+          <tr><td>Colour independence</td><td>Dimension = hue + code + swatch + label. Body = hue + solid/dashed ring + monogram. Confidence = hue + 3 bars + text.</td></tr>
+          <tr><td>Focus</td><td><code>:focus-visible</code> → <code>2px solid var(--focus)</code>, 2px offset, on links, buttons, selects, inputs and the map canvas.</td></tr>
+          <tr><td>Touch</td><td><code>--touch-min: 44px</code> on coarse pointers. The audited 36px controls are bumped to 40px minimum on desktop.</td></tr>
+          <tr><td>Screen readers</td><td><code>aria-pressed</code> on segments, <code>aria-sort</code> on ranked column, <code>aria-live</code> on status and card slot, <code>role="img"</code> + title/desc on radar.</td></tr>
+          <tr><td>Motion</td><td><code>prefers-reduced-motion</code> zeroes all four duration tokens and disables shimmer/fade animations.</td></tr>
+          <tr><td>Zoom &amp; reflow</td><td>rem-based type, grid reflows at 1200 / 900 / 600px, table scrolls horizontally rather than clipping.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3 class="ds-h3">Microcopy — use verbatim</h3>
+    <div class="ds-demo ds-demo__body--flush">
+      <table class="ds-table">
+        <thead><tr><th>Situation</th><th>Write this</th><th>Never write this</th></tr></thead>
+        <tbody>
+          <tr><td>Optional dimension absent</td><td><em>not scored</em></td><td>0.00 · 0 · N/A · –</td></tr>
+          <tr><td>Measured score of zero</td><td><code>0.00</code> (no match)</td><td>not scored · missing</td></tr>
+          <tr><td>Table status</td><td>Showing 4 of 4 sites, ranked by Terrain (high to low). Dimensions are ranked one at a time, not combined.</td><td>Overall ranking</td></tr>
+          <tr><td>Radar caption</td><td>Axes are separate properties. The polygon area is not an overall grade.</td><td>Similarity: 78%</td></tr>
+          <tr><td>Map legend note</td><td>Each map view shows one dimension. There is no overall score.</td><td>Combined match</td></tr>
+          <tr><td>Data failure</td><td>Site data failed to load. The ranked table and site card remain available.</td><td>Blank screen / console-only warning</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========================================================== 14 adopt -->
+  <section class="ds-section" id="adopt">
+    <div class="ds-section__head">
+      <p class="ds-section__num">14 / ADOPTION</p>
+      <h2>Ship it in one pass</h2>
+      <p class="ds-section__lead">Full migration map, including the hard-coded hex values in the audited <code>map.js</code>. The frozen data contract is not touched — provenance stays in sidecar files.</p>
+    </div>
+    <div class="ds-demo ds-demo__body--flush">
+      <table class="ds-table">
+        <thead><tr><th>File</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><code>app/index.html</code></td><td>Replace the four stylesheet <code>&lt;link&gt;</code> tags with one: <code>src/styles/index.css</code>. Delete the inline <code>&lt;style&gt;</code> on the visually-hidden <code>&lt;h1&gt;</code> — <code>.sr-only</code> is provided.</td></tr>
+          <tr><td><code>app/src/styles/*</code></td><td>Delete the placeholder <code>tokens.css</code>, <code>components.css</code>, <code>layout.css</code> and <code>src/map/map.css</code>. Ship the six files in <code>src/styles/</code>.</td></tr>
+          <tr><td><code>app/src/map/map.js</code></td><td>Import <code>{ mapPaint, subscribeTheme }</code> from <code>../design/tokens.js</code>. Replace <code>#440154/#21918c/#fde725</code>, <code>#9aa0a6</code>, <code>#1f2937/#c2410c</code>, <code>#2563eb</code> and <code>#dfe6ea</code> with <code>mapPaint.scoreColor()</code>, <code>mapPaint.bodyColor()</code>, <code>mapPaint.selectionRing()</code> and <code>mapPaint.basemapBackground()</code>.</td></tr>
+          <tr><td><code>app/src/map/map.js</code></td><td>Add <code>data-dim</code> to each toggle button for the dimension colour channel; add <code>.ring--moon</code> / <code>.ring--mars</code> classes in the legend; set the legend title from <code>meta.json</code>.</td></tr>
+          <tr><td><code>app/src/state.js</code></td><td>Replace the hard-coded <code>DIMENSIONS</code> array with the labels/key list from <code>meta.json</code> supplied by <code>bootstrap.js</code>.</td></tr>
+          <tr><td><code>app/src/main.js</code></td><td>Mount <code>frontend/bootstrap.js</code> first. Delete the stray top-level block in <code>components/radar.js</code> (lines 20–27) that throws on import.</td></tr>
+          <tr><td><code>app/public/fonts/</code></td><td>Optional: vendor Poppins (300/400/600/800) and IBM Plex Mono (400/600) woff2 files, then add <code>@font-face</code> rules. Until then the system stack works offline.</td></tr>
+          <tr><td><code>docs/data_contract.*</code></td><td><strong>Do not change.</strong> Frozen. All new metadata is read from <code>manifest.json</code> / <code>meta.json</code> / <code>lineage.json</code> sidecars.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ds-demo">
+      <div class="ds-demo__label"><span>Token governance</span><span>one source, one mirror</span></div>
+      <div class="ds-demo__body">
+        <p class="va-note"><code>src/design/tokens.json</code> is the machine-readable source of truth; <code>src/styles/tokens.css</code> is its runtime mirror; <code>src/design/tokens.js</code> bridges tokens into MapLibre. A value change must update the JSON and the CSS together. Component files may only reference semantic tokens — a raw hex outside <code>tokens.css</code> is a review failure. Dimension labels always come from <code>meta.json</code>, so a contract decision never requires a design-system edit.</p>
+      </div>
+    </div>
+  </section>
+
+  </main>
+</div>
+
+<div class="ds-toast" id="ds-toast" role="status" aria-live="polite"></div>
+<script type="module" src="gallery.js"></script>
+</body>
+</html>

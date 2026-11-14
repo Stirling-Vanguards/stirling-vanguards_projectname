@@ -1,0 +1,183 @@
+/* ============================================================================
+   ORBITAL DESIGN SYSTEM · map.css
+   Map overlays only. All colour comes from tokens.css; map paint values come
+   from src/design/tokens.js (mapPaint.*) — never hard-coded hex in map.js.
+   ========================================================================== */
+
+#map-wrap { position: relative; height: 100%; min-height: 420px; background: var(--bg-sunken); }
+#map { position: absolute; inset: 0; }
+
+/* ---- Overlay surfaces: glass panels above the basemap ---- */
+.va-map-overlay {
+  position: absolute;
+  z-index: var(--z-map-overlay);
+  background: var(--bg-glass);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-2);
+  color: var(--fg-secondary);
+}
+
+/* ---- Dimension toggle (legacy #dimension-toggle from map.js) ---- */
+#dimension-toggle {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  z-index: var(--z-map-overlay);
+  max-width: calc(100% - var(--space-8));
+}
+
+/* ---- Legend ---- */
+#map-legend {
+  position: absolute;
+  left: var(--space-4);
+  bottom: var(--space-8);
+  z-index: var(--z-map-overlay);
+  width: 210px;
+  padding: var(--space-4);
+  background: var(--bg-glass);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-2);
+}
+#map-legend .legend-ramp {
+  background: linear-gradient(90deg,
+    var(--ramp-0) 0%, var(--ramp-1) 25%, var(--ramp-2) 50%,
+    var(--ramp-3) 75%, var(--ramp-4) 100%);
+}
+
+/* ---- Status / error banner (legacy #map-status) ---- */
+#map-status {
+  position: absolute;
+  top: calc(var(--space-4) + 52px);
+  left: var(--space-4);
+  right: var(--space-4);
+  z-index: var(--z-panel);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--status-danger);
+  border-left-width: 3px;
+  border-radius: var(--radius-sm);
+  background: var(--signal-low-soft);
+  color: var(--fg-primary);
+  font-size: var(--text-sm);
+  box-shadow: var(--shadow-2);
+}
+#map-status[hidden] { display: none; }
+
+/* ---- MapLibre popup ---- */
+.maplibregl-popup-content {
+  padding: var(--space-3) var(--space-4) !important;
+  border-radius: var(--radius-sm) !important;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-glass) !important;
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-3) !important;
+  color: var(--fg-primary);
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  line-height: var(--lh-normal);
+}
+.maplibregl-popup-content strong { font-weight: var(--weight-semibold); }
+.maplibregl-popup-tip { border-top-color: var(--bg-glass) !important; border-bottom-color: var(--bg-glass) !important; }
+.maplibregl-popup-close-button { color: var(--fg-muted); font-size: var(--text-lg); padding: 0 var(--space-2); }
+
+/* ---- MapLibre native controls: recolor to the system ---- */
+.maplibregl-ctrl-group {
+  background: var(--bg-glass) !important;
+  border: 1px solid var(--border-default) !important;
+  border-radius: var(--radius-sm) !important;
+  box-shadow: var(--shadow-2) !important;
+  backdrop-filter: blur(14px);
+}
+.maplibregl-ctrl-group button + button { border-top-color: var(--border-subtle) !important; }
+.maplibregl-ctrl-group button .maplibregl-ctrl-icon { filter: invert(1) opacity(0.82); }
+.maplibregl-ctrl-attrib {
+  background: var(--bg-glass) !important;
+  color: var(--fg-muted) !important;
+  font-size: var(--text-2xs) !important;
+  border-radius: var(--radius-xs) 0 0 0;
+}
+.maplibregl-ctrl-attrib a { color: var(--fg-secondary) !important; }
+.maplibregl-canvas:focus-visible { outline: var(--focus-ring); outline-offset: -2px; }
+
+/* ---- Offline / CDN-down fallback ---- */
+.va-map-fallback {
+  position: absolute; inset: 0;
+  display: grid; place-content: center; gap: var(--space-4);
+  text-align: center;
+  padding: var(--space-8);
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(22, 114, 216, 0.16), transparent 60%),
+    var(--bg-sunken);
+  color: var(--fg-secondary);
+}
+.va-map-fallback .va-display { font-size: var(--text-2xl); color: var(--fg-muted); }
+
+/* ---- Popup built with DOM nodes (no innerHTML) ---- */
+.va-map-popup { display: flex; flex-direction: column; gap: 2px; font-size: var(--text-xs); }
+.va-map-popup strong { font-size: var(--text-sm); }
+
+/* ---- Offline SVG fallback (WebGL unavailable) ---- */
+.va-fallback-map {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  background: var(--bg-sunken);
+  padding: var(--space-6);
+}
+.va-fallback-map__svg {
+  width: 100%; height: auto; max-height: 100%;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  background: var(--c-space-850);
+}
+.va-fallback-map__grid line { stroke: var(--c-space-650); stroke-width: 0.6; }
+.va-fallback-map__land path { fill: var(--c-space-750); stroke: var(--c-space-650); stroke-width: 0.7; }
+.va-fallback-map__mark { cursor: pointer; }
+.va-fallback-map__mark:focus-visible { outline: none; }
+.va-fallback-map__mark:focus-visible circle:last-child {
+  stroke: var(--focus); stroke-width: 5;
+}
+.va-fallback-map__select { fill: none; stroke: var(--focus); stroke-width: 2.5; }
+.va-fallback-map__note {
+  position: absolute; bottom: var(--space-4); left: 50%; transform: translateX(-50%);
+  margin: 0; padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  background: var(--bg-glass);
+  font-size: var(--text-2xs);
+  color: var(--fg-muted);
+  text-align: center;
+  max-width: 90%;
+}
+
+@media (max-width: 600px) {
+  #map-legend { width: 180px; bottom: var(--space-5); }
+  #dimension-toggle { top: var(--space-3); left: var(--space-3); right: var(--space-3); }
+}
+
+/* ---- Moon / Mars target body map (bodyMap.js) ---- */
+.va-bodymap { --bm: var(--body-moon); --bm-soft: var(--body-moon-soft); margin: 0; display: grid; gap: var(--space-3); }
+.va-bodymap[data-body="mars"] { --bm: var(--body-mars); --bm-soft: var(--body-mars-soft); }
+.va-bodymap__stage { border: 1px solid var(--border-default); border-radius: var(--radius-lg); background: var(--bg-sunken); overflow: hidden; }
+.va-bodymap__svg { display: block; width: 100%; height: min(62vh, 540px); touch-action: none; cursor: grab; user-select: none; }
+.va-bodymap__svg.is-dragging { cursor: grabbing; }
+.va-bodymap__svg:focus-visible { outline: var(--focus-ring); outline-offset: -2px; }
+.va-bodymap__bg { fill: var(--bm-soft); stroke: var(--bm); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.va-bodymap__grid line, .va-bodymap__grid circle { fill: none; stroke: var(--border-strong); stroke-width: 0.8; vector-effect: non-scaling-stroke; }
+.va-bodymap__grid .is-axis { stroke: var(--bm); stroke-width: 1.2; }
+.va-bodymap__grid .is-edge { stroke: var(--bm); }
+.va-bodymap__label { fill: var(--fg-muted); font-family: var(--font-mono); font-size: 9px; pointer-events: none; }
+.va-bodymap__marker { cursor: pointer; }
+.va-bodymap__marker:focus-visible { outline: none; }
+.va-bodymap__marker:focus-visible .va-bodymap__ring { stroke: var(--focus); stroke-width: 4; }
+.va-bodymap__ring { fill: var(--bm-soft); stroke: var(--bm); stroke-width: 3; }
+.va-bodymap__ring--mars { stroke-dasharray: 4 3; }
+.va-bodymap__dot { fill: var(--bm); }
+.va-bodymap__marker-label { fill: var(--fg-primary); font-family: var(--font-ui); font-size: 11px; font-weight: var(--weight-semibold); paint-order: stroke; stroke: var(--bg-sunken); stroke-width: 3px; }
+.va-bodymap__bar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); }
+.va-bodymap__toolbar { display: flex; gap: var(--space-2); }
+.va-bodymap__readout { font-size: var(--text-xs); color: var(--fg-muted); min-width: 24ch; }
+.va-bodymap__info { font-size: var(--text-xs); color: var(--fg-secondary); line-height: var(--lh-normal); }
+.va-bodymap__info strong { color: var(--fg-primary); }

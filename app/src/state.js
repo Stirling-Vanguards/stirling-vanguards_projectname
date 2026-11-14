@@ -1,61 +1,90 @@
-// app/src/state.js
-// Tiny shared store so the map, ranked table, site card and comparison view agree.
-// PROPOSED location and shape: agree with Ely and Vince before they build on it.
-
-const state = {
-  sites: [],                    // array of site records (data contract shape)
-  selectedSiteId: null,         // site_id or null
-  selectedDimension: 'terrain', // one of DIMENSIONS; never a blended score
-  filters: { targetBody: 'all', confidence: 'all' }, // 'all' | 'moon' | 'mars' ; 'all' | 'high' | 'medium' | 'low'
-};
-
+/**
+ * Shared store. The map, ranked table, site card, comparison view and target
+ * pages all subscribe to this. No module owns the data fetch.
+ *
+ * Dimension keys and labels come from meta.json (generated from the frozen
+ * contract), never from a hard-coded JS array.
+ */
 const listeners = new Set();
 
-export const DIMENSIONS = [
-  { key: 'terrain', label: 'Terrain' },
-  { key: 'thermal', label: 'Thermal' },
-  { key: 'geology', label: 'Geology' },
-  { key: 'subsurface', label: 'Subsurface' },
-];
-
-export function getState() {
-  return state;
+function deriveDimensions(meta, sites) {
+  if (Array.isArray(meta?.dimensions) && meta.dimensions.length) {
+    return meta.dimensions.map((d) => ({ key: d.key, label: d.label, core: Boolean(d.core) }));
+  }
+  const keys = [...new Set(sites.flatMap((s) => Object.keys(s.dimension_scores || {})))];
+  return keys.map((key) => ({
+    key,
+    label: key.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
+    core: true,
+  }));
 }
 
-// Shallow merge. For filters, pass the whole object:
-//   setState({ filters: { ...getState().filters, targetBody: 'mars' } })
+const state = {
+  sites: [],
+  meta: null,
+  manifest: null,
+  dimensions: [],
+  selectedSiteId: null,
+  selectedDimension: null,     // never a blended score
+  filters: { targetBody: 'all', confidence: 'all' },
+  direction: 'desc',
+  dataStatus: { offline: false, skipped: 0, reason: null },
+};
+
+export function getState() { return state; }
+
+/** Shallow merge. For filters, pass the whole object. */
 export function setState(patch) {
   Object.assign(state, patch);
-  // If a filter change hides the selected site, clear the selection so the card and map ring agree.
-  if (
-    ('filters' in patch || 'sites' in patch) &&
-    state.selectedSiteId !== null &&
-    !getVisibleSites().some((s) => s.site_id === state.selectedSiteId)
-  ) {
+
+  if ('sites' in patch || 'meta' in patch) {
+    const dims = deriveDimensions(state.meta, state.sites);
+    state.dimensions = dims;
+    if (!dims.some((d) => d.key === state.selectedDimension)) {
+      state.selectedDimension = dims[0]?.key ?? null;
+    }
+  }
+  // A filter change that hides the selected site clears the selection so the
+  // card, the map ring and the table highlight always agree.
+  if (('filters' in patch || 'sites' in patch) && state.selectedSiteId !== null
+      && !getVisibleSites().some((s) => s.site_id === state.selectedSiteId)) {
     state.selectedSiteId = null;
     patch = { ...patch, selectedSiteId: null };
   }
-  listeners.forEach((fn) => fn(state, patch));
+  listeners.forEach((fn) => {
+    try { fn(state, patch); } catch (err) { console.error('[state] listener failed', err); }
+  });
 }
 
-// Returns an unsubscribe function. Callback gets (state, patch).
+/** Returns an unsubscribe function. */
 export function subscribe(fn) {
   listeners.add(fn);
   return () => listeners.delete(fn);
 }
 
-// Returns a number between 0 and 1, or null when not scored. Never returns 0 for missing data.
+/** A number 0..1, or null when not scored. Never returns 0 for missing data. */
 export function getScore(site, dimension) {
-  const v = site && site.dimension_scores ? site.dimension_scores[dimension] : null;
-  return typeof v === 'number' && v >= 0 && v <= 1 ? v : null;
+  const v = site?.dimension_scores?.[dimension];
+  return typeof v === 'number' && Number.isFinite(v) && v >= 0 && v <= 1 ? v : null;
 }
 
-// Sites that pass the current filters.
+export function getDimension(key) {
+  return state.dimensions.find((d) => d.key === key) ?? null;
+}
+export function getDimensionLabel(key) {
+  return getDimension(key)?.label ?? key;
+}
+export function getCoreDimensions() {
+  return state.dimensions.filter((d) => d.core);
+}
+
 export function getVisibleSites() {
   const { targetBody, confidence } = state.filters;
-  return state.sites.filter(
-    (s) =>
-      (targetBody === 'all' || s.target_body === targetBody) &&
-      (confidence === 'all' || s.confidence === confidence)
-  );
+  return state.sites.filter((s) =>
+    (targetBody === 'all' || s.target_body === targetBody) &&
+    (confidence === 'all' || s.confidence === confidence));
+}
+
+export function getSelectedSite() {
+  return state.sites.find((s) => s.site_id === state.selectedSiteId) ?? null;
 }
