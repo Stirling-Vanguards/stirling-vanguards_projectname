@@ -1,139 +1,130 @@
-# Analog Criteria (DRAFT v1.1)
+# Analog Criteria: Vanguard Atlas
 
-**Project:** Stirling Vanguards, 2026 NASA Space Apps Challenge (Abu Dhabi)
+**Team:** Stirling Vanguards, 2026 NASA Space Apps Challenge (Abu Dhabi)
+**Project name:** Vanguard Atlas *(Rex confirms)*
 **Challenge:** Identify Earth Locations that Analog the Permanent Moon Base Locations and Mars
 **Owner:** Venice (Science Lead). Methodology review: Rex.
-**Status:** Draft for team review. Not frozen until Rex and Venice confirm. Revised Nov 14 after Kurt's review. Items marked *(Rex)* depend on a contract decision and should not change until he confirms.
+**Status:** Final text. Becomes frozen when Venice and Rex tick the sign-off box in section 8. Items marked *(Rex)* are the defaults used until he says otherwise.
 **Last updated:** November 14, 2026
-
-> Dataset names below are starting suggestions marked **(verify access)**. Nobody should build on a dataset until access is tested and it is logged in `data/DATA_SOURCES.md`.
 
 ---
 
 ## 1. Approach
 
-- Each Earth location gets a **0 to 1 score per dimension**. We never blend them into one number.
-- A score means: *how closely this Earth cell's feature distribution matches the target site's.* 1 = close match, 0 = no match.
-- Dimension names follow the data contract (`docs/data_contract.md`): `terrain`, `thermal`, `geology`, `subsurface` (core), and optional `water_ice`, `dust_wind` (stretch). **Contract status: pending Rex's confirmation (v1.1).** Until he confirms, treat anything beyond the original fields as a proposal. *(Rex)*
-- **Cells vs sites:** the pipeline scores Earth *cells*, but the contract and site cards are per *site*. Proposed roll-up: a site's score for each dimension is the score of its **best-matching cell within the site's region**, and the card states which cell that was. Alternative: regional average. *(Rex confirms which.)*
-- **Not scored = `null`, never 0.** Optional dimensions (`water_ice`, `dust_wind`) that we don't score are sent as `null` and shown as "not scored". A 0 would wrongly mean "scored, no match". *(Rex confirms these are optional, nullable keys.)*
-- Target sites (one Moon, one Mars) are **not yet decided**. These criteria are written to work for any pair.
-- Known analogs (Atacama, Haughton, Death Valley) are for **validation only**, not headline finds.
+- Each Earth location gets a **0 to 1 score per dimension**. Dimensions are never blended into one number.
+- A score means: how closely this Earth cell's feature distribution matches the target site's. 1 = close match, 0 = no match.
+- Dimension keys follow the data contract: `terrain`, `thermal`, `geology`, `subsurface` (core); `water_ice`, `dust_wind` (optional stretch).
+- **Cells vs sites (default):** a site's score per dimension is the score of its **best-matching cell inside the site's region**. The card names that cell. *(Rex)*
+- **Not scored = `null`, never 0.** Optional dimensions we skip are `null` and shown as "not scored". *(Rex)*
+- Targets (one Moon, one Mars) are undecided; the criteria work for any pair. *(Rex)*
+- Atacama, Haughton and Death Valley are **validation only**, not headline finds.
 
----
-
-## 2. Core criteria (4)
+## 2. Core criteria
 
 ### 2.1 Terrain (`terrain`)
 
 | Field | Detail |
 | --- | --- |
-| **What we measure** | Slope (median and 90th percentile), surface roughness, and crater or boulder density if resolution allows |
-| **Why it matters** | Slope and roughness decide where landers can touch down, where rovers can drive, and where habitats can be built |
-| **Data (verify access)** | Moon: LOLA. Mars: MOLA, plus HiRISE/CTX for fine detail. Earth: SRTM or Copernicus DEM. Non-NASA: ESA Mars Express HRSC, JAXA Kaguya terrain data |
-| **How we score** | Compute the same slope and roughness stats on all DEMs at one common scale, then score the similarity of the distributions (e.g. histogram overlap) |
-| **Limitations** | DEM resolution differs a lot between bodies, so resampling to a common scale is essential. Erosion and vegetation on Earth alter slopes |
-| **Evidence needed** | Instrument team papers and PDS dataset documentation for the measurements; landing-site workshop reports for why slope and roughness matter |
+| Measure | Slope (median and 90th percentile), roughness, crater/boulder density if resolution allows |
+| Why it matters | Decides where landers touch down, rovers drive, habitats go |
+| Data (verify access) | Moon: LOLA. Mars: MOLA, HiRISE/CTX for detail. Earth: SRTM or Copernicus DEM. Non-NASA: ESA Mars Express HRSC, JAXA Kaguya |
+| Scoring | Same slope/roughness stats on all DEMs at one common scale; score distribution similarity (e.g. histogram overlap) |
+| Limitations | DEM resolution differs between bodies; Earth erosion and vegetation alter slopes |
+| Evidence | Instrument team papers, PDS documentation, landing-site workshop reports |
 
 ### 2.2 Thermal (`thermal`)
 
 | Field | Detail |
 | --- | --- |
-| **What we measure** | Surface temperature range, day/night swing, seasonal variation |
-| **Why it matters** | Thermal cycling drives equipment design, power needs, and rock weathering |
-| **Data (verify access)** | Moon: Diviner. Mars: THEMIS. Earth: MODIS or ECOSTRESS land surface temperature. Non-NASA: Chang'e data (verify availability) |
-| **How we score** | Compare **absolute** annual min/max and diurnal swing in kelvin (K), **not** values normalised per body. Suggested score: 1 minus the difference divided by a fixed reference range, clipped to 0–1. The reference range is Rex's call as part of `pipeline/scoring`. *(Rex)* |
-| **Limitations** | The Moon has no atmosphere, so its swings are far larger than anything on Earth. Because we compare absolute values, a low-swing Earth site will correctly score low against a Moon target rather than looking like a perfect match. Expect low Moon scores and say so on the site card |
-| **Evidence needed** | Instrument papers and PDS documentation for measured temperatures; planetary science reference for body constants |
+| Measure | Surface temperature range, day/night swing, seasonal variation |
+| Why it matters | Drives equipment design, power needs, rock weathering |
+| Data (verify access) | Moon: Diviner. Mars: THEMIS. Earth: MODIS or ECOSTRESS land surface temperature. Non-NASA: Chang'e (availability unconfirmed) |
+| Scoring | Compare **absolute** annual min/max and diurnal swing in kelvin. Score = 1 minus (difference / fixed reference range), clipped to 0 to 1. Reference range is a parameter in `pipeline/config.yaml`. *(Rex)* |
+| Limitations | The Moon has no atmosphere, so its swings exceed anything on Earth. Expect low Moon scores and say so on the card |
+| Evidence | Instrument papers, PDS documentation, planetary reference for body constants |
 
 ### 2.3 Geology / minerals (`geology`)
 
 | Field | Detail |
 | --- | --- |
-| **What we measure** | Rock and mineral types, volcanic or basaltic terrain, relevant alteration minerals (e.g. clays, carbonates, olivine for Mars) |
-| **Why it matters** | Composition affects ISRU (resource extraction), science targets, and dust and regolith behaviour |
-| **Data (verify access)** | Mars: CRISM. Earth: ASTER or EMIT, plus national geologic maps. Moon: Kaguya multiband or Chandrayaan-1 M3 |
-| **How we score** | Match on a short list of target mineral or lithology classes, then compute fraction overlap or spectral similarity |
-| **Limitations** | Spectral data sees the surface only. Earth weathering and vegetation can mask signals |
-| **Evidence needed** | Peer-reviewed mineral mapping papers for the target site; instrument documentation for the Earth sensors |
+| Measure | Rock and mineral types, volcanic/basaltic terrain, alteration minerals (clays, carbonates, olivine for Mars) |
+| Why it matters | Affects ISRU, science targets, dust and regolith behaviour |
+| Data (verify access) | Mars: CRISM. Earth: ASTER or EMIT plus national geologic maps. Moon: Kaguya multiband or Chandrayaan-1 M3 |
+| Scoring | Match on a short list of target mineral/lithology classes; fraction overlap or spectral similarity |
+| Limitations | Spectral data sees the surface only; weathering and vegetation mask signals |
+| Evidence | Peer-reviewed mineral mapping papers for the target; Earth sensor documentation |
 
-### 2.4 Subsurface: caves, lava tubes, pits (`subsurface`)
+### 2.4 Subsurface (`subsurface`)
 
 | Field | Detail |
 | --- | --- |
-| **What we measure** | Presence, size, and type of caves, lava tubes, and collapse pits |
-| **Why it matters** | Candidate shelters from radiation and temperature extremes; may hold ice or biosignatures |
-| **Data (verify access)** | Cave and lava-tube catalogs, plus DEM-based pit detection. Pit catalogs for the Moon and Mars exist in the literature; which are openly available is **not confirmed** |
-| **How we score** | Match on feature type and scale; use a coarse presence/absence score where only catalog data exists |
-| **Limitations** | Hardest criterion to measure from orbit. Many Earth caves are undocumented. Expect **low confidence** in most cells |
-| **Evidence needed** | Peer-reviewed pit and cave detection papers |
-
----
+| Measure | Presence, size, type of caves, lava tubes, collapse pits |
+| Why it matters | Candidate shelter from radiation and temperature extremes; may hold ice |
+| Data (verify access) | Cave and lava-tube catalogs, DEM-based pit detection. Openness of Moon/Mars pit catalogs is **unconfirmed** |
+| Scoring | Match on feature type and scale; coarse presence/absence where only catalog data exists |
+| Limitations | Hardest to measure from orbit; many Earth caves undocumented. Expect `low` confidence |
+| Evidence | Peer-reviewed pit and cave detection papers |
 
 ## 3. Stretch criteria (only if time allows)
 
-### 3.1 Water / ice (`water_ice`, optional)
+- **`water_ice`:** permafrost, aridity, soil moisture (climate/soil moisture datasets, verify access). Limit: Earth has far more liquid water. Evidence: permafrost/ice mapping papers.
+- **`dust_wind`:** dunes, wind erosion, fine dust (imagery and DEM-derived mapping, verify access). Limit: Mars's thin atmosphere changes wind transport. Evidence: aeolian studies of Mars.
 
-- **Measure:** permafrost, aridity, soil moisture.
-- **Data (verify access):** climate and soil moisture datasets.
-- **Limitation:** Earth's liquid water is far more abundant than anything on the target bodies.
-- **Evidence needed:** peer-reviewed permafrost and ice mapping papers.
+## 4. Confidence rule
 
-### 3.2 Dust / wind (`dust_wind`, optional)
+Rate each scored dimension with the table, then set the site `confidence` to the **lowest-rated scored dimension**. Per-dimension confidence is card text only unless Rex adds a contract field. *(Rex)*
 
-- **Measure:** dunes, wind erosion, fine dust.
-- **Data (verify access):** imagery and DEM-derived mapping.
-- **Limitation:** the Martian atmosphere is far thinner, so wind transport differs fundamentally.
-- **Evidence needed:** aeolian studies of Mars dunes and wind regimes.
-
----
-
-## 4. Confidence rule (assumption, adjust as needed)
-
-The contract currently has **one `confidence` value per site**, but confidence varies by dimension (e.g. `subsurface` is often low while `terrain` may be high). Proposed rule: rate each dimension with the table below in the pipeline, then set the site's overall `confidence` to the **lowest-rated scored dimension**. Per-dimension confidence is shown as card text only unless Rex adds a contract field. *(Rex)*
-
-| Level | When to use |
+| Level | When |
 | --- | --- |
 | `high` | Both datasets are direct measurements at comparable resolution |
-| `medium` | One side is modelled, or resampled by a large factor |
+| `medium` | One side modelled or resampled by a large factor |
 | `low` | Catalog-only, sparse, or proxy data |
 
----
+## 5. What Earth can't replicate
 
-## 5. "What Earth can't replicate" (standard list for every site card)
+Every site card draws on `docs/site_cards/earth_limits.md` (gravity, atmosphere/vacuum, radiation, other). Lunar polar illumination and cold traps go under **Breakdowns**, only if a lunar polar target is chosen.
 
-- **Gravity:** the Moon and Mars are well below Earth's.
-- **Atmosphere and vacuum:** the Moon has none; Mars is very thin.
-- **Radiation:** Earth's magnetic field and atmosphere shield us.
-- **Polar illumination and cold traps:** important for lunar south polar sites, with no real Earth equivalent. These go in the "where the analogy breaks down" list (Breakdowns), not under "Other". Applies only if a lunar polar target is chosen; targets are still undecided.
+## 6. Source guide
 
-*Evidence:* NASA fact sheets or a planetary science reference text for body constants.
-
----
-
-## 6. Source guide for scientific claims
-
-| Claim type | What source would support it |
+| Claim type | Supporting source |
 | --- | --- |
-| Instrument measurements (slope, temperature) | Instrument team papers and PDS dataset documentation |
-| Why a criterion matters for exploration | Peer-reviewed analog-site reviews; agency landing-site or exploration-zone workshop reports |
-| Body constants (gravity, pressure, radiation) | NASA fact sheets or a planetary science reference text |
-| Lava tubes and pits | Peer-reviewed pit and cave detection papers |
+| Instrument measurements | Instrument team papers, PDS documentation |
+| Why a criterion matters | Peer-reviewed analog reviews; agency landing-site/exploration-zone workshop reports |
+| Body constants | NASA Planetary Fact Sheets (NSSDCA); verified, see `earth_limits.md` |
+| Lava tubes and pits | Peer-reviewed detection papers |
 
-No specific citations are attached yet. Confirm each one exists before it goes in the findings report.
+No specific paper citations are attached. Confirm each exists before it enters the report.
 
----
+## 7. Site card standard
 
-## 7. Open items
+Each deep-dive site gets one card at `docs/site_cards/<site_id>.md`, written from pipeline output and verified sources only. Sections, in order:
 
-- [ ] **Contract v1.1 approved by Rex** (frozen or draft, optional/nullable dimensions, `earth_limits[]` field, per-site vs per-dimension confidence, any extra card fields). *(Rex)*
-- [ ] Rex confirms the cell-to-site roll-up rule and the thermal reference range. *(Rex)*
-- [ ] Rex confirms `docs/criteria.md` is the right location (it is a new file, not in the original repo table).
-- [ ] Venice and Rex confirm the 4 core criteria, then freeze.
-- [ ] Decide the common comparison scale (suggestion: coarse grid, then drill-down for 3 to 4 deep-dive site cards).
-- [ ] Rex checks the scoring approach against `pipeline/scoring`.
-- [ ] Joash tests access for every dataset and logs it in `data/DATA_SOURCES.md` before anyone uses it. Chang'e data and the Moon/Mars pit and lava-tube catalogs stay flagged as unconfirmed until checked.
-- [ ] Verify gravity and pressure figures (Mars and Moon gravity, Earth pressure, the Mars atmosphere claim) against a NASA planetary fact sheet before they appear in the app or report.
-- [ ] Replace each generic "Evidence needed" entry with a real, confirmed reference before the findings report.
-- [ ] Add the AI-assisted drafting of this file to `docs/ai_usage_log.md`.
-- [ ] Target sites decided (Rex).
+1. **Basics:** `site_id`, `name`, `[lon, lat]`, `target_body`, region/country, compared target, `confidence`, best-matching cell used, author, last updated.
+2. **Summary:** one or two sentences on why the site is a meaningful analog, beyond looks.
+3. **Dimension scores:** score, one-line reason and source per dimension. `null` shown as "not scored", never 0.
+4. **Strengths:** one bullet per point, each tied to a dimension.
+5. **Breakdowns:** specific ways the analogy fails (lunar polar illumination and cold traps go here if relevant).
+6. **What Earth can't replicate:** site-specific sentences drawn from `earth_limits.md`, never the whole list.
+7. **Exploration uses:** each bullet starts "Use this site to test..." and names a concrete task.
+8. **Confidence note:** why that level, the weakest dimension, and per-dimension confidence.
+9. **Data sources:** dataset, agency, use, access verified. Each also logged in `data/DATA_SOURCES.md`.
+10. **References:** only sources confirmed to exist.
+11. **Review:** scores match pipeline output; every claim sourced or `[source needed]`; breakdowns filled; datasets and AI help logged.
+
+## 8. Implementation notes for the app
+
+- The app displays `confidence` as given; it never recomputes it.
+- Ranking sorts by **one selected dimension**, never a composite.
+- `null` renders as "not scored", not zero.
+
+## 9. Sign-off and open items
+
+- [ ] Venice confirms the 4 core criteria
+- [ ] Rex confirms criteria and freezes this file
+- [ ] Rex confirms contract v1.1 (nullable optional dimensions, `earth_limits[]`, confidence handling)
+- [ ] Rex confirms cell-to-site roll-up and thermal reference range
+- [ ] Rex confirms `docs/criteria.md` as its location
+- [ ] Rex decides target sites and common comparison scale
+- [ ] Joash tests dataset access and logs each in `data/DATA_SOURCES.md`
+- [ ] Replace each "Evidence" line with a confirmed reference before the report
+- [ ] AI-assisted drafting logged in `docs/ai_usage_log.md`
