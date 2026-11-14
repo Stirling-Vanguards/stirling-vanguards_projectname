@@ -26,6 +26,15 @@ export function getState() {
 //   setState({ filters: { ...getState().filters, targetBody: 'mars' } })
 export function setState(patch) {
   Object.assign(state, patch);
+  // If a filter change hides the selected site, clear the selection so the card and map ring agree.
+  if (
+    ('filters' in patch || 'sites' in patch) &&
+    state.selectedSiteId !== null &&
+    !getVisibleSites().some((s) => s.site_id === state.selectedSiteId)
+  ) {
+    state.selectedSiteId = null;
+    patch = { ...patch, selectedSiteId: null };
+  }
   listeners.forEach((fn) => fn(state, patch));
 }
 
