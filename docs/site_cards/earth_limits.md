@@ -1,4 +1,4 @@
-# What Earth Can't Replicate: Vanguard Atlas (v2.1, final for sign-off)
+# What Earth Can't Replicate: Vanguard Atlas
 
 Standard limits of Earth as an analog for the Moon and Mars. Every site card picks the relevant ones and says how each affects *that* site (section 6 of the site card standard in `docs/criteria.md`, section 7).
 
