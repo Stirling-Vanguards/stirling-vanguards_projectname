@@ -1,4 +1,4 @@
-# Stirling Vanguards: Earth Analog Finder (working title)
+# Stirling Vanguards: Vanguard Atlas
 
 NASA Space Apps Challenge 2026, Abu Dhabi local event.
 
