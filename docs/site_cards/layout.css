@@ -1,0 +1,32 @@
+/* Layout for the component slots only. Uses tokens; no hard-coded colors.
+   The page grid and the map container stay in index.html (Kurt). */
+
+/* min-width: 0 stops a wide table from stretching a grid or flex parent */
+#site-table-slot,
+#site-card-slot,
+#comparison-slot {
+  min-width: 0;
+  font-family: var(--font-body);
+  color: var(--color-text);
+}
+
+/* In a sidebar the card should fill its slot, not stop at 34rem */
+#site-card-slot .site-card { max-width: none; }
+
+/* Empty-state and error text that main.js puts directly in the slot */
+#site-card-slot > p {
+  margin: 0;
+  padding: var(--space-3);
+  color: var(--color-muted);
+  background: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius);
+}
+
+/* Spacing between stacked slots when they share a column */
+#site-table-slot + #site-card-slot,
+#site-card-slot + #comparison-slot { margin-top: var(--space-4); }
+
+@media (max-width: 40rem) {
+  #site-card-slot > p { padding: var(--space-2); }
+}
