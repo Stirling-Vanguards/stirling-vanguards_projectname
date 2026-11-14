@@ -51,7 +51,7 @@ function fillOptions(sel, options, value) {
 // onDimensionChange(d) / onFilterChange({ body, confidence }) fire on USER changes in the table.
 // setDimension / setFilters / setSites are for inbound sync and never fire callbacks.
 export function renderRankedTable(initialSites, {
-  dimension = 'terrain', body = 'all', confidence = 'all',
+  dimension = 'terrain', body = 'all', confidence = 'all', rankDimensions,
   onOpen, onLocate, onDimensionChange, onFilterChange,
 } = {}) {
   let sites = initialSites;
@@ -59,6 +59,12 @@ export function renderRankedTable(initialSites, {
 
   const dims = () => {
     const list = [...CORE, ...OPTIONAL.filter((d) => sites.some((s) => valid(s.dimension_scores?.[d])))];
+    if (!list.includes(state.dimension) && LABELS[state.dimension]) list.push(state.dimension);
+    return list;
+  };
+
+    const rankable = () => {
+    const list = rankDimensions ? [...rankDimensions] : dims();
     if (!list.includes(state.dimension) && LABELS[state.dimension]) list.push(state.dimension);
     return list;
   };
@@ -86,7 +92,7 @@ export function renderRankedTable(initialSites, {
   dirBtn.type = 'button';
   dirBtn.addEventListener('click', () => {
     state.direction = state.direction === 'desc' ? 'asc' : 'desc';
-    syncControls(); drawTable();
+    syncControls(); fillOptions(dimCtl.sel, rankable().map((d) => [d, LABELS[d]]), state.dimension);
   });
   controls.append(bodyCtl.wrap, confCtl.wrap, dimCtl.wrap, dirBtn);
 
