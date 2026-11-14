@@ -5,7 +5,7 @@ Standard limits of Earth as an analog for the Moon and Mars. Every site card pul
 **Owner:** Venice, with Ely (who displays it on the site card).
 **Status:** Draft. Numbers marked *(verify)* must be checked against the listed source before they go in the report or the app.
 
-> Rex may add a "what Earth can't replicate" field to the data contract. If he does, he will announce it in the group chat. Until then this content lives on the card only.
+> **Data status (Nov 14):** the contract has no field for this content, so the app cannot read it yet. Suggested field: `earth_limits[]` (from Kurt's review). Pending Rex's decision. Until he confirms, this is **card text only** and will not display in the app. Update this note once he decides. *(Rex)*
 
 ---
 
@@ -53,7 +53,7 @@ The challenge says an analog does not need to match everything, but we have to e
 
 - **Why it matters:** at lunar polar sites, some terrain is in near-permanent shadow with extremely low temperatures where volatiles like water ice may persist, while nearby ridges can have long periods of sunlight. This drives power, thermal, and resource planning.
 - **Where an Earth site fails:** Earth's axial tilt and atmosphere give no equivalent. Polar Earth sites have seasonal light and dark cycles, but no permanently shadowed, airless cold traps.
-- **How the card should handle it:** list it under "where the analogy breaks down" for any site compared to a lunar polar target.
+- **How the card should handle it:** list it under Breakdowns ("where the analogy breaks down") for any site compared to a lunar polar target. Do **not** repeat it under "what Earth can't replicate → Other". This only applies if a lunar polar site is chosen as a target; revisit once Rex confirms the targets.
 - **Source to cite:** lunar orbiter temperature and illumination studies (for example Diviner-based papers), and peer-reviewed permanently shadowed region studies.
 
 ## 5. Other limits worth mentioning (use if relevant)
