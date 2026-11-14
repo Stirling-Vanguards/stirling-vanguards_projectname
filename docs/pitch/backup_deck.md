@@ -1,4 +1,3 @@
-@"
 # Vanguard Atlas — Backup Presentation Deck (8 Slides)
 
 ---
