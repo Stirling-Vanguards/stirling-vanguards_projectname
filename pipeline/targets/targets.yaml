@@ -1,4 +1,4 @@
-# Target site profiles. Footprint + features to compute, NOT hand-typed measurements.
+﻿# Target site profiles. Footprint + features to compute, NOT hand-typed measurements.
 # Anything with verified: false must not appear in the report as fact.
 
 schema_version: 1
@@ -12,7 +12,7 @@ targets:
     dimensions:
       terrain:
         features: [slope_median, slope_p90, roughness, crater_density]
-        data_sources: ["LOLA (verify access)"]
+        data_sources: ["LRO LOLA GDRDSM (240m)"]
         computed: true         # pipeline fills data/interim/targets/<site_id>.json
       thermal:
         features: [temp_min, temp_max, diurnal_swing, seasonal_variation]
@@ -40,7 +40,7 @@ targets:
     dimensions:
       terrain:
         features: [slope_median, slope_p90, roughness, crater_density]
-        data_sources: ["MOLA", "HiRISE/CTX (verify access)"]
+        data_sources: ["MGS MOLA MEGDR (463m)"]
         computed: true
       thermal:
         features: [temp_min, temp_max, diurnal_swing, seasonal_variation]

@@ -37,3 +37,22 @@ paths:
 output:
   target_bodies: [moon, mars]
   score_range: [0.0, 1.0]
+
+# Scoring configuration (added for real terrain pipeline run)
+scoring:
+  tolerances:
+    slope_median: 5.0
+    slope_p90: 10.0
+  resample_factor_limit: 4
+  strength_min: 0.7
+  breakdown_max: 0.4
+  require_verified_targets: false
+  data_quality:
+    earth:
+      terrain: {kind: direct, resolution_m: 30}
+    moon:
+      terrain: {kind: direct, resolution_m: 240}
+    mars:
+      terrain: {kind: direct, resolution_m: 463}
+  earth_data_sources:
+    terrain: ["Copernicus GLO-30 DEM (30m)"]

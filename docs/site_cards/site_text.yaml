@@ -1,0 +1,34 @@
+﻿# Curated site text overrides for pipeline/scoring/narrative.py
+# Scoped strictly to terrain slope mobility and field-testing uses (other dimensions not yet scored).
+
+atacama_desert:
+  exploration_uses:
+    - "Use this site to test rover navigation and wheel traction across moderate desert slopes (median 7.15 deg) in hyper-arid conditions."
+
+haughton_crater:
+  exploration_uses:
+    - "Use this site to test crater-interior traverse planning and polar field operations on gentle impact-basin slopes (median 4.02 deg)."
+
+death_valley:
+  exploration_uses:
+    - "Use this site to test long-range autonomous driving and hazard avoidance on flat basin floors (median 0.46 deg) comparable to Jezero Crater's floor."
+
+antarctic_dry_valleys:
+  exploration_uses:
+    - "Use this site to test steep-slope mobility and cold-environment hardware operations on rugged polar valley terrain (median 15.65 deg)."
+
+iceland_lava_fields:
+  exploration_uses:
+    - "Use this site to test rover suspension and pathfinding over gently undulating volcanic terrain (median 2.58 deg)."
+
+mauna_kea:
+  exploration_uses:
+    - "Use this site to test highland ascent, slope-stability limits, and regolith-like volcanic terrain mobility (median 14.44 deg) comparable to lunar south polar slopes."
+
+rio_tinto:
+  exploration_uses:
+    - "Use this site to test field-instrument deployment and mobility across moderately sloped terrain (median 8.82 deg)."
+
+samail_ophiolite:
+  exploration_uses:
+    - "Use this site to test extreme-slope climbing limits and cliff-avoidance algorithms in steep mountainous terrain (median 28.11 deg)."

@@ -38,3 +38,23 @@
 - https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megt44n000hb.xml
 - https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megt44n000hb.lbl
 - https://ode.rsl.wustl.edu/mars/productsearch
+
+
+### Copernicus DEM GLO-30 (Global 30 m Digital Elevation Model)
+
+- **Source:** Copernicus Space Component Data Access / AWS Open Data Registry (Copernicus DEM 30m COG)
+- **DOI:** https://doi.org/10.5069/G9028PQB
+- **Accessed:** 2026-11-14 by Kurt
+- **Instrument:** TanDEM-X / TerraSAR-X radar interferometry (WorldDEM derived)
+- **Coverage:** 85°S to 84°N (1° x 1° Cloud-Optimized GeoTIFF tiles covering all 8 Earth analog footprints)
+- **Format:** 32-bit floating-point Cloud-Optimized GeoTIFF (.tif)
+- **Resolution:** 1 arcsecond (about 30 m at the equator), WGS84 (EPSG:4326)
+- **Used for:** terrain dimension (slope computed over a 5 km circular radius per Earth site)
+- **Local path:** data/raw/ (not committed)
+- **Code:** pipeline/features/earth_terrain.py
+- **Limitations:** Digital Surface Model (DSM) rather than a bare-earth DTM, so vegetation canopies and human structures can locally increase slope estimates at non-arid sites.
+- **Credit:** © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved.
+
+# Source Link
+- https://copernicus-dem-30m.s3.amazonaws.com/
+- https://doi.org/10.5069/G9028PQB
