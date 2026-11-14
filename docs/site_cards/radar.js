@@ -8,6 +8,8 @@ const LABELS = {
 };
 const valid = (v) => typeof v === 'number' && Number.isFinite(v) && v >= 0 && v <= 1;
 
+let radarUid = 0;
+
 function s(tag, attrs = {}, text) {
   const node = document.createElementNS(NS, tag);
   for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v);
@@ -15,7 +17,17 @@ function s(tag, attrs = {}, text) {
   return node;
 }
 
+  const root = s('svg', {
+    viewBox: `0 0 ${size} ${size}`, role: 'img', class: 'radar',
+    'aria-labelledby': `${uid}-title ${uid}-desc`,
+  });
+  root.append(
+    s('title', { id: `${uid}-title` }, 'Per-dimension match scores'),
+    s('desc', { id: `${uid}-desc` }, `${summary}. Scores range 0 to 1 and are separate properties, not an overall grade.`),
+  );
+
 export function renderRadar(scores = {}, { size = 260 } = {}) {
+  const uid = `radar-${++radarUid}`;
   const dims = [...CORE, ...OPTIONAL.filter((d) => valid(scores[d]))];
   const missingCore = CORE.filter((d) => !valid(scores[d]));
   if (missingCore.length) {
