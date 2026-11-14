@@ -154,16 +154,16 @@ function init() {
     map.setFilter('sites-selected', ['==', ['get', 'site_id'], selectedSiteId ?? '']);
   }
 
-  map.on('load', async () => {
-    let sites = [];
-    try {
-      sites = await loadSites();
-    } catch (err) {
+  // Load site data right away. The table and card must not wait for basemap tiles.
+  loadSites()
+    .then((sites) => setState({ sites }))
+    .catch((err) => {
       console.error(err);
       showError(`Site data failed to load: ${err.message}`);
-    }
-    setState({ sites });
+    });
 
+  // 'style.load' fires when the style is ready, without waiting for tiles (works offline).
+  map.on('style.load', () => {
     map.addSource('sites', { type: 'geojson', data: toGeoJSON(getVisibleSites(), getState().selectedDimension) });
 
     map.addLayer({
@@ -233,7 +233,7 @@ function init() {
     if ('selectedSiteId' in patch) {
       refreshSelection();
       const site = state.sites.find((s) => s.site_id === state.selectedSiteId);
-      if (site && map.loaded()) map.easeTo({ center: site.coordinates, zoom: Math.max(map.getZoom(), 3) });
+      if (site) map.easeTo({ center: site.coordinates, zoom: Math.max(map.getZoom(), 3) });
     }
   });
 
