@@ -15,7 +15,7 @@ function el(tag, className, text) {
   return n;
 }
 
-// Pure function, easy to test. Missing/null scores always sort last.
+// Pure function. Missing/null scores always sort last.
 export function filterAndSort(sites, { body = 'all', confidence = 'all', dimension = 'terrain', direction = 'desc' } = {}) {
   const rows = sites.filter((s) =>
     (body === 'all' || s.target_body === body) &&
@@ -30,26 +30,38 @@ export function filterAndSort(sites, { body = 'all', confidence = 'all', dimensi
   });
 }
 
-function select(label, options, value, onChange) {
+function makeSelect(label, onChange) {
   const wrap = el('label', 'filter');
   wrap.append(el('span', '', label));
   const sel = el('select');
-  options.forEach(([v, text]) => {
-    const o = el('option', '', text);
-    o.value = v;
-    sel.append(o);
-  });
-  sel.value = value;
   sel.addEventListener('change', () => onChange(sel.value));
   wrap.append(sel);
-  return wrap;
+  return { wrap, sel };
+}
+function fillOptions(sel, options, value) {
+  sel.replaceChildren(...options.map(([v, text]) => {
+    const o = el('option', '', text);
+    o.value = v;
+    return o;
+  }));
+  sel.value = value;
 }
 
-// onOpen(site) / onLocate(site) are callbacks so this file doesn't depend on
-// Kurt's map or a shared-state module yet. Wire them once that's agreed.
-export function renderRankedTable(initialSites, { dimension = 'terrain', onOpen, onLocate } = {}) {
+// Callbacks only; this file never imports state.js.
+// onDimensionChange(d) / onFilterChange({ body, confidence }) fire on USER changes in the table.
+// setDimension / setFilters / setSites are for inbound sync and never fire callbacks.
+export function renderRankedTable(initialSites, {
+  dimension = 'terrain', body = 'all', confidence = 'all',
+  onOpen, onLocate, onDimensionChange, onFilterChange,
+} = {}) {
   let sites = initialSites;
-  const state = { body: 'all', confidence: 'all', dimension, direction: 'desc' };
+  const state = { body, confidence, dimension, direction: 'desc' };
+
+  const dims = () => {
+    const list = [...CORE, ...OPTIONAL.filter((d) => sites.some((s) => valid(s.dimension_scores?.[d])))];
+    if (!list.includes(state.dimension) && LABELS[state.dimension]) list.push(state.dimension);
+    return list;
+  };
 
   const root = el('section', 'ranked');
   const controls = el('div', 'ranked-controls');
@@ -58,25 +70,34 @@ export function renderRankedTable(initialSites, { dimension = 'terrain', onOpen,
   const tableWrap = el('div', 'ranked-table-wrap');
   root.append(controls, status, tableWrap);
 
-  const dims = () => [...CORE, ...OPTIONAL.filter((d) => sites.some((s) => valid(s.dimension_scores?.[d])))];
+  const bodyCtl = makeSelect('Target', (v) => {
+    state.body = v; drawTable();
+    onFilterChange?.({ body: state.body, confidence: state.confidence });
+  });
+  const confCtl = makeSelect('Confidence', (v) => {
+    state.confidence = v; drawTable();
+    onFilterChange?.({ body: state.body, confidence: state.confidence });
+  });
+  const dimCtl = makeSelect('Rank by', (v) => {
+    state.dimension = v; drawTable();
+    onDimensionChange?.(v);
+  });
+  const dirBtn = el('button', 'dir-toggle');
+  dirBtn.type = 'button';
+  dirBtn.addEventListener('click', () => {
+    state.direction = state.direction === 'desc' ? 'asc' : 'desc';
+    syncControls(); drawTable();
+  });
+  controls.append(bodyCtl.wrap, confCtl.wrap, dimCtl.wrap, dirBtn);
 
-  function drawControls() {
-    controls.replaceChildren(
-      select('Target', [['all', 'All'], ['moon', 'Moon'], ['mars', 'Mars']], state.body,
-        (v) => { state.body = v; drawTable(); }),
-      select('Confidence', [['all', 'All'], ['high', 'High'], ['medium', 'Medium'], ['low', 'Low']], state.confidence,
-        (v) => { state.confidence = v; drawTable(); }),
-      select('Rank by', dims().map((d) => [d, LABELS[d]]), state.dimension,
-        (v) => { state.dimension = v; drawTable(); }),
-    );
-    const dir = el('button', 'dir-toggle', state.direction === 'desc' ? 'Highest first' : 'Lowest first');
-    dir.type = 'button';
-    dir.addEventListener('click', () => {
-      state.direction = state.direction === 'desc' ? 'asc' : 'desc';
-      dir.textContent = state.direction === 'desc' ? 'Highest first' : 'Lowest first';
-      drawTable();
-    });
-    controls.append(dir);
+  fillOptions(bodyCtl.sel, [['all', 'All'], ['moon', 'Moon'], ['mars', 'Mars']], state.body);
+  fillOptions(confCtl.sel, [['all', 'All'], ['high', 'High'], ['medium', 'Medium'], ['low', 'Low']], state.confidence);
+
+  function syncControls() {
+    fillOptions(dimCtl.sel, dims().map((d) => [d, LABELS[d]]), state.dimension);
+    bodyCtl.sel.value = state.body;
+    confCtl.sel.value = state.confidence;
+    dirBtn.textContent = state.direction === 'desc' ? 'Highest first' : 'Lowest first';
   }
 
   function drawTable() {
@@ -94,14 +115,13 @@ export function renderRankedTable(initialSites, { dimension = 'terrain', onOpen,
     table.append(el('caption', 'sr-only', `Sites ranked by ${LABELS[state.dimension]}`));
 
     const hr = el('tr');
-    ['#', 'Site', 'Target'].forEach((t) => { const th = el('th', '', t); th.scope = 'col'; hr.append(th); });
+    const addTh = (text, cls = '') => { const th = el('th', cls, text); th.scope = 'col'; hr.append(th); return th; };
+    ['#', 'Site', 'Target'].forEach((t) => addTh(t));
     cols.forEach((d) => {
-      const th = el('th', d === state.dimension ? 'is-ranked' : '', LABELS[d]);
-      th.scope = 'col';
+      const th = addTh(LABELS[d], d === state.dimension ? 'is-ranked' : '');
       if (d === state.dimension) th.setAttribute('aria-sort', state.direction === 'desc' ? 'descending' : 'ascending');
-      hr.append(th);
     });
-    ['Confidence', 'Actions'].forEach((t) => { const th = el('th', '', t); th.scope = 'col'; hr.append(th); });
+    ['Confidence', 'Actions'].forEach((t) => addTh(t));
     const thead = el('thead');
     thead.append(hr);
     table.append(thead);
@@ -109,8 +129,9 @@ export function renderRankedTable(initialSites, { dimension = 'terrain', onOpen,
     const tbody = el('tbody');
     rows.forEach((site, i) => {
       const tr = el('tr');
-      tr.append(el('td', 'rank', String(i + 1)), el('th', 'site-name', site.name), el('td', '', BODY[site.target_body] ?? site.target_body));
-      tr.firstChild.nextSibling.scope = 'row';
+      const nameTh = el('th', 'site-name', site.name);
+      nameTh.scope = 'row';
+      tr.append(el('td', 'rank', String(i + 1)), nameTh, el('td', '', BODY[site.target_body] ?? site.target_body));
       cols.forEach((d) => {
         const v = site.dimension_scores?.[d];
         tr.append(el('td', `score${d === state.dimension ? ' is-ranked' : ''}${valid(v) ? '' : ' not-scored'}`,
@@ -133,13 +154,19 @@ export function renderRankedTable(initialSites, { dimension = 'terrain', onOpen,
     tableWrap.replaceChildren(table);
   }
 
-  drawControls();
+  syncControls();
   drawTable();
 
   return {
     element: root,
-    // For syncing with Kurt's dimension toggle later
-    setDimension(d) { state.dimension = d; drawControls(); drawTable(); },
-    setSites(next) { sites = next; drawControls(); drawTable(); },
+    setDimension(d) {
+      if (d === state.dimension) return;
+      state.dimension = d; syncControls(); drawTable();
+    },
+    setFilters({ body: b = state.body, confidence: c = state.confidence } = {}) {
+      if (b === state.body && c === state.confidence) return;
+      state.body = b; state.confidence = c; syncControls(); drawTable();
+    },
+    setSites(next) { sites = next; syncControls(); drawTable(); },
   };
 }
