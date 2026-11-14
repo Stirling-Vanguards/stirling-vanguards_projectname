@@ -1,0 +1,32 @@
+{
+  "dataset": "MGS MOLA MEGDR topography",
+  "product_id": "megt44n000hb",
+  "logical_identifier": "urn:nasa:pds:mgs_mola_topography_derived:data_meg128:megt44n000hb",
+  "source": "Mars ODE (PDS Geosciences Node)",
+  "target_body": "mars",
+  "file": "megt44n000hb.img",
+  "dtype": ">i2",
+  "shape": [5632, 11520],
+  "units": "meter",
+  "elevation_reference": "areoid (GMM3), not ellipsoid",
+  "pixels_per_degree": 128,
+  "pixel_size_m": 463.0576672,
+  "projection": {
+    "name": "Equirectangular (simple cylindrical)",
+    "central_meridian_deg": 180,
+    "sphere_radius_m": 3396000,
+    "latitude_type": "planetocentric",
+    "longitude_direction": "positive east, 0-360"
+  },
+  "bounds": {"lat_min": 0, "lat_max": 44, "lon_min": 0, "lon_max": 90},
+  "upper_left_corner": "lon 0, lat 44 (pixel corner)",
+  "nodata": null,
+  "notes": [
+    "Big-endian int16 (SignedMSB2). No scaling or offset: values are meters.",
+    "Median of MOLA shots per 1/128 deg bin. Bins with no shots are INTERPOLATED, so slope in those areas is not measured.",
+    "Only about 55% of bins near the equator contain at least one shot; gaps between profiles up to 12 km.",
+    "ENVI header says 'data ignore value = 0' but 0 m is a valid elevation and the label says gaps are interpolated, so zeros are NOT masked.",
+    "Pixel width in meters shrinks with cos(latitude); slope code accounts for this.",
+    "Slope baseline here is ~926 m (central difference over 2 pixels), much coarser than the LOLA map. Not directly comparable."
+  ]
+}
