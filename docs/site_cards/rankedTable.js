@@ -102,7 +102,9 @@ export function renderRankedTable(initialSites, { dimension = 'terrain', onOpen,
       hr.append(th);
     });
     ['Confidence', 'Actions'].forEach((t) => { const th = el('th', '', t); th.scope = 'col'; hr.append(th); });
-    table.append(el('thead')).firstChild.append(hr);
+    const thead = el('thead');
+    thead.append(hr);
+    table.append(thead);
 
     const tbody = el('tbody');
     rows.forEach((site, i) => {
