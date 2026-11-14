@@ -7,8 +7,8 @@ targets:
   - site_id: lunar_south_pole
     name: "Lunar South Polar Site"
     target_body: moon
-    coordinates: null          # [lon, lat] from a verified source
-    footprint_radius_km: null  # area the stats are computed over
+    coordinates: [30.0, -88.0]
+    footprint_radius_km: 5
     dimensions:
       terrain:
         features: [slope_median, slope_p90, roughness, crater_density]
@@ -35,8 +35,8 @@ targets:
   - site_id: jezero_crater
     name: "Jezero Crater"
     target_body: mars
-    coordinates: null
-    footprint_radius_km: null
+    coordinates: [77.5, 18.4]
+    footprint_radius_km: 5
     dimensions:
       terrain:
         features: [slope_median, slope_p90, roughness, crater_density]
