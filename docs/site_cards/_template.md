@@ -1,7 +1,7 @@
-# Site Card: [Site name]
+z# Site Card: [Site name]
 
 > Copy this file to `docs/site_cards/<site_id>.md` and fill in every section.
-> Field names match the frozen data contract (`docs/data_contract.md`). Do not invent new fields here.
+> Fields marked **(contract)** match the data contract (`docs/data_contract.md`, status pending Rex's v1.1 confirmation). Fields marked **(card text only)** are not in the contract and will **not** show in the app unless Rex adds them. Don't add other new fields without checking with Rex.
 > Every scientific claim needs a source. If you don't have one yet, write `[source needed]`.
 > Never use the fake sites from `data/processed/sample_sites.json` for a real card.
 
@@ -9,13 +9,13 @@
 
 | Field | Value |
 | --- | --- |
-| `site_id` | |
-| `name` | |
-| `coordinates` | [lon, lat] (longitude first) |
-| `target_body` | `moon` or `mars` (the body this site is an analog **for**) |
-| Region / country | |
-| Compared against | Name of the Moon or Mars target site |
-| `confidence` | `high` / `medium` / `low` (see rule in `docs/criteria.md`) |
+| `site_id` (contract) | |
+| `name` (contract) | |
+| `coordinates` (contract) | [lon, lat] (longitude first) |
+| `target_body` (contract) | `moon` or `mars` (the body this site is an analog **for**) |
+| Region / country (card text only) | |
+| Compared against (card text only) | Name of the Moon or Mars target site |
+| `confidence` (contract) | `high` / `medium` / `low`. One value per site: the **lowest-rated scored dimension** (rule in `docs/criteria.md` §4) |
 | Card author | |
 | Last updated | |
 
@@ -25,9 +25,11 @@ One or two sentences: what is this site, and why is it a meaningful analog? Say 
 
 ## 3. Dimension scores
 
-Scores are 0 to 1. A score is how closely this site's feature distribution matches the target. Copy values from the pipeline output, never from memory.
+Scores are 0 to 1. A score is how closely this site's feature distribution matches the target. Copy values from the pipeline output, never from memory. State which cell the site score comes from (best-matching cell in the region, unless Rex decides otherwise).
 
-| Dimension | Score | One-line reason | Source / dataset |
+A dimension we did not score is **`null`, never 0**. Write "not scored" in the table.
+
+| Dimension | Score (contract) | One-line reason (card text only) | Source / dataset |
 | --- | --- | --- | --- |
 | `terrain` | | | |
 | `thermal` | | | |
@@ -52,12 +54,14 @@ Where the analogy fails. Be specific. An honest breakdown makes the card more cr
 
 ## 6. What Earth can't replicate
 
-Pull the relevant items from `docs/site_cards/earth_limits.md` and say how each one affects *this* site. Do not just paste the whole list.
+Pull the relevant items from `docs/site_cards/earth_limits.md` and say how each one affects *this* site. Do not just paste the whole list. This section is **card text only** until Rex adds a contract field for it (suggested: `earth_limits[]`).
+
+Polar illumination and cold traps do **not** go here. Put them in section 5 (Breakdowns).
 
 - **Gravity:**
 - **Atmosphere / vacuum:**
 - **Radiation:**
-- **Other (e.g. polar illumination):**
+- **Other (only if not covered above):**
 
 ## 7. Exploration uses (`exploration_uses`)
 
@@ -69,6 +73,13 @@ Start each bullet with "Use this site to test...". Name a concrete activity.
 ## 8. Confidence note
 
 Why `confidence` is high, medium, or low. Name the weakest dimension and why (resolution gap, proxy data, catalog-only, and so on).
+
+List the confidence of each scored dimension here too (card text only):
+
+- `terrain`:
+- `thermal`:
+- `geology`:
+- `subsurface`:
 
 ## 9. Data sources (`data_sources`)
 
