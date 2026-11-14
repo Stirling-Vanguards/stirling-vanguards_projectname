@@ -1,10 +1,4 @@
 # Site Card: [Site name]
-
-> Copy this file to `docs/site_cards/<site_id>.md` and fill in every section.
-> Fields marked **(contract)** match the data contract (`docs/data_contract.md`, status pending Rex's v1.1 confirmation). Fields marked **(card text only)** are not in the contract and will **not** show in the app unless Rex adds them. Don't add other new fields without checking with Rex.
-> Every scientific claim needs a source. If you don't have one yet, write `[source needed]`.
-> Never use the fake sites from `data/processed/sample_sites.json` for a real card.
-
 ## 1. Basics
 
 | Field | Value |
