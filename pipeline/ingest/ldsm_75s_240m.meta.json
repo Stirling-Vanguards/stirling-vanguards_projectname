@@ -1,0 +1,33 @@
+{
+  "dataset": "LRO LOLA GDRDSM slope map",
+  "product_id": "ldsm_75s_240m",
+  "logical_identifier": "urn:nasa:pds:lro_lola_rdr:data_gridded:ldsm_75s_240m",
+  "source": "Lunar ODE (PDS Geosciences Node)",
+  "target_body": "moon",
+  "file": "ldsm_75s_240m.img",
+  "dtype": "<i2",
+  "shape": [3812, 3812],
+  "scaling_factor": 0.0015,
+  "value_offset": 45.0,
+  "units": "degrees",
+  "nodata": null,
+  "valid_slope_range_deg": [0, 90],
+  "projection": {
+    "name": "Polar Stereographic",
+    "lat_origin": -90,
+    "lon_central_meridian": 0,
+    "sphere_radius_m": 1737400,
+    "latitude_type": "planetocentric",
+    "longitude_direction": "positive east"
+  },
+  "pixel_size_m": 240,
+  "upper_left_x_m": -457466.0986,
+  "upper_left_y_m": 457466.0986,
+  "coverage": {"lat_min": -90, "lat_max": -75},
+  "notes": [
+    "Slope computed from plane fit to 3 successive laser shots, baseline 30-120 m, not 240 m.",
+    "LOLA laser 1 and 2 data through mission phase LRO_SM_17.",
+    "nodata not stated in label: values outside 0-90 deg are masked as an assumption. Verify.",
+    "Upper-left corner convention (pixel corner vs center) not confirmed. Offset is under 1 pixel."
+  ]
+}
