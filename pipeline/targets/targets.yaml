@@ -4,7 +4,7 @@
 schema_version: 1
 
 targets:
-  - site_id: moon_target_a
+  - site_id: lunar_south_pole
     name: "Lunar South Pole Site"
     target_body: moon
     coordinates: null          # [lon, lat] from a verified source
@@ -32,7 +32,7 @@ targets:
       - "Permanently shadowed regions and cold traps have no real Earth equivalent"
       - "Vacuum, low gravity and radiation cannot be replicated on Earth"
 
-  - site_id: mars_target_a
+  - site_id: jezero_crater
     name: "Jezero Crater"
     target_body: mars
     coordinates: null
