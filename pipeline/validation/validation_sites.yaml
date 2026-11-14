@@ -1,0 +1,48 @@
+# Validation expectations: which known analogs SHOULD score high (or low) on which dimension.
+#
+# RULES
+#  * Every expectation needs a published source before it is reported as fact.
+#    Until `source_citation` is filled in and `verified: true`, the result is labelled
+#    "unverified" and does not fail the run (unless --strict).
+#  * Do not tune tolerances in config.yaml to make these pass. Validation is a test of the
+#    method, not a target for it. If a known analog scores low, report it (and why).
+#  * site_id must match a row in data/interim/earth_features.csv (Joash). Rename to fit.
+#  * target is a site_id from pipeline/targets/targets.yaml (lunar_south_pole, jezero_crater).
+#
+# Rank checks are only meaningful when the Earth pool is big enough and not made up of the
+# known analogs themselves. Below `min_sites_for_rank` they are reported as INCONCLUSIVE.
+
+settings:
+  min_percentile: 0.75        # expect_high: site must match or beat >= 75% of the other Earth sites
+  min_sites_for_rank: 8       # smaller pools give INCONCLUSIVE, not PASS/FAIL
+  tolerance_scales: [0.75, 1.0, 1.25]   # sensitivity run: scale every tolerance in config.yaml
+
+validation_sites:
+  - site_id: atacama
+    name: "Atacama Desert"
+    expect_high: []           # e.g. [{target: jezero_crater, dimension: terrain}]  <- needs a citation
+    expect_low: []
+    source_citation: null
+    verified: false
+
+  - site_id: haughton_crater
+    name: "Haughton impact crater"
+    expect_high: []
+    expect_low: []
+    source_citation: null
+    verified: false
+
+  - site_id: death_valley
+    name: "Death Valley"
+    expect_high: []
+    expect_low: []
+    source_citation: null
+    verified: false
+
+# Optional negative controls: places that should NOT look like the target on a dimension
+# (also needs a citation or an obvious physical argument written down in the report).
+#  - site_id: <earth site>
+#    name: "<name>"
+#    expect_low: [{target: lunar_south_pole, dimension: thermal}]
+#    source_citation: "<paper / dataset doc>"
+#    verified: true
