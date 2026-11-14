@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Analog Finder (working title)</title>
+
+  <!-- MapLibre GL JS. Version is pinned; VERIFY it exists on unpkg before relying on it.
+       For the demo, vendor these two files into app/public/ so nothing depends on a CDN. -->
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+
+  <link rel="stylesheet" href="src/map/map.css">
+  <!-- Ely: add your app-wide stylesheet here, e.g. src/styles/main.css -->
+
+  <style>
+    /* Temporary layout only. Ely replaces this with src/styles/ once Venice's design lands. */
+    html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
+    #app { display: grid; grid-template-columns: 1fr 380px; grid-template-rows: 1fr auto; height: 100%; }
+    #map-wrap { grid-column: 1; grid-row: 1; }
+    #side { grid-column: 2; grid-row: 1 / span 2; overflow: auto; border-left: 1px solid #d1d5db; }
+    #bottom { grid-column: 1; grid-row: 2; max-height: 40vh; overflow: auto; border-top: 1px solid #d1d5db; }
+    @media (max-width: 800px) {
+      #app { grid-template-columns: 1fr; grid-template-rows: 60vh auto auto; height: auto; }
+      #side, #bottom { grid-column: 1; grid-row: auto; border: 0; max-height: none; }
+    }
+  </style>
+</head>
+<body>
+  <main id="app">
+    <!-- Kurt: map and dimension toggle -->
+    <section id="map-wrap" aria-label="Map of Earth analog sites">
+      <div id="dimension-toggle"></div>
+      <div id="map"></div>
+      <div id="map-legend"></div>
+      <div id="map-status" role="alert" hidden></div>
+    </section>
+
+    <!-- Mount points. IDs are PROPOSED: confirm with Ely and Vince in the group chat. -->
+    <aside id="side">
+      <div id="site-card-slot"></div>        <!-- Ely: site analog card -->
+      <div id="comparison-slot"></div>       <!-- Vince: Earth-vs-target comparison -->
+    </aside>
+    <section id="bottom">
+      <div id="site-table-slot"></div>       <!-- Ely: ranked table and filters -->
+    </section>
+  </main>
+
+  <!-- ES modules need a local server (see run steps). Ely and Vince add their own module scripts below. -->
+  <script type="module" src="src/map/map.js"></script>
+</body>
+</html>
