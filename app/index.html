@@ -13,23 +13,12 @@
   <link rel="stylesheet" href="src/map/map.css">
   <link rel="stylesheet" href="src/styles/tokens.css">
   <link rel="stylesheet" href="src/styles/components.css">
-  <script type="module" src="src/main.js"></script>
-  <!-- Ely: add your app-wide stylesheet here, e.g. src/styles/main.css -->
-
-  <style>
-    /* Temporary layout only. Ely replaces this with src/styles/ once Venice's design lands. */
-    html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
-    #app { display: grid; grid-template-columns: 1fr 380px; grid-template-rows: 1fr auto; height: 100%; }
-    #map-wrap { grid-column: 1; grid-row: 1; }
-    #side { grid-column: 2; grid-row: 1 / span 2; overflow: auto; border-left: 1px solid #d1d5db; }
-    #bottom { grid-column: 1; grid-row: 2; max-height: 40vh; overflow: auto; border-top: 1px solid #d1d5db; }
-    @media (max-width: 800px) {
-      #app { grid-template-columns: 1fr; grid-template-rows: 60vh auto auto; height: auto; }
-      #side, #bottom { grid-column: 1; grid-row: auto; border: 0; max-height: none; }
-    }
-  </style>
+  <link rel="stylesheet" href="src/styles/layout.css">
 </head>
 <body>
+  <!-- Visually hidden page heading for screen readers (inline style so it works without a shared class). -->
+  <h1 style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Earth analog finder</h1>
+
   <main id="app">
     <!-- Kurt: map and dimension toggle -->
     <section id="map-wrap" aria-label="Map of Earth analog sites">
@@ -39,17 +28,17 @@
       <div id="map-status" role="alert" hidden></div>
     </section>
 
-    <!-- Mount points. IDs are PROPOSED: confirm with Ely and Vince in the group chat. -->
-    <aside id="side">
-      <div id="site-card-slot"></div>        <!-- Ely: site analog card -->
-      <div id="comparison-slot"></div>       <!-- Vince: Earth-vs-target comparison -->
+    <aside id="side" aria-label="Selected site details">
+      <div id="site-card-slot" aria-live="polite"></div>   <!-- Ely: site analog card (mounted by src/main.js) -->
+      <div id="comparison-slot"></div>                      <!-- Vince: Earth-vs-target comparison -->
     </aside>
-    <section id="bottom">
-      <div id="site-table-slot"></div>       <!-- Ely: ranked table and filters -->
+    <section id="bottom" aria-label="Ranked sites">
+      <div id="site-table-slot"></div>                      <!-- Ely: ranked table and filters (mounted by src/main.js) -->
     </section>
   </main>
 
-  <!-- ES modules need a local server (see run steps). Ely and Vince add their own module scripts below. -->
+  <!-- ES modules need a local server. Separate modules so one failing import cannot break the other. -->
   <script type="module" src="src/map/map.js"></script>
+  <script type="module" src="src/main.js"></script>
 </body>
 </html>
