@@ -6,3 +6,4 @@ jsonschema
 pytest
 
 # Joash: add ingestion dependencies below
+pyproj
