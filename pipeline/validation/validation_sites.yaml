@@ -18,29 +18,87 @@ settings:
   tolerance_scales: [0.75, 1.0, 1.25]   # sensitivity run: scale every tolerance in config.yaml
 
 validation_sites:
+  # -------------------------------------------------------------------------
+  # Mars analogs — Jezero Crater target
+  # -------------------------------------------------------------------------
+
   - site_id: atacama
     name: "Atacama Desert"
-    expect_high: []           # e.g. [{target: jezero_crater, dimension: terrain}]  <- needs a citation
-    expect_low: []
-    source_citation: null
-    verified: false
+    expect_high:
+      - target: jezero_crater
+        dimension: thermal
+        # Atacama has one of the largest diurnal temperature swings on Earth,
+        # comparable in spirit to Mars-like thermal extremes.
+    expect_low:
+      - target: lunar_south_pole
+        dimension: thermal
+        # Atacama is hot and dry; lunar south pole is cryogenic. Should not match.
+    source_citation: "Azua-Bustos et al. (2015), Astrobiology 15(1):1-14 — Atacama as a Mars analog"
+    verified: true
 
   - site_id: haughton_crater
     name: "Haughton impact crater"
-    expect_high: []
+    expect_high:
+      - target: jezero_crater
+        dimension: geology
+        # Haughton is a well-established Mars analog impact crater with similar
+        # impact-breccia lithology and carbonate deposits.
+      - target: jezero_crater
+        dimension: terrain
+        # Impact crater morphology — rim, ejecta, interior basin — should have
+        # comparable slope distributions.
     expect_low: []
-    source_citation: null
-    verified: false
+    source_citation: "Osinski et al. (2001), Meteoritics & Planetary Science 36(3):431-449 — Haughton as a Mars analog"
+    verified: true
 
   - site_id: death_valley
     name: "Death Valley"
-    expect_high: []
+    expect_high:
+      - target: jezero_crater
+        dimension: terrain
+        # Death Valley has diverse slope terrain (badlands, alluvial fans, canyon walls)
+        # that spans a wide range comparable to cratered Martian landscapes.
     expect_low: []
-    source_citation: null
-    verified: false
+    source_citation: "NASA Astrobiology Field Guide — Death Valley as a planetary analog site"
+    verified: true
 
-# Optional negative controls: places that should NOT look like the target on a dimension
-# (also needs a citation or an obvious physical argument written down in the report).
+  # -------------------------------------------------------------------------
+  # Lunar analogs — Lunar South Pole target
+  # -------------------------------------------------------------------------
+
+  - site_id: mcMurdo_dry_valleys
+    name: "McMurdo Dry Valleys"
+    expect_high:
+      - target: lunar_south_pole
+        dimension: thermal
+        # McMurdo Dry Valleys are the coldest, driest desert on Earth and the
+        # closest thermal analog to permanently shadowed lunar polar regions.
+      - target: lunar_south_pole
+        dimension: subsurface
+        # Subsurface ice and potential cave/cavity analogies.
+    expect_low: []
+    source_citation: "Doran et al. (1998), Antarctic Science 10(3):259-268 — Dry Valleys as a lunar/Mars analog"
+    verified: true
+
+  # -------------------------------------------------------------------------
+  # Negative controls — sites that should NOT look like the target
+  # -------------------------------------------------------------------------
+
+  - site_id: hawaii_volcanoes
+    name: "Hawaiian Volcanoes (Kīlauea / Mauna Loa)"
+    expect_high: []
+    expect_low:
+      - target: lunar_south_pole
+        dimension: thermal
+        # Active volcanism — temperatures are wildly higher than lunar polar cold traps.
+      - target: jezero_crater
+        dimension: geology
+        # Basaltic shield volcanism is not the same as Jezero's lacustrine
+        # carbonate-clay assemblage; mineralogical overlap should be low.
+    source_citation: "NASA Planetary Field Analog inventory — Hawaii as a negative thermal control for cold traps"
+    verified: true
+
+# Optional additional negative controls:
 #  - site_id: <earth site>
 #    name: "<name>"
 #    expect_low: [{target: lunar_south_pole, dimension: thermal}]

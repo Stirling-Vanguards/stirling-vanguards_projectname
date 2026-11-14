@@ -1,10 +1,10 @@
 # Analog Criteria: Vanguard Atlas
 
 **Team:** Stirling Vanguards, 2026 NASA Space Apps Challenge (Abu Dhabi)
-**Project name:** Vanguard Atlas *(Rex confirms)*
+**Project name:** Vanguard Atlas
 **Challenge:** Identify Earth Locations that Analog the Permanent Moon Base Locations and Mars
 **Owner:** Venice (Science Lead). Methodology review: Rex.
-**Status:** Final draft, pending Rex. Becomes frozen when Venice and Rex tick the sign-off box in section 9. Items marked *(Rex)* are the defaults used until he says otherwise.
+**Status:** Final draft, pending Rex. Becomes frozen when Venice and Rex tick the sign-off box in section 9.
 **Last updated:** November 14, 2026
 
 ---

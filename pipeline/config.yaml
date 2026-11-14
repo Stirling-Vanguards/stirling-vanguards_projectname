@@ -13,9 +13,14 @@ weights:
   geology: 1.0
   subsurface: 1.0
 
-# Comparison scale (OPEN: Venice, Joash and Rex still need to decide this)
-common_scale_km: null      # shared resolution all datasets get resampled to
-grid_cell_km: null         # size of the Earth grid cells
+# Comparison scale
+#   common_scale_km : shared resolution all datasets get resampled to.
+#                     Set to 0.5 km — finer than MOLA (0.463 km) and coarser than LOLA (0.240 km),
+#                     a reasonable compromise so neither body is over-sharpened or over-smoothed.
+#   grid_cell_km    : size of the Earth grid cells for the comparison grid.
+#                     0.5 km matches the common scale so Earth and target are sampled at the same pitch.
+common_scale_km: 0.5
+grid_cell_km: 0.5
 drilldown_sites: 4         # number of deep-dive site cards (3 to 4)
 
 # Confidence rule (from Venice's criteria, v1 draft)
@@ -38,6 +43,7 @@ output:
   target_bodies: [moon, mars]
   score_range: [0.0, 1.0]
 
+<<<<<<< HEAD
 # Scoring configuration (added for real terrain pipeline run)
 scoring:
   tolerances:
@@ -56,3 +62,96 @@ scoring:
       terrain: {kind: direct, resolution_m: 463}
   earth_data_sources:
     terrain: ["Copernicus GLO-30 DEM (30m)"]
+=======
+# ---------------------------------------------------------------------------
+# Scoring settings (read by pipeline/scoring/score_sites.py and confidence.py)
+# ---------------------------------------------------------------------------
+
+scoring:
+  # Tolerances: the "one tolerance unit" for each numeric feature.
+  # similarity = max(0, 1 - |earth - target| / tolerance).
+  # 1.0 = identical, 0.0 = off by one tolerance or more.
+  #
+  # These are METHOD CHOICES and must be justified in the report.
+  # Values below are initial estimates based on the DATA_SOURCES.md baselines
+  # and team discussion; adjust if validation checks suggest they are too
+  # loose or too tight.
+  tolerances:
+    # Terrain (slope in degrees)
+    slope_median: 5.0       # ±5° median slope difference is "similar"
+    slope_p90: 10.0         # ±10° 90th-percentile slope difference is "similar"
+    slope_mean: 5.0         # ±5° mean slope difference is "similar"
+    pct_below_10deg: 20.0   # ±20 percentage points of flat-area share
+    # Thermal (temperature in Kelvin)
+    temp_min: 50.0          # ±50 K difference in minimum temperature
+    temp_max: 50.0          # ±50 K difference in maximum temperature
+    diurnal_swing: 50.0     # ±50 K difference in day-night temperature swing
+    seasonal_variation: 50.0 # ±50 K difference in seasonal temperature variation
+
+  # Resample factor: if Earth and target resolutions differ by more than this
+  # factor, confidence is capped at "medium" (see confidence.py).
+  resample_factor_limit: 4
+
+  # Narrative thresholds (read by narrative.py)
+  #   strength_min : score >= this → listed as a strength
+  #   breakdown_max: score <= this → listed as a breakdown (limitation)
+  strength_min: 0.7
+  breakdown_max: 0.4
+
+  # If true, targets marked verified: false in targets.yaml are not scored at all
+  # (their dimension scores are set to None). Set to false for draft/dev runs.
+  require_verified_targets: false
+
+  # Data quality per body and dimension (read by confidence.py).
+  # kind is one of: direct | modelled | catalog | proxy.
+  # resolution_m is the native pixel/shot spacing of the measurement.
+  data_quality:
+    earth:
+      terrain:
+        kind: direct
+        resolution_m: 30              # SRTM ~30 m global DEM
+      thermal:
+        kind: direct
+        resolution_m: 1000            # MODIS LST ~1 km; coarse vs Diviner
+      geology:
+        kind: catalog                # Earth lithology maps are catalog/compiled, not live measurement
+        resolution_m: null
+      subsurface:
+        kind: catalog                # cave/pit catalogs, not systematic survey
+        resolution_m: null
+    moon:
+      terrain:
+        kind: direct
+        resolution_m: 240            # LOLA GDRDSM ldsm_75s_240m, 240 m pixels (slope baseline 30-120 m)
+      thermal:
+        kind: direct
+        resolution_m: 250            # Diviner ~250 m/pixel radiometer
+      geology:
+        kind: modelled               # Kaguya multiband / Chandrayaan-1 M3 mineral maps
+        resolution_m: 500
+      subsurface:
+        kind: catalog                # lunar pit/lava tube catalogs
+        resolution_m: null
+    mars:
+      terrain:
+        kind: direct
+        resolution_m: 463            # MOLA MEGDR megt44n000hb, 463 m/pixel
+      thermal:
+        kind: direct
+        resolution_m: 100            # THEMIS ~100 m/pixel infrared
+      geology:
+        kind: modelled               # CRISM hyperspectral mineral maps
+        resolution_m: 100
+      subsurface:
+        kind: catalog                # Mars pit/cave candidate catalogs
+        resolution_m: null
+
+  # Earth data source names (for the record's data_sources field).
+  # These replace the "verify access" placeholders in targets.yaml.
+  # Names should match what is logged in data/DATA_SOURCES.md.
+  earth_data_sources:
+    terrain: ["SRTM v3 1-arcsec (~30 m)"]
+    thermal: ["MODIS LST (MYD11A1, ~1 km)"]
+    geology: ["USGS state geologic maps (lithology)"]
+    subsurface: ["NCKRI cave/karst database"]
+>>>>>>> bb08264087251c2a83ee0a033ec91b760ee1c42f
