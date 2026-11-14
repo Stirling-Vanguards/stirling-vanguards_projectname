@@ -1,0 +1,50 @@
+[
+  {
+    "site_id": "mock-001",
+    "name": "MOCK Site A (fake data)",
+    "coordinates": [-69.25, -24.5],
+    "target_body": "mars",
+    "dimension_scores": { "terrain": 0.82, "thermal": 0.41, "geology": 0.77, "subsurface": 0.2 },
+    "confidence": "medium",
+    "strengths": ["Fake strength for UI testing"],
+    "breakdowns": ["Fake breakdown for UI testing"],
+    "exploration_uses": ["Use this site to test fake rover mobility"],
+    "data_sources": ["MOCK"]
+  },
+  {
+    "site_id": "mock-002",
+    "name": "MOCK Site B (fake data)",
+    "coordinates": [-89.7, 75.4],
+    "target_body": "moon",
+    "dimension_scores": { "terrain": 0.55, "thermal": 0.9, "geology": 0.3, "subsurface": null },
+    "confidence": "low",
+    "strengths": ["Fake strength for UI testing"],
+    "breakdowns": ["Fake breakdown for UI testing"],
+    "exploration_uses": ["Use this site to test fake drill deployment"],
+    "data_sources": ["MOCK"]
+  },
+  {
+    "site_id": "mock-003",
+    "name": "MOCK Site C (fake data)",
+    "coordinates": [58.5, 22.0],
+    "target_body": "mars",
+    "dimension_scores": { "terrain": 0.35, "thermal": 0.62, "geology": 0.5, "subsurface": 0.71, "water_ice": null },
+    "confidence": "high",
+    "strengths": ["Fake strength for UI testing"],
+    "breakdowns": ["Fake breakdown for UI testing"],
+    "exploration_uses": ["Use this site to test fake habitat siting"],
+    "data_sources": ["MOCK"]
+  },
+  {
+    "site_id": "mock-004",
+    "name": "MOCK Site D (fake data)",
+    "coordinates": [-116.9, 36.5],
+    "target_body": "moon",
+    "dimension_scores": { "terrain": 0.12, "thermal": 0.05, "geology": 0.88, "subsurface": 0.45 },
+    "confidence": "medium",
+    "strengths": ["Fake strength for UI testing"],
+    "breakdowns": ["Fake breakdown for UI testing"],
+    "exploration_uses": ["Use this site to test fake sample collection"],
+    "data_sources": ["MOCK"]
+  }
+]

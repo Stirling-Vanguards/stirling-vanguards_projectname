@@ -1,0 +1,314 @@
+{
+	"Product_Observational": {
+		"Identification_Area": {
+			"logical_identifier": "urn:nasa:pds:lro_lola_rdr:data_gridded:ldsm_75s_240m",
+			"version_id": "1.0",
+			"title": "LRO LOLA gridded science product: LDSM_75S_240M",
+			"information_model_version": "1.17.0.0",
+			"product_class": "Product_Observational",
+			"Modification_History": {
+				"Modification_Detail": {
+					"modification_date": "2021-10-11",
+					"version_id": "1.0",
+					"description": "Initial version"
+				}
+			}
+		},
+		"Observation_Area": {
+			"Time_Coordinates": {
+				"start_date_time": "2009-07-13T17:33:17.246Z",
+				"stop_date_time": "2011-12-11T13:33:12.807Z"
+			},
+			"Investigation_Area": {
+				"name": "Lunar Reconnaissance Orbiter",
+				"type": "Mission",
+				"Internal_Reference": {
+					"lid_reference": "urn:nasa:pds:context:investigation:mission.lunar_reconnaissance_orbiter",
+					"reference_type": "data_to_investigation"
+				}
+			},
+			"Observing_System": {
+				"name": "LOLA",
+				"Observing_System_Component": [
+					{
+						"name": "Lunar Reconnaissance Orbiter",
+						"type": "Host",
+						"Internal_Reference": {
+							"lid_reference": "urn:nasa:pds:context:instrument_host:spacecraft.lro",
+							"reference_type": "is_instrument_host"
+						}
+					},
+					{
+						"name": "Lunar Orbiter Laser Altimeter for LRO",
+						"type": "Instrument",
+						"Internal_Reference": {
+							"lid_reference": "urn:nasa:pds:context:instrument:lro.lola",
+							"reference_type": "is_instrument"
+						}
+					}
+				]
+			},
+			"Target_Identification": {
+				"name": "Moon",
+				"type": "Satellite",
+				"Internal_Reference": {
+					"lid_reference": "urn:nasa:pds:context:target:satellite.earth.moon",
+					"reference_type": "data_to_target"
+				}
+			},
+			"Mission_Area": {
+				"LRO_Parameters": {
+					"product_type": {
+						"__prefix": "lro",
+						"__text": "LOLA_DSM"
+					},
+					"product_version_id": {
+						"__prefix": "lro",
+						"__text": "V2.0"
+					},
+					"mission_phase_name": [
+						{
+							"__prefix": "lro",
+							"__text": "COMMISSIONING"
+						},
+						{
+							"__prefix": "lro",
+							"__text": "NOMINAL MISSION"
+						},
+						{
+							"__prefix": "lro",
+							"__text": "SCIENCE MISSION"
+						}
+					],
+					"producer_institution_name": {
+						"__prefix": "lro",
+						"__text": "GODDARD SPACE FLIGHT CENTER"
+					},
+					"__prefix": "lro"
+				}
+			},
+			"Discipline_Area": {
+				"Display_Settings": {
+					"Local_Internal_Reference": {
+						"local_identifier_reference": "gridded_image",
+						"local_reference_type": "display_settings_to_array"
+					},
+					"Display_Direction": {
+						"horizontal_display_axis": {
+							"__prefix": "disp",
+							"__text": "Sample"
+						},
+						"horizontal_display_direction": {
+							"__prefix": "disp",
+							"__text": "Left to Right"
+						},
+						"vertical_display_axis": {
+							"__prefix": "disp",
+							"__text": "Line"
+						},
+						"vertical_display_direction": {
+							"__prefix": "disp",
+							"__text": "Top to Bottom"
+						},
+						"__prefix": "disp"
+					},
+					"__prefix": "disp"
+				},
+				"Cartography": {
+					"Local_Internal_Reference": {
+						"local_identifier_reference": "gridded_image",
+						"local_reference_type": "cartography_parameters_to_image_object"
+					},
+					"Spatial_Domain": {
+						"Bounding_Coordinates": {
+							"west_bounding_coordinate": {
+								"_unit": "deg",
+								"__prefix": "cart",
+								"__text": "0"
+							},
+							"east_bounding_coordinate": {
+								"_unit": "deg",
+								"__prefix": "cart",
+								"__text": "360"
+							},
+							"north_bounding_coordinate": {
+								"_unit": "deg",
+								"__prefix": "cart",
+								"__text": "-75"
+							},
+							"south_bounding_coordinate": {
+								"_unit": "deg",
+								"__prefix": "cart",
+								"__text": "-90"
+							},
+							"__prefix": "cart"
+						},
+						"__prefix": "cart"
+					},
+					"Spatial_Reference_Information": {
+						"Horizontal_Coordinate_System_Definition": {
+							"Planar": {
+								"Map_Projection": {
+									"map_projection_name": {
+										"__prefix": "cart",
+										"__text": "Polar Stereographic"
+									},
+									"Polar_Stereographic": {
+										"longitude_of_central_meridian": {
+											"_unit": "deg",
+											"__prefix": "cart",
+											"__text": "0"
+										},
+										"latitude_of_projection_origin": {
+											"_unit": "deg",
+											"__prefix": "cart",
+											"__text": "-90"
+										},
+										"__prefix": "cart"
+									},
+									"__prefix": "cart"
+								},
+								"Planar_Coordinate_Information": {
+									"planar_coordinate_encoding_method": {
+										"__prefix": "cart",
+										"__text": "Coordinate Pair"
+									},
+									"Coordinate_Representation": {
+										"pixel_resolution_x": {
+											"_unit": "m/pixel",
+											"__prefix": "cart",
+											"__text": "240"
+										},
+										"pixel_resolution_y": {
+											"_unit": "m/pixel",
+											"__prefix": "cart",
+											"__text": "240"
+										},
+										"pixel_scale_x": {
+											"_unit": "pixel/deg",
+											"__prefix": "cart",
+											"__text": "126.347"
+										},
+										"pixel_scale_y": {
+											"_unit": "pixel/deg",
+											"__prefix": "cart",
+											"__text": "126.347"
+										},
+										"__prefix": "cart"
+									},
+									"__prefix": "cart"
+								},
+								"Geo_Transformation": {
+									"upperleft_corner_x": {
+										"_unit": "m",
+										"__prefix": "cart",
+										"__text": "-457466.09859999997"
+									},
+									"upperleft_corner_y": {
+										"_unit": "m",
+										"__prefix": "cart",
+										"__text": "457466.09859999997"
+									},
+									"__prefix": "cart"
+								},
+								"__prefix": "cart"
+							},
+							"Geodetic_Model": {
+								"latitude_type": {
+									"__prefix": "cart",
+									"__text": "Planetocentric"
+								},
+								"a_axis_radius": {
+									"_unit": "km",
+									"__prefix": "cart",
+									"__text": "1737.4"
+								},
+								"b_axis_radius": {
+									"_unit": "km",
+									"__prefix": "cart",
+									"__text": "1737.4"
+								},
+								"c_axis_radius": {
+									"_unit": "km",
+									"__prefix": "cart",
+									"__text": "1737.4"
+								},
+								"longitude_direction": {
+									"__prefix": "cart",
+									"__text": "Positive East"
+								},
+								"coordinate_system_type": {
+									"__prefix": "cart",
+									"__text": "Body-fixed Rotating"
+								},
+								"coordinate_system_name": {
+									"__prefix": "cart",
+									"__text": "MEAN EARTH/POLAR AXIS OF DE421"
+								},
+								"__prefix": "cart"
+							},
+							"__prefix": "cart"
+						},
+						"__prefix": "cart"
+					},
+					"__prefix": "cart"
+				}
+			}
+		},
+		"File_Area_Observational": {
+			"File": {
+				"file_name": "ldsm_75s_240m.img",
+				"creation_date_time": "2012-06-15T00:00:00",
+				"comment": "This data product is a map of the surface \n   slope of the Moon at a resolution of 240m/pix by 240m/pix\n   true at the pole in polar stereographic (spherical) projection, \n   based on altimetry data acquired by the LOLA instrument [ZUBERETAL2012].\n   The LOLA Laser 1 and 2 data through mission phase LRO_SM_17 are \n   the source for this data set. The bi-directional slope was calculated \n   from a plane fit to three successive laser shots requiring n=5 to 15 \n   profile returns. Depending on orbital velocity, probability of detection,\n   and spacecraft altitude, the slope baseline may vary from 30 to 120 \n   meters.\n\n   This label describes an IMG file in the form of a binary resampling \n   with pixel registration."
+			},
+			"Array_2D_Image": {
+				"local_identifier": "gridded_image",
+				"offset": {
+					"_unit": "byte",
+					"__text": "0"
+				},
+				"axes": "2",
+				"axis_index_order": "Last Index Fastest",
+				"description": "Each sample represents the surface slope at a \n    baseline of 240 meters. A scaling was applied to make better use of the\n    16-bit integer range: a flat surface corresponds to a numerical value of\n    -30,000, and a surface tilted by 45 degrees corresponds to a numerical \n    value of 0.",
+				"Element_Array": {
+					"data_type": "SignedLSB2",
+					"unit": "DEGREE",
+					"scaling_factor": "0.0015",
+					"value_offset": "45."
+				},
+				"Axis_Array": [
+					{
+						"axis_name": "Line",
+						"elements": "3812",
+						"sequence_number": "1"
+					},
+					{
+						"axis_name": "Sample",
+						"elements": "3812",
+						"sequence_number": "2"
+					}
+				]
+			}
+		},
+		"File_Area_Observational_Supplemental": {
+			"File": {
+				"file_name": "ldsm_75s_240m.lbl"
+			},
+			"Stream_Text": {
+				"offset": {
+					"_unit": "byte",
+					"__text": "0"
+				},
+				"parsing_standard_id": "PDS3",
+				"description": "PDS3 label",
+				"record_delimiter": "Carriage-Return Line-Feed"
+			}
+		},
+		"_xmlns": "http://pds.nasa.gov/pds4/pds/v1",
+		"_xmlns:cart": "http://pds.nasa.gov/pds4/cart/v1",
+		"_xmlns:disp": "http://pds.nasa.gov/pds4/disp/v1",
+		"_xmlns:lro": "http://pds.nasa.gov/pds4/mission/lro/v1",
+		"_xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+		"_xsi:schemaLocation": "http://pds.nasa.gov/pds4/pds/v1         https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1H00.xsd     http://pds.nasa.gov/pds4/mission/lro/v1 https://pds.nasa.gov/pds4/mission/lro/v1/PDS4_LRO_1H00_1020.xsd     http://pds.nasa.gov/pds4/disp/v1        https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1H00_1510.xsd     http://pds.nasa.gov/pds4/cart/v1        https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1H00_1950.xsd"
+	}
+}
