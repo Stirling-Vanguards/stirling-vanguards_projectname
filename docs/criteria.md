@@ -1,9 +1,9 @@
-# Analog Criteria (DRAFT v1)
+# Analog Criteria (DRAFT v1.1)
 
 **Project:** Stirling Vanguards, 2026 NASA Space Apps Challenge (Abu Dhabi)
 **Challenge:** Identify Earth Locations that Analog the Permanent Moon Base Locations and Mars
 **Owner:** Venice (Science Lead). Methodology review: Rex.
-**Status:** Draft for team review. Not frozen until Rex and Venice confirm.
+**Status:** Draft for team review. Not frozen until Rex and Venice confirm. Revised Nov 14 after Kurt's review. Items marked *(Rex)* depend on a contract decision and should not change until he confirms.
 **Last updated:** November 14, 2026
 
 > Dataset names below are starting suggestions marked **(verify access)**. Nobody should build on a dataset until access is tested and it is logged in `data/DATA_SOURCES.md`.
@@ -14,7 +14,9 @@
 
 - Each Earth location gets a **0 to 1 score per dimension**. We never blend them into one number.
 - A score means: *how closely this Earth cell's feature distribution matches the target site's.* 1 = close match, 0 = no match.
-- Dimension names match the frozen data contract (`docs/data_contract.md`): `terrain`, `thermal`, `geology`, `subsurface` (core), and optional `water_ice`, `dust_wind` (stretch).
+- Dimension names follow the data contract (`docs/data_contract.md`): `terrain`, `thermal`, `geology`, `subsurface` (core), and optional `water_ice`, `dust_wind` (stretch). **Contract status: pending Rex's confirmation (v1.1).** Until he confirms, treat anything beyond the original fields as a proposal. *(Rex)*
+- **Cells vs sites:** the pipeline scores Earth *cells*, but the contract and site cards are per *site*. Proposed roll-up: a site's score for each dimension is the score of its **best-matching cell within the site's region**, and the card states which cell that was. Alternative: regional average. *(Rex confirms which.)*
+- **Not scored = `null`, never 0.** Optional dimensions (`water_ice`, `dust_wind`) that we don't score are sent as `null` and shown as "not scored". A 0 would wrongly mean "scored, no match". *(Rex confirms these are optional, nullable keys.)*
 - Target sites (one Moon, one Mars) are **not yet decided**. These criteria are written to work for any pair.
 - Known analogs (Atacama, Haughton, Death Valley) are for **validation only**, not headline finds.
 
@@ -40,8 +42,8 @@
 | **What we measure** | Surface temperature range, day/night swing, seasonal variation |
 | **Why it matters** | Thermal cycling drives equipment design, power needs, and rock weathering |
 | **Data (verify access)** | Moon: Diviner. Mars: THEMIS. Earth: MODIS or ECOSTRESS land surface temperature. Non-NASA: Chang'e data (verify availability) |
-| **How we score** | Compare annual min/max and diurnal swing, normalised per body |
-| **Limitations** | The Moon has no atmosphere, so its swings are far larger than anything on Earth. Score rewards *similar swing pattern or magnitude where achievable*. Expect low Moon scores and say so on the site card |
+| **How we score** | Compare **absolute** annual min/max and diurnal swing in kelvin (K), **not** values normalised per body. Suggested score: 1 minus the difference divided by a fixed reference range, clipped to 0–1. The reference range is Rex's call as part of `pipeline/scoring`. *(Rex)* |
+| **Limitations** | The Moon has no atmosphere, so its swings are far larger than anything on Earth. Because we compare absolute values, a low-swing Earth site will correctly score low against a Moon target rather than looking like a perfect match. Expect low Moon scores and say so on the site card |
 | **Evidence needed** | Instrument papers and PDS documentation for measured temperatures; planetary science reference for body constants |
 
 ### 2.3 Geology / minerals (`geology`)
@@ -88,7 +90,7 @@
 
 ## 4. Confidence rule (assumption, adjust as needed)
 
-Maps to the contract field `confidence`.
+The contract currently has **one `confidence` value per site**, but confidence varies by dimension (e.g. `subsurface` is often low while `terrain` may be high). Proposed rule: rate each dimension with the table below in the pipeline, then set the site's overall `confidence` to the **lowest-rated scored dimension**. Per-dimension confidence is shown as card text only unless Rex adds a contract field. *(Rex)*
 
 | Level | When to use |
 | --- | --- |
@@ -103,7 +105,7 @@ Maps to the contract field `confidence`.
 - **Gravity:** the Moon and Mars are well below Earth's.
 - **Atmosphere and vacuum:** the Moon has none; Mars is very thin.
 - **Radiation:** Earth's magnetic field and atmosphere shield us.
-- **Polar illumination and cold traps:** important for lunar south polar sites, with no real Earth equivalent. These go in the "where the analogy breaks down" list.
+- **Polar illumination and cold traps:** important for lunar south polar sites, with no real Earth equivalent. These go in the "where the analogy breaks down" list (Breakdowns), not under "Other". Applies only if a lunar polar target is chosen; targets are still undecided.
 
 *Evidence:* NASA fact sheets or a planetary science reference text for body constants.
 
@@ -124,9 +126,14 @@ No specific citations are attached yet. Confirm each one exists before it goes i
 
 ## 7. Open items
 
+- [ ] **Contract v1.1 approved by Rex** (frozen or draft, optional/nullable dimensions, `earth_limits[]` field, per-site vs per-dimension confidence, any extra card fields). *(Rex)*
+- [ ] Rex confirms the cell-to-site roll-up rule and the thermal reference range. *(Rex)*
+- [ ] Rex confirms `docs/criteria.md` is the right location (it is a new file, not in the original repo table).
 - [ ] Venice and Rex confirm the 4 core criteria, then freeze.
 - [ ] Decide the common comparison scale (suggestion: coarse grid, then drill-down for 3 to 4 deep-dive site cards).
 - [ ] Rex checks the scoring approach against `pipeline/scoring`.
-- [ ] Joash logs every dataset in `data/DATA_SOURCES.md` as it is used.
+- [ ] Joash tests access for every dataset and logs it in `data/DATA_SOURCES.md` before anyone uses it. Chang'e data and the Moon/Mars pit and lava-tube catalogs stay flagged as unconfirmed until checked.
+- [ ] Verify gravity and pressure figures (Mars and Moon gravity, Earth pressure, the Mars atmosphere claim) against a NASA planetary fact sheet before they appear in the app or report.
+- [ ] Replace each generic "Evidence needed" entry with a real, confirmed reference before the findings report.
 - [ ] Add the AI-assisted drafting of this file to `docs/ai_usage_log.md`.
 - [ ] Target sites decided (Rex).
