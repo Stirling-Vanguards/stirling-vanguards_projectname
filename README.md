@@ -160,9 +160,9 @@ Results: [`docs/report/validation_results.md`](docs/report/validation_results.md
 | --- | --- |
 | Rex Gabriel Salamat | Project Manager, Data Lead, & Pipeline Architect |
 | Kurt Marvic Amboy | Fullstack Lead, Data Co-Lead, & Science Co-Lead | 
-| Elieser Agustin IV | Frontend Lead & Science Lead |
+| Elieser Agustin IV | Frontend Lead, Science Lead and Documentation |
 | Joash Chrysler Aludino | Data Engineer |
-| Venice Lee Ballovar | Documentation |
+| Venice Lee Ballovar | Design Documentation |
 
 
 ## License
