@@ -154,7 +154,16 @@ Results: [`docs/report/validation_results.md`](docs/report/validation_results.md
 
 ## Team
 
-**Stirling Vanguards** — Rex, Joash, Kurt, Ely, Vince, Venice.
+**Stirling Vanguards**
+
+| Member | Role |
+| --- | --- |
+| Rex Gabriel Salamat | Project Manager & Data Lead |
+| Kurt Marvic Amboy | Fullstack Lead |
+| Elieser Agustin IV | Frontend Lead & Science Lead |
+| Joash Chrysler Aludino | Data Engineer |
+| Venice Lee Ballovar | Science Documentation |
+
 
 ## License
 
