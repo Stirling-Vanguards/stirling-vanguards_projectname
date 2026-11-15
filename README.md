@@ -10,7 +10,7 @@ Rather than hiding trade-offs behind a single blended "similarity score," we com
 
 ## Live demo
 
-**https://vanguardatlas.github.io**
+**[https://vanguardatlas.github.io](https://stirling-vanguards.github.io/vanguardatlas.github.io/)**
 
 The app is a zero-backend static site deployed via GitHub Pages. The only external requests it makes are for basemap tiles and the MapLibre library.
 
